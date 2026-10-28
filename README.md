@@ -38,6 +38,19 @@ project bridges that gap.
 Either way the hard dependency is the **Panasonic PTZ byte format** — see
 `docs/reference/` for the Panasonic protocol specs collected so far.
 
+## Video over IP (working)
+
+Separate from the PTZ problem, the converter now serves the camera's NTSC
+composite as **full-resolution 640×480 colour** over RTSP, an MJPEG web preview,
+and an EpocCam-compatible **ExMachino** sender — all at once, on the stock
+kernel, starting at boot. The GK7205V200 can't hardware-weave an interlaced
+BT.656 source, so the two 240-line NTSC fields are interleaved and downscaled in
+software (low latency) inside a modified OpenIPC/divinus.
+
+- **Build it from scratch:** [`BUILD.md`](BUILD.md)
+- **How it works / gotchas:** [`divinus/RUN.md`](divinus/RUN.md)
+- **Full buildable source:** [`divinus-src/`](divinus-src/)
+
 ## Repo layout
 
 ```
@@ -57,6 +70,8 @@ docs/
   FIRMWARE-RE.md         full reverse-engineering writeup (read this)
 tools/                   serial capture / dump / carve / unpack / analysis scripts
 esp32/                   (reserved) ESP32 translator firmware if option 2 is taken
+divinus-src/             full buildable OpenIPC/divinus source with the video mods
+divinus/                 device overlay (config, init, sensor ini), RUN.md, built binary
 ```
 
 ## Status

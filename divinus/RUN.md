@@ -68,16 +68,17 @@ PAL; the thread re-pokes it to NTSC.
 - **v4_venc.h** — load `HI_MPI_VENC_SendFrame`.
 - **v4_sys.h** — load `HI_MPI_SYS_Mmap/Munmap` (u64 phys!) and
   `HI_MPI_VB_GetBlock/ReleaseBlock/Handle2PhysAddr`.
-  The authoritative copies live in the WSL checkout ~/divinus/src/hal/hisi/.
+  The full buildable source (with all these changes) is vendored in the repo at
+  `divinus-src/`; the files here in `divinus/` are a diff-reference copy.
 
 Gen4 VIDEO_FRAME_S offsets used when hand-building frames: width@0, height@4,
 field@8, pixfmt@12, stride@44, **virtual addr @96/@104/@112** (VENC null-checks
 these — must point at the mapped VB block), **phys addr @120 (Y) / @128 (UV)**.
 
 ## Build
-    # in the WSL checkout with the patched src:
-    cd ~/divinus && rm -f src/hal/hisi/v4_hal.o && ./build.sh hisi-v4
-    # -> ~/divinus/divinus  (ARM, ~406 KB)
+    # from the vendored source in this repo (see ../BUILD.md for the full recipe):
+    cd divinus-src && ./build.sh hisi-v4   # auto-downloads the HiSi toolchain
+    # -> divinus-src/divinus  (ARM, ~400 KB)
 
 ## What is installed on the device (persistent, survives reboot)
 - `/usr/bin/divinus`            — the binary (jffs2 compresses it on the overlay)
