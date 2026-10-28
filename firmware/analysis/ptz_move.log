@@ -1,0 +1,85 @@
+﻿wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+[0m[0m[1969-12-31 20:11:46, 706349, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:46, 706349, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:46, 706350, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][08][00][14][AF][12].
+[0m[0m[1969-12-31 20:11:47, 707352, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:47, 707352, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:47, 707352, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][00][00][00][AF][0E].
+[0m[0m[1969-12-31 20:11:47, 707788, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:47, 707788, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:47, 707788, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][00][00][00][AF][0E].
+wlan0     No such device
+
+wlan0     No such device
+
+[0m[0m[1969-12-31 20:11:48, 708742, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:48, 708742, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:48, 708742, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][02][14][00][AF][18].
+[0m[0m[1969-12-31 20:11:49, 709743, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:49, 709743, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:49, 709743, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][00][00][00][AF][0E].
+[0m[0m[1969-12-31 20:11:50, 710088, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:50, 710089, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:50, 710089, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][00][00][00][AF][0E].
+[0m[0m[1969-12-31 20:11:51, 711052, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:51, 711052, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:51, 711052, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][04][14][00][AF][1E].
+[0m[0m[1969-12-31 20:11:52, 712057, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:52, 712057, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:52, 712057, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][00][00][00][AF][0E].
+[0m[0m[1969-12-31 20:11:52, 712397, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:52, 712397, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:52, 712397, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][00][00][00][AF][0E].
+[0m[0m[1969-12-31 20:11:53, 713354, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:53, 713354, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:53, 713354, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][10][00][14][AF][0A].
+wlan0     No such device
+
+wlan0     No such device
+
+[0m[0m[1969-12-31 20:11:54, 714357, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:54, 714357, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:54, 714357, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][00][00][00][AF][0E].
+[0m[0m[1969-12-31 20:11:54, 714709, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:54, 714709, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:54, 714710, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][00][00][00][AF][0E].
+[0m[0m[1969-12-31 20:11:55, 715655, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:55, 715655, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:55, 715655, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][20][00][00][AF][2E].
+[0m[0m[1969-12-31 20:11:56, 716657, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:56, 716657, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:56, 716658, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][00][00][00][AF][0E].
+[0m[0m[1969-12-31 20:11:57, 717037, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:11:57, 717037, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:11:57, 717037, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][00][00][00][AF][0E].
+[0m[0m[1969-12-31 20:11:57, 717042, dep/osal/osal_dbg.c:92] [1;31mAPP ===>>>>> MCU: [a0][01][00][00][00][00][af][0e][a0][01][00][08][00][14][af][12][a0][01][00][00][00][00][af][0e][a0][01][00][00][00][00][af][0e][a0][01][00][02][14][00][af][18][a0][01][00][00][00][00][af][0e][a0][01][00][00][00][00][af][0e][a0][01][00][04][14][00][af][1e][a0][01][00][00][00][00][af][0e][a0][01][00][00][00][00][af][0e][a0][01][00][10][00][14][af][0a][a0][01][00][00][00][00][af][0e][a0][01][00][00][00][00][af][0e][a0][01][00][20][00][00][af][2e][a0][01][00][00][00][00][af][0e][a0][01][00][00][00][00][af][0e] !!!
+[0maf4b4  1 mongoose.c:422:mg_error        11 43 socket error
+wlan0     No such device
+
+wlan0     No such device
+
+
+Login timed out after 60 seconds
+(none) login: wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+

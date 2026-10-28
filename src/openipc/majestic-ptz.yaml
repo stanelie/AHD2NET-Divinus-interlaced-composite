@@ -1,0 +1,8 @@
+# Merge into /etc/majestic.yaml on the converter (video keys per the bt656
+# bring-up in docs/OPENIPC-FLASHING.md).
+ptz:
+  enabled: true
+  actuator: panasonic     # try "panasonic-new" if the conventional protocol is silent
+  port: /dev/ttyAMA1
+  baud: 19200
+  address: 1          # = the camera's DIP unit number (1..96)

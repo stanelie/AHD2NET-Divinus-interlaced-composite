@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Media>
+	<VideoSource Num="1">
+		<Configuration0 Token="VideoIPCameraToken" Name="VideoIPCamera">
+			<UseCount>2</UseCount>
+			<SourceToken>VideoIPCameraSourceToken</SourceToken>
+			<Bounds height="4096" width="4096" y="0" x="0"></Bounds>			<!-- x y: coord height width: video capturing area -->
+		</Configuration0>
+	</VideoSource>
+
+	<AudioSource Num="1">
+		<Configuration0 Token="AudioIPCameraToken" Name="AudioIPCamera">
+			<UseCount>2</UseCount>
+			<SourceToken>AudioIPCameraSourceToken</SourceToken>
+		</Configuration0>
+	</AudioSource>
+
+	<VideoEncoder Num="2">
+		<Configuration0 Token="VideoStream0Token" Name="VideoStream0">
+			<UseCount>1</UseCount>
+			<Multicast>
+				<Address>
+					<Type>0</Type>
+					<IPv4Address>239.1.0.0</IPv4Address>
+					<IPv6Address></IPv6Address>
+				</Address>
+				<Port>1000</Port>
+				<TTL>64</TTL>
+				<AutoStart>1</AutoStart>
+			</Multicast>
+			<SessionTimeout>60</SessionTimeout>
+		</Configuration0>
+		<Configuration1 Token="VideoStream1Token" Name="VideoStream1">
+			<UseCount>1</UseCount>
+			<Multicast>
+				<Address>
+					<Type>0</Type>
+					<IPv4Address>239.1.0.1</IPv4Address>
+					<IPv6Address></IPv6Address>
+				</Address>
+				<Port>1001</Port>
+				<TTL>64</TTL>
+				<AutoStart>1</AutoStart>
+			</Multicast>
+			<SessionTimeout>60</SessionTimeout>
+		</Configuration1>
+	</VideoEncoder>
+
+	<AudioEncoder Num="2">
+		<Configuration0 Token="AudioStream0Token" Name="AudioStream0">
+			<UseCount>1</UseCount>
+			<Encoding>0</Encoding>
+			<Bitrate>0</Bitrate>
+			<SampleRate>0</SampleRate>
+			<Multicast>
+				<Address>
+					<Type>0</Type>
+					<IPv4Address>239.2.0.0</IPv4Address>
+					<IPv6Address></IPv6Address>
+				</Address>
+				<Port>5000</Port>
+				<TTL>64</TTL>
+				<AutoStart>1</AutoStart>
+			</Multicast>
+			<SessionTimeout>60</SessionTimeout>
+		</Configuration0>
+		<Configuration1 Token="AudioStream1Token" Name="AudioStream1">
+			<UseCount>1</UseCount>
+			<Encoding>0</Encoding>
+			<Bitrate>0</Bitrate>
+			<SampleRate>0</SampleRate>
+			<Multicast>
+				<Address>
+					<Type>0</Type>
+					<IPv4Address>239.2.0.1</IPv4Address>
+					<IPv6Address></IPv6Address>
+				</Address>
+				<Port>5001</Port>
+				<TTL>64</TTL>
+				<AutoStart>1</AutoStart>
+			</Multicast>
+			<SessionTimeout>60</SessionTimeout>
+		</Configuration1>
+	</AudioEncoder>
+
+	<PTZ Num="1">
+		<Configuration0>			<!-- PTZ Configuration-->
+			<Name>PTZ-Config</Name>
+			<UseCount>2</UseCount>
+			<token>PTZ-Config-Token</token>
+			<NodeToken>GOKE-PTZ-Token</NodeToken>
+			<DefaultAbsolutePantTiltPositionSpace>http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace</DefaultAbsolutePantTiltPositionSpace>
+			<DefaultAbsoluteZoomPositionSpace>http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace</DefaultAbsoluteZoomPositionSpace>
+			<DefaultRelativePanTiltTranslationSpace>http://www.onvif.org/ver10/tptz/PanTiltSpaces/TranslationGenericSpace</DefaultRelativePanTiltTranslationSpace>
+			<DefaultRelativeZoomTranslationSpace>http://www.onvif.org/ver10/tptz/ZoomSpaces/TranslationGenericSpace</DefaultRelativeZoomTranslationSpace>
+			<DefaultContinuousPanTiltVelocitySpace>http://www.onvif.org/ver10/tptz/PanTiltSpaces/VelocityGenericSpace</DefaultContinuousPanTiltVelocitySpace>
+			<DefaultContinuousZoomVelocitySpace>http://www.onvif.org/ver10/tptz/ZoomSpaces/VelocityGenericSpace</DefaultContinuousZoomVelocitySpace>
+			<DefaultPTZSpeed>
+				<PanTilt space="http://www.onvif.org/ver10/tptz/PanTiltSpaces/GenericSpeedSpace" x="0.8" y="0.8"></PanTilt>
+				<Zoom space="http://www.onvif.org/ver10/tptz/ZoomSpaces/ZoomGenericSpeedSpace" x="0.8"></Zoom>
+			</DefaultPTZSpeed>
+			<DefaultPTZTimeout>10</DefaultPTZTimeout>
+			<PanTiltLimits>
+				<Range>
+					<URI>http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace</URI>
+					<XRange Min="-1" Max="1"></XRange>
+					<YRange Min="-1" Max="1"></YRange>
+				</Range>
+			</PanTiltLimits>
+			<ZoomLimits>
+				<Range>
+					<URI>http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace</URI>
+					<XRange Min="0" Max="1"></XRange>
+				</Range>
+			</ZoomLimits>
+		</Configuration0>
+	</PTZ>
+
+	<RelayOutput Num="2">
+		<Configuration0 Token="RelayOutput0Token">
+			<Mode>0</Mode>
+			<DelayTime>20</DelayTime>
+			<IdleState>0</IdleState>
+		</Configuration0>
+		<Configuration1 Token="RelayOutput1Token">
+			<Mode>1</Mode>
+			<DelayTime>10</DelayTime>
+			<IdleState>1</IdleState>
+		</Configuration1>
+	</RelayOutput>
+
+	<Profile Num="2">
+		<Configuration0 Fixed="1" Token="MainStreamProfileToken" Name="MainStreamProfile">
+			<VideoSourceConfiguration>VideoIPCameraToken</VideoSourceConfiguration>
+			<AudioSourceConfiguration>AudioIPCameraToken</AudioSourceConfiguration>
+			<VideoEncoderConfiguration>VideoStream0Token</VideoEncoderConfiguration>
+			<AudioEncoderConfiguration>AudioStream0Token</AudioEncoderConfiguration>
+			<VideoAnalyticConfiguration>VideoAnalytics0Token</VideoAnalyticConfiguration>
+			<PTZConfiguration>PTZ-Config-Token</PTZConfiguration>
+		</Configuration0>
+		<Configuration1 Fixed="1" Token="SecondStreamProfileToken" Name="SecondStreamProfile">
+			<VideoSourceConfiguration>VideoIPCameraToken</VideoSourceConfiguration>
+			<AudioSourceConfiguration>AudioIPCameraToken</AudioSourceConfiguration>
+			<VideoEncoderConfiguration>VideoStream1Token</VideoEncoderConfiguration>
+			<AudioEncoderConfiguration>AudioStream1Token</AudioEncoderConfiguration>
+			<VideoAnalyticConfiguration>VideoAnalytics0Token</VideoAnalyticConfiguration>
+			<PTZConfiguration>PTZ-Config-Token</PTZConfiguration>
+		</Configuration1>
+	</Profile>
+</Media>

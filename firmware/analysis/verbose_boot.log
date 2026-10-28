@@ -1,0 +1,448 @@
+setenv bootargs mem=36M console=ttyAMA0,115200 loglevel=8 ignore_loglevel root=/dev/mtdblock3 rootfstype=squashfs rw mtdparts=sfc:128K(boot),64K(env),1792K(kernel),3M(rootfs),-(usr) mmz_allocator=xmedia mmz=anonymous,0,0x42400000,28M chip=gk7205ev200 sensors=sc200ai g_cmos_yuv_flag=1 board=demo
+# sf probe 0
+# xmediaapp
+# sf read 0x41000000 0x30000 0x200000
+device 0 offset 0x30000, size 0x200000
+
+SF: 2097152 bytes @ 0x30000 Read: OK
+# bootm 0x41000000
+## Booting kernel from Legacy Image at 41000000 ...
+   Image Name:   Linux-4.9.37
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    1828779 Bytes = 1.7 MiB
+   Load Address: 40008000
+   Entry Point:  40008000
+   Loading Kernel Image
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 4.9.37 (root@fork-Z68P-DS3) (gcc version 7.3.0 (GCC) ) #2 Tue Apr 14 15:01:57 CST 2026
+[    0.000000] CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr=50c53c7d
+[    0.000000] CPU: div instructions available: patching division code
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+[    0.000000] ATAGs To FDT: FDT got at 0xc051cb00, try getting ATAGs from 0x40000100
+[    0.000000] ATAGs To FDT: ATAGs found
+[    0.000000] ATAGs To FDT: GET End Param: End of param
+[    0.000000] OF: fdt:Machine model: xmedia XM72050200 DEMO Board
+[    0.000000] debug: ignoring loglevel setting.
+[    0.000000] Memory policy: Data cache writeback
+[    0.000000] On node 0 totalpages: 9216
+[    0.000000] free_area_init_node: node 0, pgdat c035f9c8, node_mem_map c23b3000
+[    0.000000]   Normal zone: 72 pages used for memmap
+[    0.000000]   Normal zone: 0 pages reserved
+[    0.000000]   Normal zone: 9216 pages, LIFO batch:1
+[    0.000000] CPU: All CPU(s) started in SVC mode.
+[    0.000000] pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+[    0.000000] pcpu-alloc: [0] 0 
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 9144
+[    0.000000] Kernel command line: mem=36M console=ttyAMA0,115200 loglevel=8 ignore_loglevel root=/dev/mtdblock3 rootfstype=squashfs rw mtdparts=sfc:128K(boot),64K(env),1792K(kernel),3M(rootfs),-(usr) mmz_allocator=xmedia mmz=anonymous,0,0x42400000,28M chip=gk7205ev200 sensors=sc200ai g_cmos_yuv_flag=1 board=demo
+[    0.000000] PID hash table entries: 256 (order: -2, 1024 bytes)
+[    0.000000] Dentry cache hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.000000] Inode-cache hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Memory: 32836K/36864K available (2145K kernel code, 103K rwdata, 916K rodata, 96K init, 135K bss, 4028K reserved, 0K cma-reserved)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xffc00000 - 0xfff00000   (3072 kB)
+[    0.000000]     vmalloc : 0xc2800000 - 0xff800000   ( 976 MB)
+[    0.000000]     lowmem  : 0xc0000000 - 0xc2400000   (  36 MB)
+[    0.000000]     modules : 0xbf800000 - 0xc0000000   (   8 MB)
+[    0.000000]       .text : 0xc0008000 - 0xc0220968   (2147 kB)
+[    0.000000]       .init : 0xc032e000 - 0xc0346000   (  96 kB)
+[    0.000000]       .data : 0xc0346000 - 0xc035ffe0   ( 104 kB)
+[    0.000000]        .bss : 0xc0361000 - 0xc0382ef8   ( 136 kB)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS:16 nr_irqs:16 16
+[    0.000000] Gic dist init...
+[    0.000000] arm_arch_timer: Architected cp15 timer(s) running at 50.00MHz (phys).
+[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0xb8812736b, max_idle_ns: 440795202655 ns
+[    0.000006] sched_clock: 56 bits at 50MHz, resolution 20ns, wraps every 4398046511100ns
+[    0.000017] Switching to timer-based delay loop, resolution 20ns
+[    0.000115] clocksource: arm,sp804: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 637086815595 ns
+[    0.000256] Calibrating delay loop (skipped), value calculated using timer frequency.. 100.00 BogoMIPS (lpj=50000)
+[    0.000269] pid_max: default: 4096 minimum: 301
+[    0.000346] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.000356] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.000766] CPU: Testing write buffer coherency: ok
+[    0.000994] Setting up static identity map for 0x40008200 - 0x40008230
+[    0.004958] VFP support v0.3: implementor 41 architecture 2 part 30 variant 7 rev 5
+[    0.005098] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+[    0.005120] futex hash table entries: 16 (order: -5, 192 bytes)
+[    0.005188] pinctrl core: initialized pinctrl subsystem
+[    0.005466] NET: Registered protocol family 16
+[    0.005847] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.006768] Serial: AMBA PL011 UART driver
+[    0.008082] 12040000.uart: ttyAMA0 at MMIO 0x12040000 (irq = 21, base_baud = 0) is a PL011 rev2
+[    0.382799] console [ttyAMA0] enabled
+[    0.386839] 12041000.uart: ttyAMA1 at MMIO 0x12041000 (irq = 22, base_baud = 0) is a PL011 rev2
+[    0.395894] 12042000.uart: ttyAMA2 at MMIO 0x12042000 (irq = 23, base_baud = 0) is a PL011 rev2
+[    0.413394] SCSI subsystem initialized
+[    0.417252] ssp-pl022 12070000.spi: ARM PL022 driver, device ID: 0x00041022
+[    0.424245] ssp-pl022 12070000.spi: mapped registers from 0x12070000 to c286f000
+[    0.432256] ssp-pl022 12071000.spi: ARM PL022 driver, device ID: 0x00041022
+[    0.439270] ssp-pl022 12071000.spi: mapped registers from 0x12071000 to c2873000
+[    0.447721] usbcore: registered new interface driver usbfs
+[    0.453270] usbcore: registered new interface driver hub
+[    0.458629] usbcore: registered new device driver usb
+[    0.464484] Bluetooth: Core ver 2.22
+[    0.468105] NET: Registered protocol family 31
+[    0.472549] Bluetooth: HCI device and connection manager initialized
+[    0.478905] Bluetooth: HCI socket layer initialized
+[    0.483783] Bluetooth: L2CAP socket layer initialized
+[    0.489364] clocksource: Switched to clocksource arch_sys_counter
+[    0.496109] NET: Registered protocol family 2
+[    0.500992] TCP established hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.507996] TCP bind hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.514371] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.520778] UDP hash table entries: 256 (order: 0, 4096 bytes)
+[    0.526629] UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+[    0.533009] NET: Registered protocol family 1
+[    0.538148] workingset: timestamp_bits=30 max_order=14 bucket_order=0
+[    0.549563] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.555603] jffs2: version 2.2 (NAND) (ZLIB) (RTIME) (c) 2001-2006 Red Hat, Inc.
+[    0.566088] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)
+[    0.573509] io scheduler noop registered (default)
+[    0.579416] pl061_gpio 120b0000.gpio_chip: PL061 GPIO chip @0x120b0000 registered
+[    0.587504] pl061_gpio 120b1000.gpio_chip: PL061 GPIO chip @0x120b1000 registered
+[    0.595559] pl061_gpio 120b2000.gpio_chip: PL061 GPIO chip @0x120b2000 registered
+[    0.603629] pl061_gpio 120b4000.gpio_chip: PL061 GPIO chip @0x120b4000 registered
+[    0.611706] pl061_gpio 120b5000.gpio_chip: PL061 GPIO chip @0x120b5000 registered
+[    0.619782] pl061_gpio 120b6000.gpio_chip: PL061 GPIO chip @0x120b6000 registered
+[    0.627874] pl061_gpio 120b7000.gpio_chip: PL061 GPIO chip @0x120b7000 registered
+[    0.635946] pl061_gpio 120b8000.gpio_chip: PL061 GPIO chip @0x120b8000 registered
+[    0.644632] bsp-sfc bsp_spi_nor.0: SPI Nor ID Table Version 1.2
+[    0.650597] bsp-sfc bsp_spi_nor.0: The ID: 0xa1 isn't in the BP table, Current device can't not protect
+[    0.660012] bsp-sfc bsp_spi_nor.0: FM25Q64-SOB-T-G (Chipsize 8 Mbytes, Blocksize 64KiB)
+[    0.668040] 5 cmdlinepart partitions found on MTD device sfc
+[    0.673707] 5 cmdlinepart partitions found on MTD device sfc
+[    0.679368] Creating 5 MTD partitions on "sfc":
+[    0.683903] 0x000000000000-0x000000020000 : "boot"
+[    0.689490] 0x000000020000-0x000000030000 : "env"
+[    0.694802] 0x000000030000-0x0000001f0000 : "kernel"
+[    0.700400] 0x0000001f0000-0x0000004f0000 : "rootfs"
+[    0.705963] 0x0000004f0000-0x000000800000 : "usr"
+[    0.745707] FEPHY:addr=1, la_am=0x9, ldo_am=0x4, r_tuning=0x25
+[    0.751626] libphy: femac_mii_bus: probed
+[    0.756339] libphy: Fixed MDIO Bus: probed
+[    0.760615] femac 10040000.ethernet: using random MAC address c2:a5:09:68:6b:65
+[    0.822502] Generic PHY 10041100.mdio:01: attached PHY driver [Generic PHY] (mii_bus:phy_addr=10041100.mdio:01, irq=-1)
+[    0.833292] phy_id=0x20669906, phy_mode=mii
+[    0.841571] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    0.848387] xhci-hcd xhci-hcd.0.auto: xHCI Host Controller
+[    0.853903] xhci-hcd xhci-hcd.0.auto: new USB bus registered, assigned bus number 1
+[    0.861748] xhci-hcd xhci-hcd.0.auto: hcc params 0x0220fe6c hci version 0x110 quirks 0x20010010
+[    0.870494] xhci-hcd xhci-hcd.0.auto: irq 117, io mem 0x10030000
+[    0.877039] hub 1-0:1.0: USB hub found
+[    0.880833] hub 1-0:1.0: 1 port detected
+[    0.884958] xhci-hcd xhci-hcd.0.auto: xHCI Host Controller
+[    0.890470] xhci-hcd xhci-hcd.0.auto: new USB bus registered, assigned bus number 2
+[    0.898176] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+[    0.906733] hub 2-0:1.0: USB hub found
+[    0.910525] hub 2-0:1.0: hub can't support USB3.0
+[    0.915532] usbcore: registered new interface driver usbserial
+[    0.921412] usbcore: registered new interface driver option
+[    0.927025] usbserial: USB Serial support registered for GSM modem (1-port)
+[    1.038742] xmedia_rtc 120e0000.rtc: rtc core: registered 120e0000.rtc as rtc0
+[    1.046026] xmedia_rtc 120e0000.rtc: RTC driver for xmedia enabled
+[    1.052308] i2c /dev entries driver
+[    1.056091] xmedia-i2c 12060000.i2c: xmedia-i2c0@100000hz registered
+[    1.062666] xmedia-i2c 12061000.i2c: xmedia-i2c1@100000hz registered
+[    1.069253] xmedia-i2c 12062000.i2c: xmedia-i2c2@100000hz registered
+[    1.076005] sdhci: Secure Digital Host Controller Interface driver
+[    1.082203] sdhci: Copyright(c) Pierre Ossman
+[    1.086562] sdhci-pltfm: SDHCI platform and OF driver helper
+[    1.118371] mmc0: SDHCI controller on 10010000.sdhci [10010000.sdhci] using ADMA in legacy mode
+[    1.160371] mmc1: SDHCI controller on 10020000.sdhci [10020000.sdhci] using ADMA in legacy mode
+[    1.169691] NET: Registered protocol family 17
+[    1.174186] Key type dns_resolver registered
+[    1.280753] xmedia_rtc 120e0000.rtc: hctosys: unable to read the hardware clock
+[    1.292398] VFS: Mounted root (squashfs filesystem) readonly on device 31:3.
+[    1.299650] Freeing unused kernel memory: 96K (c032e000 - c0346000)
+[    1.305925] This architecture does not have kernel memory protection.
+[RCS]: /etc/init.d/S00devs
+/etc/init.d/S00devs: line 10: find: not found
+[RCS]: /etc/init.d/S01udev
+[RCS]: /etc/init.d/S80network
+[RCS]: /etc/init.d/S99camapp
+mount tmp folder
+mount mmc device
+ls: /dev/mmcblk*: No such file or directory
+check usrinit script...
+check preinit script...
+check application...
+execute application: /usr/sbin/camapp
+(none) login: ======================================================================================
+======================================================================================
+CAMAPP VERISON:[2.0.25] BUILD TIME:[Aug 10 2026 23:32:21] 
+======================================================================================
+======================================================================================
+chmod: /etc/serial-login: No such file or directory
+osal_cmd_server_init run as no daemon mode !!!
+[0m[1970-01-01 00:00:02, 2729, app/camapp.c:1448] [1;33m####### camapp_init Entry #######
+[0m[0m[1970-01-01 00:00:02, 2729, app/camapp.c:1486] [1;33m####### camapp_init Leave #######
+[0m[0m[1970-01-01 00:00:02, 2729, dev/camapp_sys.c:281] [1;31mcamapp_get_res_from_bin:start...
+[0m[0m[1970-01-01 00:00:02, 2784, dev/camapp_sys.c:178] [1;31mcamapp_res_unpack_new: unpack res.tar(655360 bytes) to /tmp...
+[0m[0m[1970-01-01 00:00:02, 2805, soc/gk72xx-linux-quick/video.c:3029] [1;31mvideo_set_config load user res:[1920 x 1080] !!!
+mount: can't find /mnt in /proc/mounts
+[0m[0m[1970-01-01 00:00:02, 2915, soc/gk72xx-linux-quick/sys.c:216] [1;31msys_load_rtc get rtc time failed !!!
+[0mcrc : cd27ea1d, cd27ea1d, env size: 65532 !!
+baudrate=115200
+bootargs=mem=36M console=ttyAMA0,115200 loglevel=0 root=/dev/mtdblock3 rootfstype=squashfs rw mtdparts=sfc:128K(boot),64K(env),1792K(kernel),3M(rootfs),-(usr) mmz_allocator=xmedia mmz=anonymous,0,0x42400000,28M chip=gk7205ev200 sensors=sc200ai g_cmos_yuv_flag=1 board=demo
+bootcmd=sf probe 0;xmediaapp;sf read 0x41000000 0x30000 0x200000;bootm 0x41000000
+ethaddr=00:00:00:00:00:00
+gatewayip=192.168.3.1
+ipaddr=192.168.3.23
+netmask=255.255.255.0
+sensor=sc200ai
+serverip=192.168.3.77
+stderr=serial
+stdin=serial
+stdout=serial
+verify=n
+version=2026-01-12T16:47:38
+[0m[1970-01-01 00:00:02, 2919, soc/gk72xx-linux-quick/sys.c:602] [1;31msys_load_set_from_env got bootargs mtdparts:[mtdparts=sfc:128K(boot),64K(env),1792K(kernel),3M(rootfs),-(usr)] !!!
+[0m[0m[1970-01-01 00:00:02,[    3.405871] xm_osal: loading out-of-tree module taints kernel.
+ 2919, soc/gk72xx-linux-quick/sys.c:610] [1;31msys_load_set_fro[    3.416908] Module media: init ok
+m_env got bootargs chip:[chip=gk[    3.423748] Media Memory Zone Manager
+7205ev200] !!!
+[0m[0m[1970-0[    3.430268] osal 1.0 init success!
+1-01 00:00:02, 2919, soc/gk72xx-linux-quick/sys.c:618] [1;31msys_load_set_from_env got bootargs rootfs dev:[root=/dev/mtdblock3] !!!
+[0m[0m[1970-01-01 00:00:02, 2919, soc/gk72xx-linux-quick/sys.c:626] [1;31msys_load_set_from_env got bootargs rootfs fstype:[rootfstype=squashfs] !!!
+[0m[0m[1970-01-01 00:00:02, 2919, soc/gk72xx-linux-quick/sys.c:634] [1;31msys_load_set_from_env got bootargs chip:[chip=gk7205ev200] !!!
+[    3.475123] FUNC:parse_sensor_clock line:317  SNS: is [bt656]!
+[    3.480995] FUNC:parse_sensor_bus_type line:223  SNS is [bt656]  !
+[    3.487183] ==== online_flag=0, cmos_yuv_flag=3, sensor=bt656, chip=xm72050200, board=demo====
+[    3.495799] ==== g_quick_start_flag=0 ====
+[    3.499894] sysconfig init success!
+[    3.548923] load base.ko OK!
+[    3.565642] load sys.ko OK!
+[    3.579006] load tde.ko...OK!
+[    3.591174] load region.ko OK!
+[    3.606233] load pm.ko ok!
+[    3.677162] load vgs.ko OK!
+[    3.785447] load vi.ko OK !
+[    3.852674] ISP Mod init!
+[    3.928695] load vpss.ko OK!
+insmod: can't insert 'xm_vo.ko': No such file or directory
+insmod: can't insert 'xm_gfbg.ko': No such file or directory
+[    3.994834] load chnl.ko OK!
+[    4.029184] load vedu.ko OK!
+[    4.076912] load rc.ko OK!
+[    4.130014] load venc.ko OK!
+[    4.189835] load h264e.ko OK!
+[    4.199110] load h265e.ko OK!
+[    4.253534] load jpege.ko OK!
+[    4.263599] load ive.ko OK!
+insmod: can't insert 'xm_isp_pwm.ko': No such file or directory
+insmod: can't insert 'xm_isp_sensor_i2c.ko': No such file or directory
+insmod: can't insert 'xm_isp_sensor_spi.ko': No such file or directory
+[    4.326673] load aio.ko OK !
+[    4.340927] load ai.ko OK !
+[    4.353158] load ao.ko OK !
+[    4.365027] load aenc.ko OK !
+[    4.376743] load adec.ko OK !
+[    4.389482] load acodec.ko OK !
+[    4.402449] load mipi_rx driver successful!
+[    4.455855] register dev
+[    4.458634] pdm init ok. ver=Jan 12 2026, 15:11:54.
+[0m[0m[1970-01-01 00:00:04, 4062, soc/gk72xx-linux-quick/sys.c:459] [1;31mgk_sys_init warp enable with line:[160] !!!
+[0m[0m[1970-01-01 00:00:04, 4062, soc/gk72xx-linux-quick/sys.c:460] [1;31mgk_sys_init warp enable with line:[160] !!!
+[0m[0m[1970-01-01 00:00:04, 4062, soc/gk72xx-linux-quick/sys.c:461] [1;31mgk_sys_init warp enable with line:[160] !!!
+[0m[0m[1969-12-31 20:00:04, 4063, dev/camapp_sys.c:785] [1;31mcamapp_init_sys load res version:[2.0.25] !!!
+[0m[0m[1969-12-31 20:00:04, 4064, soc/gk72xx-linux-quick/io.c:2192] [1;31mgpio_init set gpio reg start !!!
+[0m[0m[1969-12-31 20:00:04, 4071, soc/gk72xx-linux-quick/io.c:2201] [1;31m[00] SET REG 0x100c000c = 0x1000
+[0m[0m[1969-12-31 20:00:04, 4119, soc/gk72xx-linux-quick/io.c:2201] [1;31m[01] SET REG 0x112c0000 = 0x1002
+[0m[0m[1969-12-31 20:00:04, 4123, soc/gk72xx-linux-quick/io.c:2201] [1;31m[02] SET REG 0x112c0004 = 0x1002
+[0m[0m[1969-12-31 20:00:04, 41[    4.550796] register dev
+27, soc/gk72xx-linux-quick/io.c:[    4.556381] Watchdog Timer: 0.01 initialized. default_margin=30 sec (nodeamon= 1)
+2201] [1;31m[03] SET REG 0x112c[    4.566411] wtdg init ok. ver=Jan 12 2026, 15:12:06.
+0028 = 0x1002
+[0m[0m[1969-12-31 20:00:04, 4131, soc/gk72xx-linux-quick/io.c:2201] [1;31m[04] SET REG 0x112c002c = 0x1002
+[0m[0m[1969-12-31 20:00:04, 4135, soc/gk72xx-linux-quick/io.c:2201] [1;31m[05] SET REG 0x112c0030 = 0x1c02
+[0m[0m[1969-12-31 20:00:04, 4139, soc/gk72xx-linux-quick/io.c:2201] [1;31m[06] SET REG 0x112c0034 = 0x1c02
+[0m[0m[1969-12-31 20:00:04, 4175, soc/gk72xx-linux-quick/io.c:2201] [1;31m[07] SET REG 0x112c0038 = 0x1c02
+[0m[0m[1969-12-31 20:00:04, 4179, soc/gk72xx-linux-quick/io.c:2201] [1;31m[08] SET REG 0x112c003c = 0x1c02
+[0m[0m[1969-12-31 20:00:04, 4183, soc/gk72xx-linux-quick/io.c:2201] [1;31m[09] SET REG [    4.630473] lsadc init ok. ver=Jan 12 2026, 15:12:06.
+0x112c0040 = 0x1002
+[0m[0m[1969-12-31 20:00:04, 4187, soc/gk72xx-linux-quick/io.c:2201] [1;31m[10] SET REG 0x112c0044 = 0x0501
+[0m[0m[1969-12-31 20:00:04, 4190, soc/gk72xx-linux-quick/s[    4.649708] 
+[    4.649708] status checked: ai enabled?(1); ao enabled?(1)
+ys.c:762] [1;31mset_watch_dog with [7] secs !!!
+[0m[0m[1969-12-31 20:00:04, 4192, soc/gk72xx-linux-quick/io.c:2201] [1;31m[11] SET REG 0x112c0048 = 0x1000[    4.672487] camapp_proc_net (277): drop_caches: 3
+
+[0m[0m[1969-12-31 20:00:04, 4196, soc/gk72xx-linux-quick/io.c:2201] [1;31m[12] SET REG 0x112c004c = 0x1000
+[0m[0m[1969-12-31 20:00:04, 4200, soc/gk72xx-linux-quick/io.c:2201] [1;31m[13] SET REG 0x112c0050 = 0x1000
+[0m[0m[1969-12-31 20:00:04, 4205, soc/gk72xx-linux-quick/io.c:2201] [1;31m[14] SET REG 0x112c0060 = 0x1002
+[0m[0m[1969-12-31 20:00:04, 4209, soc/gk72xx-linux-quick/io.c:2201] [1;31m[15] SET REG 0x112c0064 = 0x1002
+[0m[0m[1969-12-31 20:00:04, 4213, soc/gk72xx-linux-quick/io.c:2201] [1;31m[16] SET REG 0x112c0070 = 0x1002
+[0m[0m[1969-12-31 20:00:04, 4217, soc/gk72xx-linux-quick/io.c:2201] [1;31m[17] SET REG 0x112c0074 = 0x1002
+[0m[0m[1969-12-31 20:00:04, 4217, soc/gk72xx-linux-quick/io.c:2204] [1;31mgpio_init set gpio reg close !!!
+[0mAcodec set input vol(30)
+[Func]:MPI_AO_SetVqeVolume [Line]:2500 [Info]:invalid vqe volume:30
+ifconfig: SIOCGIFFLAGS: No such device
+ifconfig: SIOCGIFFLAGS: No such device
+[0m[1969-12-31 20:00:04, 4504, dep/osal/osal_net.c:1572] [1;31mwireless_init_unlocked wifi rst pwr !!!
+[    5.258885] random: fast init done
+[0m[0m[1969-12-31 20:00:05, 5510, dep/osal/osal_net.c:1601] [1;31mwireless_init_unlocked got lsusb ====>>>> Bus 001 Device 001: ID 1d6b:0002
+Bus 002 Device 001: ID 1d6b:0003
+
+[0m[0m[1969-12-31 20:00:06, 6516, dep/osal/osal_net.c:1601] [1;31mwireless_init_unlocked got lsusb ====>>>> Bus 001 Device 001: ID 1d6b:0002
+Bus 002 Device 001: ID 1d6b:0003
+
+[0m[0m[1969-12-31 20:00:07, 7390, soc/gk72xx-linux-quick/tp2825b.c:4248] [1;31mtp2802_set_video_mode =============>>>>>>>>>>>>>> std mode:[0] !!!
+[0m[0m[1969-12-31 20:00:07, 7417, soc/gk72xx-linux-quick/osd.c:839] [1;31mXMEDIA_API_RGN_AttachToChn == 0 !!!
+[0m[0m[1969-12-31 20:00:07, 7420, soc/gk72xx-linux-quick/osd.c:839] [1;31mXMEDIA_API_RGN_AttachToChn == 1 !!!
+[0m[0m[1969-12-31 20:00:07, 7420, soc/gk72xx-linux-quick/osd.c:839] [1;31mXMEDIA_API_RGN_AttachToChn == 0 !!!
+[0m[0m[1969-12-31 20:00:07, 7420, soc/gk72xx-linux-quick/osd.c:839] [1;31mXMEDIA_API_RGN_AttachToChn == 1 !!!
+[0m[0m[1969-12-31 20:00:07, 7421, soc/gk72xx-linux-quick/osd.c:839] [1;31mXMEDIA_API_RGN_AttachToChn == 0 !!!
+[0m[0m[1969-12-31 20:00:07, 7421, soc/gk72xx-linux-quick/osd.c:839] [1;31mXMEDIA_API_RGN_AttachToChn == 1 !!!
+[0mfont init: asc[32]=ok/ok hzk[16]=ok/ok off=16 size32=321880 size16=105016
+canvas_load_by_bmp_file: fileName: /tmp/res/fonts/logo0.bmp.
+canvas_load_by_bmp_file: can not open fileName:/tmp/res/fonts/logo0.bmp.
+canvas_load_by_bmp_file: fileName: /tmp/res/fonts/logo1.bmp.
+canvas_load_by_bmp_file: can not open fileName:/tmp/res/fonts/logo1.bmp.
+[0m[1969-12-31 20:00:07, 7532, dep/osal/osal_net.c:1601] [1;31mwireless_init_unlocked got lsusb ====>>>> Bus 001 Device 001: ID 1d6b:0002
+Bus 002 Device 001: ID 1d6b:0003
+
+[0m[0m[1969-12-31 20:00:07, 7564, soc/gk72xx-linux-quick/video.c:691] [1;31mgk_video_ivp_load_res handle ============ 0!
+[0m[0m[1969-12-31 20:00:07, 7565, soc/gk72xx-linux-quick/video.c:2027] [1;31mvideo_set_mode not support when bt656 !!!
+[0m[0m[1969-12-31 20:00:07, 7567, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:00:07, 7567, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:00:07, 7567, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][07][00][54][AF][5D].
+[0m[0m[1969-12-31 20:00:07, 7567, soc/gk72xx-linux-quick/video.c:2125] [1;31mvideo_set_rotate got chn attr failed !!!
+[Func]:MPI_ISP_GetExposureAttr [Line]:291 [Info]:ISP[0] Mem NOT Init 0!
+[0m[0m[1969-12-31 20:00:07, 7567, soc/gk72xx-linux-quick/video.c:2729] [1;31mXMEDIA_MPI_ISP_GetExposureAttr failed for 0xa01c8041!
+[0m[0m[1969-12-31 20:00:07, 7768, soc/gk72xx-linux-quick/ptz_uart.c:191] [1;31mptz_uart_set to UART0 failed!!!
+[0m[0m[1969-12-31 20:00:07, 7768, soc/gk72xx-linux-quick/ptz_uart.c:198] [1;31mptz_uart_set to UART1 failed!!!
+[0m[0m[1969-12-31 20:00:07, 7768, soc/gk72xx-linux-quick/ptz_uart.c:212] [1;31m=========>>>>>>> [A0][01][00][07][00][FF][AF][F6].
+[0m[0m[1969-12-31 20:00:08, 8538, dep/osal/osal_net.c:1601] [1;31mwireless_init_unlocked got lsusb ====>>>> Bus 001 Device 001: ID 1d6b:0002
+Bus 002 Device 001: ID 1d6b:0003
+
+[0m[0;31m[ONVIF ERR] FILE: dep/onvif/config_parse.c, LINE: 3300: Unable to find Node:[JPEG]!
+[0;0m
+[0;31m[ONVIF ERR] FILE: dep/onvif/config_parse.c, LINE: 3300: Unable to find Node:[JPEG]!
+[0;0m
+iniparser: cannot open /mnt/factory.cfg
+[0m[1969-12-31 20:00:08, 8985, app/camapp_service_factory.c:2975] [1;31mcamapp_factory_config_load iniparser load file /mnt/factory.cfg failed!!!
+[0m[0m[1969-12-31 20:00:08, 8987, app/camapp_service_factory.c:3076] [1;31mcamapp_factory_configs_apply failed...
+[0m[0;31m[ONVIF ERR] FILE: dep/onvif/onvif_discovery.c, LINE: 304: [GK_NVT_DevSearch_SendHello]rlen = -1, slen = 1664
+[0;0m
+[0m[1969-12-31 20:00:09, 9544, dep/osal/osal_net.c:1601] [1;31mwireless_init_unlocked got lsusb ====>>>> Bus 001 Device 001: ID 1d6b:0002
+Bus 002 Device 001: ID 1d6b:0003
+
+[0m[0;31m[ONVIF ERR] FILE: dep/onvif/onvif_discovery.c, LINE: 304: [GK_NVT_DevSearch_SendHello]rlen = -1, slen = 1664
+[0;0m
+[0m[1969-12-31 20:00:10, 10550, dep/osal/osal_net.c:1601] [1;31mwireless_init_unlocked got lsusb ====>>>> Bus 001 Device 001: ID 1d6b:0002
+Bus 002 Device 001: ID 1d6b:0003
+
+[0m[0m[1969-12-31 20:00:11, 11556, dep/osal/osal_net.c:1601] [1;31mwireless_init_unlocked got lsusb ====>>>> Bus 001 Device 001: ID 1d6b:0002
+Bus 002 Device 001: ID 1d6b:0003
+
+[0m[0m[1969-12-31 20:00:12, 12564, dep/osal/osal_net.c:1601] [1;31mwireless_init_unlocked got lsusb ====>>>> Bus 001 Device 001: ID 1d6b:0002
+Bus 002 Device 001: ID 1d6b:0003
+
+[0m[0m[1969-12-31 20:00:13, 13572, dep/osal/osal_net.c:1601] [1;31mwireless_init_unlocked got lsusb ====>>>> Bus 001 Device 001: ID 1d6b:0002
+Bus 002 Device 001: ID 1d6b:0003
+
+[0m[0m[1969-12-31 20:00:14, 14578, dep/osal/osal_net.c:1601] [1;31mwireless_init_unlocked got lsusb ====>>>> Bus 001 Device 001: ID 1d6b:0002
+Bus 002 Device 001: ID 1d6b:0003
+
+[0m[0m[1969-12-31 20:00:15, 15585, dep/osal/osal_net.c:1601] [1;31mwireless_init_unlocked got lsusb ====>>>> Bus 001 Device 001: ID 1d6b:0002
+Bus 002 Device 001: ID 1d6b:0003
+
+[0m[0;31m[ONVIF ERR] FILE: dep/onvif/onvif_discovery.c, LINE: 304: [GK_NVT_DevSearch_SendHello]rlen = -1, slen = 1664
+[0;0m
+[0m[1969-12-31 20:00:16, 16586, dep/osal/osal_net.c:1616] [1;31mwireless_init_unlocked check usb wireless device timeout !!!
+[0m[0m[1969-12-31 20:00:16, 16586, dev/camapp_net.c:859] [1;31mcamapp_proc_net hardware init error !!!, skip wifi !!!
+route: SIOCDELRT: No such process
+route: SIOCADDRT: File exists
+route: SIOCADDRT: File exists
+[0m[0m[1969-12-31 20:00:17, 17642, soc/gk72xx-linux-quick/audio_old.c:1207] [1;31maudio_output_prompt prompt file:/tmp/res/prompt/DD/wan_done.mp3 not exists !!!
+[   19.064623] femac 10040000.ethernet eth0: Link is Up - 100Mbps/Full - flow control off
+[0m[0m[1969-12-31 20:00:18, 18743, dev/camapp_net.c:590] [1;31meth0 start dhcp!!!
+killall: udhcpc: no process killed
+udhcpc: started, v1.26.2
+udhcpc: sending discover
+[0m[0m[1969-12-31 20:00:20, 20055, soc/gk72xx-linux-quick/video.c:2027] [1;31mvideo_set_mode not support when bt656 !!!
+udhcpc: sending discover
+udhcpc: sending select for 10.8.0.236
+udhcpc: lease of 10.8.0.236 obtained, lease time 86400
+[0m[0m[1969-12-31 20:00:21, 21854, dev/camapp_net.c:35] [1;31mcamapp_reset_dns cur dns =====>>>>> 
+nameserver 10.8.0.17
+nameserver 10.8.0.1
+[0m[0m[1969-12-31 20:00:21, 21854, dev/camapp_net.c:39] [1;31mcamapp_reset_dns rst dns [223.5.5.5][8.8.4.4]!!!
+route: SIOCDELRT: No such process
+wlan0     No such device
+
+wlan0     No such device
+
+route: SIOCADDRT: File exists
+route: SIOCADDRT: File exists
+route: SIOCADDRT: File exists
+route: SIOCADDRT: File exists
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+
+Login timed out after 60 seconds
+(none) login: wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+
+wlan0     No such device
+

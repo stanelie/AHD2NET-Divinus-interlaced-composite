@@ -1,0 +1,16 @@
+#!/bin/sh
+# Route SoC UART2 to the RS-485 transceiver pads on the GK7205V200 converter.
+# These are the exact IOMUX writes the stock firmware makes (live-verified);
+# the SoC powers up with these pads as GPIO, so this must run every boot
+# before majestic opens /dev/ttyAMA1.  See docs/PTZ-PROTOCOL-stock.md.
+#   0x112c0070 = UART2_RXD / RS485_RO   (func 2)
+#   0x112c0074 = UART2_TXD / RS485_DI   (func 2)
+case "$1" in
+  start|"")
+    devmem 0x112c0070 32 0x1002
+    devmem 0x112c0074 32 0x1002
+    # DE is UART2_RTS (GPIO54); the act_panasonic actuator drives it via
+    # TIOCSRS485. If your build instead toggles it as a GPIO, export/own it here.
+    ;;
+esac
+exit 0

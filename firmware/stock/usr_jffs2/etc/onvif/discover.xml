@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Discover>
+	<Scopes>
+		<scope>onvif://www.onvif.org/type/NetworkVideoTransmitter</scope>
+		<scope>onvif://www.onvif.org/type/video_encoder</scope>
+		<scope>onvif://www.onvif.org/type/ptz</scope>
+		<scope>onvif://www.onvif.org/hardware/CAMAPP</scope>
+		<scope>onvif://www.onvif.org/name/CAMAPP</scope>
+		<scope>onvif://www.onvif.org/location/WasteLand</scope>
+	</Scopes>
+	<Address>onvif/device_service</Address>
+	<DiscoveryMode>0</DiscoveryMode>
+	<Security>1</Security>
+	<Hostport>80</Hostport>
+</Discover>

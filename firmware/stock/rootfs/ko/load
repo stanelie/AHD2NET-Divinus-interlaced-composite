@@ -1,0 +1,397 @@
+#!/bin/sh
+# Useage: ./loadxm [chip_type] [ -r|-i|-a ] [ sensor ]
+#         -r : rmmod all modules
+#         -i : insmod all modules
+#    default : rmmod all moules and then insmod them
+# e.g: ./load xm72050500 -i -sensor0 imx307 -osmem 32
+
+####################Variables Definition##########################
+
+SNS_TYPE0=imx307;           # sensor type
+YUV_TYPE0=0;                # 0 -- raw, 1 --DC, 2 --bt1120, 3 --bt656
+CHIP_TYPE=$1;               # chip type
+BOARD=demo;
+
+#DDR start:0x40000000, kernel start:0x40000000,  OS(32M); MMZ start:0x42000000
+mem_total=64                 # 64M, total mem
+mem_start=0x40000000         # phy mem start
+os_mem_size=32               # 32M, os mem
+mmz_start=0x42000000;        # mmz start addr
+mmz_size=32M;                # 32M, mmz size
+##################################################################
+
+cd /ko
+
+pre_mem_info()
+{
+    if [ "$CHIP_TYPE" == "xm72050300" -o "$CHIP_TYPE" == "xm72050510" ];then
+        mem_total=128                # total mem
+        mem_start=0x40000000         # phy mem start
+        os_mem_size=32               # os mem
+        mmz_start=0x42000000;        # mmz start addr
+        mmz_size=96M;                # mmz size
+    elif [ "$CHIP_TYPE" == "xm76050100" -o "$CHIP_TYPE" == "xm72050530" ];then
+        mem_total=512                # total mem
+        mem_start=0x40000000         # phy mem start
+        os_mem_size=32               # os mem
+        mmz_start=0x42000000;        # mmz start addr
+        mmz_size=480M;               # mmz size
+    else
+        mem_total=64                 # total mem
+        mem_start=0x40000000         # phy mem start
+        os_mem_size=32               # os mem
+        mmz_start=0x42000000;        # mmz start addr
+        mmz_size=32M;                # mmz size
+    fi
+}
+
+check_mem_info()
+{
+    var=`cat /proc/cmdline`
+    temp=${var##*mem=}
+    bootargs_mem=${temp%%M*}
+
+    if [ $os_mem_size -lt $bootargs_mem ]; then
+        echo "bootargs_mem: $bootargs_mem, os_mem_size: $os_mem_size"
+        echo "The mem in bootargs conflicts with the osmem in the load scrip, please check these two parameters."
+        exit 0;
+    fi
+}
+
+report_error()
+{
+    echo "******* Error: There's something wrong, please check! *****"
+    exit 1
+}
+
+insert_audio()
+{
+    insmod xm_aio.ko
+    insmod xm_ai.ko
+    insmod xm_ao.ko
+    insmod xm_aenc.ko
+    insmod xm_adec.ko
+    insmod xm_acodec.ko
+    echo "load audio"
+}
+
+remove_audio()
+{
+    rmmod xm_acodec
+    rmmod xm_adec
+    rmmod xm_aenc
+    rmmod xm_ao
+    rmmod xm_ai
+    rmmod xm_aio
+    echo "remove audio"
+}
+
+insert_sil9024()
+{
+    if [ "$CHIP_TYPE" == "xm72020300" -o "$CHIP_TYPE" == "xm72050300" -o \
+         "$CHIP_TYPE" == "xm72050200" -o "$CHIP_TYPE" == "xm76050100" -o \
+         "$CHIP_TYPE" == "xm72010200" -o "$CHIP_TYPE" == "xm72010300" ];then
+
+        i2c_sel=1
+        if [ "$BOARD" == "sck" ];then
+            insmod sil9024.ko norm=12 i2c_num=$i2c_sel  #1080P@30fps
+            echo "insmod sil9024.ko"
+        fi
+        echo "load sil9024"
+    fi
+}
+
+remove_sil9024()
+{
+    if [ "$CHIP_TYPE" == "xm72020300" -o "$CHIP_TYPE" == "xm72050300" -o \
+         "$CHIP_TYPE" == "xm72050200" -o "$CHIP_TYPE" == "xm76050100" -o \
+         "$CHIP_TYPE" == "xm72010200" -o "$CHIP_TYPE" == "xm72010300" ];then
+        rmmod sil9024 &> /dev/null
+        echo "remove sil9024"
+    fi
+}
+
+insert_isp_piris()
+{
+    if [ "$CHIP_TYPE" == "xm72050300" -o "$CHIP_TYPE" == "xm76050100" ] && [ "$BOARD" == "demo" ];then
+        insmod xm_isp_piris.ko
+        echo "load xm_isp_piris"
+    fi
+}
+
+remove_isp_piris()
+{
+    if [ "$CHIP_TYPE" == "xm72050300" -o "$CHIP_TYPE" == "xm76050100" ] && [ "$BOARD" == "demo" ];then
+        rmmod xm_isp_piris
+        echo "remove xm_isp_piris"
+    fi
+}
+
+insert_vo_gfbg()
+{
+    if [ "$CHIP_TYPE" == "xm72020300" -o "$CHIP_TYPE" == "xm72050300" -o \
+         "$CHIP_TYPE" == "xm72050200" -o "$CHIP_TYPE" == "xm76050100" -o \
+         "$CHIP_TYPE" == "xm72010200" -o "$CHIP_TYPE" == "xm72010300" ];then
+        insmod xm_vo.ko
+        insmod xm_gfbg.ko video="gfbg:vram0_size:1620"     # default fb0:D1
+        echo "load vo & gfbg"
+    fi
+}
+
+remove_gfbg_vo()
+{
+    if [ "$CHIP_TYPE" == "xm72020300" -o "$CHIP_TYPE" == "xm72050300" -o \
+         "$CHIP_TYPE" == "xm72050200" -o "$CHIP_TYPE" == "xm76050100" -o \
+         "$CHIP_TYPE" == "xm72010200" -o "$CHIP_TYPE" == "xm72010300" ];then
+        rmmod xm_gfbg
+        rmmod xm_vo
+        echo "remove gfbg & vo"
+    fi
+}
+
+insert_npu()
+{
+    if [ "$CHIP_TYPE" == "xm72050500" -o "$CHIP_TYPE" == "xm72050510" -o \
+        "$CHIP_TYPE" == "xm72050530" -o "$CHIP_TYPE" == "xm72020330" -o \
+        "$CHIP_TYPE" == "xm72050230" ];then
+        insmod xm_npu.ko
+        echo "load npu"
+    fi
+}
+
+remove_npu()
+{
+    if [ "$CHIP_TYPE" == "xm72050500" -o "$CHIP_TYPE" == "xm72050510" -o \
+        "$CHIP_TYPE" == "xm72050530" -o "$CHIP_TYPE" == "xm72020330" -o \
+        "$CHIP_TYPE" == "xm72050230" ];then
+        rmmod xm_npu
+        echo "remove npu"
+    fi
+}
+
+b_load_rcs=0
+insert_rcs()
+{
+    if [ -f "./xm_rcs.ko" ]; then
+        insmod xm_rcs.ko
+        b_load_rcs=1
+    fi
+}
+
+remove_rcs()
+{
+    if [ $b_load_rcs -eq 1 ] ; then
+        b_load_rcs=0
+        rmmod xm_rcs
+    fi
+}
+
+insert_ko()
+{
+    insmod xm_osal.ko mmz_allocator=xmedia mmz=anonymous,0,$mmz_start,$mmz_size || report_error
+    insmod xm_sysconfig.ko chip=$CHIP_TYPE sensors=$SNS_TYPE0 g_cmos_yuv_flag=$YUV_TYPE0 board=$BOARD
+    insmod xm_base.ko
+    insmod xm_sys.ko
+    insmod xm_tde.ko
+    insmod xm_rgn.ko
+    insmod xm_pm.ko
+    insmod xm_vgs.ko
+    insmod xm_vi.ko
+    insmod xm_isp.ko
+    insmod xm_vpss.ko
+    insert_vo_gfbg
+    insmod xm_chnl.ko
+    insmod xm_vedu.ko
+    insmod xm_rc.ko
+    insert_rcs
+    insmod xm_venc.ko
+    insmod xm_h264e.ko
+    insmod xm_h265e.ko
+    insmod xm_jpege.ko
+    insmod xm_ive.ko save_power=0 max_node_num=20
+    insmod xm_isp_pwm.ko
+    insmod xm_isp_sensor_i2c.ko
+    insmod xm_isp_sensor_spi.ko
+    insert_isp_piris
+    insert_sil9024; # BT1120
+    insert_audio
+    insmod xm_mipi_rx.ko
+    insmod xm_pdm.ko
+    insert_npu
+}
+
+remove_ko()
+{
+    remove_npu
+    rmmod xm_pdm
+    remove_audio
+    rmmod xm_mipi_rx
+    remove_isp_piris
+    rmmod xm_isp_pwm
+    remove_sil9024
+    rmmod xm_ive
+    remove_rcs
+    rmmod xm_rc
+    rmmod xm_jpege
+    rmmod xm_h264e
+    rmmod xm_h265e
+    rmmod xm_venc
+    rmmod xm_vedu
+    rmmod xm_chnl
+    remove_gfbg_vo
+    rmmod xm_vpss
+    rmmod xm_isp
+    rmmod xm_vi
+    rmmod xm_vgs
+    rmmod xm_rgn
+    rmmod xm_tde
+    rmmod xm_isp_sensor_i2c &> /dev/null
+    rmmod xm_isp_sensor_spi &> /dev/null
+    rmmod xm_sys
+    rmmod xm_pm
+    rmmod xm_base
+    rmmod xm_sysconfig
+    rmmod xm_osal
+}
+
+load_usage()
+{
+    echo "Usage:  ./load [chip_type] [-option] [sensor_name]"
+    echo "chip_type:xm72020300 xm72050200 xm72050300 xm76050100 xm72010200 xm72010300"
+    echo "          xm72050500 xm72050510 xm72050530 xm72050230 xm72020330"
+    echo "options:"
+    echo "    -i                       insert modules"
+    echo "    -r                       remove modules"
+    echo "    -a                       remove modules first, then insert modules"
+    echo "    -sensor sensor_name      config sensor type [default: imx307]"
+    echo "    -h                       help information"
+    echo -e "Available sensors: imx307 imx335 os05a etc."
+    echo -e "for example: ./load xm72050500 -i -sensor imx307 -osmem 32 -board demo -yuv0 0\n"
+}
+
+calc_mmz_info()
+{
+        mmz_start=`echo "$mem_start $os_mem_size"  |
+        awk 'BEGIN { temp = 0; }
+        {
+                temp = $1/1024/1024 + $2;
+        }
+        END { printf("0x%x00000\n", temp); }'`
+
+        mmz_size=`echo "$mem_total $os_mem_size"  |
+        awk 'BEGIN { temp = 0; }
+        {
+                temp = $1 - $2;
+        }
+        END { printf("%dM\n", temp); }'`
+        echo "mem_total: $mem_total, os_mem_size: $os_mem_size, mmz_start: $mmz_start, mmz_size: $mmz_size"
+}
+
+######################parse arg###################################
+b_arg_sensor0=0
+b_arg_sensor1=0
+b_arg_yuv_type0=0
+b_arg_insmod=0
+b_arg_remove=0
+b_arg_os_mem=0
+b_arg_board=0
+
+pre_mem_info;
+
+for arg in $@
+do
+    if [ $b_arg_sensor0 -eq 1 ] ; then
+        b_arg_sensor0=0;
+        SNS_TYPE0=$arg;
+    fi
+
+    if [ $b_arg_os_mem -eq 1 ] ; then
+        b_arg_os_mem=0;
+        os_mem_size=$arg;
+
+        if [ -z $os_mem_size ]; then
+            echo "[error] os_mem_size is null"
+            exit;
+        fi
+    fi
+
+    if [ $b_arg_yuv_type0 -eq 1 ] ; then
+        b_arg_yuv_type0=0;
+        YUV_TYPE0=$arg;
+    fi
+
+    if [ $b_arg_board -eq 1 ] ; then
+        b_arg_board=0;
+        BOARD=$arg;
+    fi
+
+    case $arg in
+        "-i")
+            b_arg_insmod=1;
+            ;;
+        "-r")
+            b_arg_remove=1;
+            ;;
+        "-a")
+            b_arg_insmod=1;
+            b_arg_remove=1;
+            ;;
+        "-h")
+            load_usage;
+            ;;
+        "-sensor0")
+            b_arg_sensor0=1;
+            ;;
+        "-sensor")
+            b_arg_sensor0=1;
+            ;;
+        "-osmem")
+            b_arg_os_mem=1;
+            ;;
+        "-yuv0")
+            b_arg_yuv_type0=1;
+            ;;
+        "-board")
+            b_arg_board=1;
+            ;;
+    esac
+done
+#######################parse arg end########################
+
+if [ $CHIP_TYPE != "xm72020300" ] && [ $CHIP_TYPE != "xm72020330" ] \
+    && [ $CHIP_TYPE != "xm72050200" ] && [ $CHIP_TYPE != "xm72050230" ] \
+    && [ $CHIP_TYPE != "xm72050300" ] && [ $CHIP_TYPE != "xm72050500" ] \
+    && [ $CHIP_TYPE != "xm72050510" ] && [ $CHIP_TYPE != "xm72050530" ] \
+    && [ $CHIP_TYPE != "xm76050100" ] && [ $CHIP_TYPE != "xm72010200" ] \
+    && [ $CHIP_TYPE != "xm72010300" ];then
+    echo "[err] chip[$CHIP_TYPE] not support"
+    load_usage;
+    exit;
+fi
+
+if [ $os_mem_size -ge $mem_total ] ; then
+    echo "[err] os_mem[$os_mem_size], over total_mem[$mem_total]"
+    exit;
+fi
+
+echo "CHIP_TYPE:$CHIP_TYPE"
+
+calc_mmz_info;
+
+#######################Action###############################
+
+if [ $# -lt 2 ]; then
+    load_usage;
+    exit 0;
+fi
+
+check_mem_info;
+
+if [ $b_arg_remove -eq 1 ]; then
+    remove_ko;
+fi
+
+if [ $b_arg_insmod -eq 1 ]; then
+    insert_ko;
+fi
+

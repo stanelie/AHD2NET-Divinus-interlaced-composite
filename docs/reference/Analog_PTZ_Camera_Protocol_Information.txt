@@ -1,0 +1,5774 @@
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+Protocol Information 
+
+WV-CS950,CW960,CW970,CS850B, 
+            CW860A,CW590,CS580 
+
+VER. 4.5 
+
+Panasonic System Networks Co.,Ltd. 
+Security Networks Business Division 
+
+1 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+History 
+Date 
+15 Feb. 2000 
+
+Comment 
+First edition 
+
+Page 
+
+15 Nov. 2000 
+
+Miner upgrade edition 
+
+3(+ascii code) 
+
+11 Dec 2000 
+
+Ver. 2.0 
+
+15 May 2001 
+
+22 Aug. 2001 
+
+31 Oct. 2001 
+
+July 2002 
+
+Jan 2003 
+
+May 2005 
+
+Nov 2006 
+
+Jan  2007 
+
+Ver. 2.1 
+
+Ver. 2.2 
+
+Ver. 3.0 
+
+Ver. 3.1 
+
+Ver. 3.2 
+
+Ver. 4.0 
+
+Ver. 4.1 
+
+Ver. 4.2 
+
+5(+STOP command ex.) 
+
+2.7(Revise) 
+
+4,5,6 (Add.) 
+
+3 New protocol revised 
+
+7. Setup reset commands 
+
+CS850A 256 step PT command, page 21 
+
+P7 ATW offset, LL phase, P14 QID code 
+
+SD ON Page 6 
+
+Support CS950 (2.3  2.4  5) 
+4 Absolute Position Control (Add.) 
+
+Support CW960(No change) 
+
+Support CW970(2.4  6) 
+
+April 28, 2011 
+
+Ver. 4.3 
+
+Support CW590,CS580(No change) 
+
+3 New Protocol(Add.) 
+
+4 Absolute Position Control (Add.) 
+
+April 28, 2011 
+
+Ver. 4.4 
+
+3 New Protocol(Add.) 
+
+June 25, 2013 
+
+Ver. 4.5 
+
+2.9.3  Communication Configuration（Modify） 
+
+2 
+
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+Contents 
+
+1. Protocol mode 
+
+2. Conventional Protocol 
+
+2.1 Command Structure. 
+
+2.2 Communication Procedure 
+
+2.3 Camera Function Command 
+
+2.4 Receiver Function Command 
+
+2.5 PTZ Control (Conventional Protocol) 
+
+2.6 Preset Position Call command. 
+
+2.7 Direct Preset Position SET Command 
+
+2.8 Normal Preset Position SET Command 
+
+2.9 System Command 
+
+2.9.1 Alarm 
+
+2.9.2 Device ID request 
+
+2.9.3 Communication Configuration 
+
+3. New Protocol 
+
+3.1 One Way Command 
+
+3.1.1 Command Structure 
+
+3.1.2 Command Answer 
+
+3.2 Pan/Tilt Command 
+
+3.3 Focus Command  
+
+3.4 Preset Command 
+
+3.5 256 steps PTZ commands 
+
+4. Absolute Position Control   
+
+compatible in CS850A and later model 
+
+4.1 Get Positioning Data from Dome Camera (PTZ)  
+
+4.1.1 Pan Position 
+
+4.1.2 Tilt Position 
+
+4.1.3 Zoom Ratio 
+
+4.2 Set Positioning Data to Dome Camera 
+
+4.2.1 Pan Position 
+
+4.2.2 Tilt Position 
+
+4.2.3 Pan/Tilt Position 
+
+4.2.4 Zoom Ratio 
+
+4.2.5 Focus Distance 
+
+3 
+
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+5. Direct Function Command  
+
+6. Auto Tracking Control 
+
+only for CW970 model 
+
+6.1 Control Auto Tracking 
+
+6.1.1  Search in the whole area and start Auto-Tracking 
+
+6.1.2  Select the target and start Auto-Tracking 
+
+6.1.3  Stop Auto-Tracking 
+
+6.2 Get the Information of Auto Tracking 
+
+6.2.1 Get the Status of Auto-Tracking 
+
+6.2.2 Get the Information of PTZ movement during Auto-Tracking 
+
+7. Gateway Mode  
+
+8. Wiring 
+
+Note: Additional items for CS950 are written in blue. 
+
+4 
+
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+1. Protocol mode 
+
+WV-CS850 supports two different protocols. One is Panasonic conventional camera protocol, 
+which is compatible with CS600, CS650 etc. The other is Panasonic new camera protocol, which 
+enables faster PTZF operations. Panasonic new camera protocol is automatically selected when 
+CS850 is connected to a Panasonic controller/switcher, which supports the new protocol such as 
+CU161, MP204 with CU360. Panasonic conventional protocol is applicable for general 
+commands such as AGC, ALC, shutter etc even when connected to CU161 or MP204 with 
+CU360. 
+
+2. Conventional Protocol 
+
+2.1 Command structure. 
+
+2.1.1 Single Command 
+
+Ex. Shutter 1/250 ON 
+
+STX G C 7 : 0 0 2 1 1 0 C ETX 
+
+G C  
+
+: Command header, GC:Camera Control Command 
+
+7 
+
+: Number of commands. Refer Fig – 1 
+
+0 0 2 
+
+: Command distination, 002:Camera functions,202:Receiver functions 
+
+1 
+
+: Command type, 1:Control command, 0:Status request command, 2:Text data 
+
+1 0 C 
+
+: Function(1/250 ON), Refer table 1 Camera function command. 
+
+<Fig-1> When sending two commands, use G C F instead of G C 7. 
+
+Number of Commands 
+
+Number of Commands 
+
+7   37hex 
+
+F  46hex 
+
+N  4Ehex 
+
+V  56hex 
+
+^  5Ehex 
+
+1(7 bytes) 
+
+2(15bytes) 
+
+3(23bytes) 
+
+f  66hex 
+
+n  6Ehex 
+
+v  76hex 
+
+4(31bytes) 
+
+~   7Ehex 
+
+6(47bytes) 
+
+7(55bytes) 
+
+8(63bytes) 
+
+9(71bytes) 
+
+5(39bytes) 
+
+(  28hex 
+
+10(79bytes) 
+
+2.1.2 Single Command (Answer) 
+
+After sending a command, following answer will be received.   
+
+Ex. Shutter 1/250 ON 
+ STX G C 7 : 0 0 2 E 1 0 C ETX 
+
+E 
+
+: In case Command type = 0, E : OK, D : NG 
+
+: In case Command type = 1, E : OK, D : NG 
+
+: In case Command type = 2, 9 : OK, D : NG 
+
+5 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+2.1.3 Multiple Commands 
+
+Ex. Preset Position Call 
+STX G C F : 2 0 2 1 4 0 0 : 2 0 2 2 0 0 0 ETX 
+
+              STX         :02hex of ASCII code table 
+
+G C  
+
+: Command header, GC:Camera Control Command 
+
+F 
+
+: Number of commands. Refer Fig – 1 
+
+2 0 2 
+
+: Command distination, 002:Camera functions,202:Receiver functions 
+
+1 
+
+: Command type, 1:Control command, 0:Status request command, 2:Text data 
+
+4 0 0 
+
+: Function (Preset position call), Refer table 2 Receiver function command. 
+
+2 0 2 
+
+: Command distination, 002:Camera functions,202:Receiver functions 
+
+2 
+
+: Command type, 1:Control command, 0:Status request command, 2:Text data 
+
+0 0 0 
+
+: Text data (Position 1), Refer ??? table. 
+
+       ETX         :03hex of ASCII code table 
+
+2.1.4 Multiple Commands (Answer) 
+
+Ex. Preset Position Call 
+
+Answer 1 
+
+STX G C 7 : 2 0 2 E 4 0 0 ETX 
+
+Answer 2 
+
+STX G C 7 : 2 0 2 9 0 0 0 ETX 
+
+2.1.5 Unit Address 
+
+When multiple units are daisy chain connected, a command must have unit address as shown 
+
+bellow.  
+
+Ex. Shutter 1/250 ON 
+
+STX A D 0 0 ; G C 7 : 0 0 2 1 1 0 C ETX 
+
+A D 0 0 
+
+ : Unit Address 00 – 99, ZZ 
+
+Note : Only address 01 – 96 is available for CSR camera series.  
+
+ Only address 01 – 16 is available for WV-RM70.  
+
+ ZZ controls all units. 
+
+6 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+2.2 Communication Procedure 
+
+2.2.1 Single Command  
+
+                  Camera                                                         PC   
+
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+STX G C 7 : 0 0 2 1 1 0 C ETX  
+
+ACK  
+
+Answer 
+
+STX G C 7 : 0 0 2 E 1 0 C ETX 
+
+ ACK 
+
+If PC does not send ACK after receiving the Answer, the camera repeats sending the Answer 
+
+up to 4 times (includes first one). Repeat interval is programmable (off, 100ms-1000ms). 
+
+2.2.2 Multiple Commands  
+
+                Camera           I/F block                                  PC   
+
+Send    
+
+STX G C F : 2 0 2 1 4 0 0 
+
+: 2 0 2 2 0 0 0 ETX 
+
+ACK 
+
+Answer 
+
+STX G C 7 : 2 0 2 E 4 0 0 ETX 
+
+Answer 
+
+STX G C 7 : 2 0 2 9 0 0 0 ETX 
+
+2.2.3 Command timeout 
+
+Some commands have time out which deactivates the command at the specified time after sending. 
+
+To  keep  a  command  valid,  repeat  the  command  within  the  timeout  period.  Recommended  repeat 
+
+frequency is shown in the command tables. For small amount of adjustment , send STOP command 
+
+after sending these commands.  ex. GCF:0021002:0021004   
+
+7 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+2.3 Camera Function Command 
+
+  CS950:Y : New command for CS950 ,N :no support, no function. 
+
+No 
+
+Function 
+
+Command 
+
+CS950  Remark 
+
+1 IRIS(CAMERA) OPEN 
+
+2 IRIS(CAMERA) CLOSE 
+
+3 IRIS(CAMERA) STOP 
+
+4 IRIS(CAMERA) RESET 
+
+5 ALC  ON 
+
+6 ELC  ON 
+
+7 MANU  IRIS  ON 
+
+8 BW ON 
+
+9 BW OFF 
+
+10 BW AUTO 
+
+11 BW BURST ON 
+
+12 BW BURST OFF 
+
+13 SHUTTER  ON 
+
+14 SHUTTER  OFF 
+
+15 SHUTTER  INC 
+
+16 SHUTTER  DEC 
+
+17 SHUTTER  AUTO 
+
+0021002 
+
+0021003 
+
+0021004 
+
+0021005 
+
+0021032 
+
+0021033 
+
+0021034 
+
+0021040 
+
+0021041 
+
+0021042 
+
+0021050 
+
+0021051 
+
+0021100 
+
+0021101 
+
+0021102 
+
+0021103 
+
+0021107 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+N 
+
+ALWAYS SEND BACK 002D033 
+
+Need SD2 OFF(BLC MODE OFF) 
+
+Y 
+
+18 SHUTTER  1/100NTSC, 1/120PAL 
+
+0021109 
+
+19 SHUTTER  1/250 
+
+20 SHUTTER  1/500 
+
+21 SHUTTER  1/1000 
+
+22 SHUTTER  1/2000 
+
+23 SHUTTER  1/4000 
+
+24 SHUTTER  1/10000 
+
+25 SENS  UP  AUTO  ON 
+
+26 SENS  UP  AUTO  OFF 
+
+27 SENS  UP  AUTO  INC 
+
+28 SENS  UP  AUTO  DEC 
+
+29 SENS  UP  MANU  ON 
+
+30 SENS  UP  MANU  OFF 
+
+31 SENS  UP  MANU  INC 
+
+32 SENS  UP  MANU  DEC 
+
+33 AGC  ON 
+
+34 AGC  OFF 
+
+35 AGC  GAIN  UP  LOW 
+
+36 AGC  GAIN  UP  MID 
+
+37 AGC  GAIN  UP  HIGH 
+
+38 MANU  GAIN  UP  LOW 
+
+39 MANU  GAIN  UP  MID 
+
+40 MANU  GAIN  UP  HIGH 
+
+41 BLC  MODE  AUTO 
+
+42 BLC  MODE  PRESET 
+
+43 BLC  SET  UP  [START] 
+
+44 BLC  SET  UP  [END] 
+
+002110C 
+
+002110D 
+
+002110E 
+
+002110F 
+
+0021119 
+
+002111A 
+
+0021120 
+
+0021121 
+
+0021122 
+
+0021123 
+
+0021150 
+
+0021151 
+
+0021152 
+
+0021153 
+
+0021200 
+
+0021201 
+
+0021208 
+
+0021209 
+
+002120A 
+
+0021228 
+
+0021229 
+
+002122A 
+
+00212A2 
+
+00212A3 
+
+00212B0 
+
+00212B1 
+
+8 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+45 BLC  SET  UP  [MASK  ON] 
+
+46 BLC  SET  UP  [MASK  OFF] 
+
+47 BLC  SET  UP  [MASK  CLEAR] 
+
+00212C0 
+
+00212C1 
+
+00212C2 
+
+48 BLC  SET  UP  [MASK  REVERSE] 
+
+00212C3 
+
+49 BLC  SET  UP  [Cursor UP] 
+
+50 BLC  SET  UP  [Cursor Right] 
+
+51 BLC  SET  UP  [Cursor Down] 
+
+52 BLC  SET  UP  [Cursor Left] 
+
+53 AWC  ON 
+
+54 AWC  RESET 
+
+55 AWC  SET  UP 
+
+56 ATW  ON 
+
+57 R offset up 
+
+58 R offset down 
+
+59 R offset stop 
+
+60 R offset Reset 
+
+61 B offset UP 
+
+62 B offset down 
+
+63 B offset stop 
+
+64 B offset Reset 
+
+65 BURST  PHASE  UP  (+) 
+
+66 BURST  PHASE  Down (-) 
+
+67 BURST  PHASE  STOP 
+
+68 BURST  PHASE  RESET 
+
+69 LINE  LOCK  ON 
+
+70 LINE  LOCK  OFF  (INT) 
+
+71 LL Phase UP 
+
+72 LL Phase Down 
+
+73 LL Phase Stop 
+
+74 EL-Zoom ON 
+
+75 EL-Zoom OFF 
+
+76 Privacy zone ON 
+
+77 Privacy zone OFF 
+
+78 Privacy zone(2) ON 
+
+79 MOTION  DETECT  ON 
+
+80 MOTION  DETECT  OFF 
+
+81 DNR  LOW 
+
+82 DNR  HIGH 
+
+83 MOTION  DETECT  MODE2  ON 
+
+84 STABILIZER  ON 
+
+85 STABILIZER  OFF 
+
+86 D-RANGE  ON 
+
+87 D-RANGE  OFF 
+
+88 ALL  RESET 
+
+89 Restart 
+
+90 RESOLUTION  NORMAL 
+
+00212C8 
+
+00212C9 
+
+00212CA 
+
+00212CB 
+
+0021300 
+
+0021305 
+
+0021300:0022306 
+
+0021310 
+
+0021312 
+
+0021313 
+
+0021314 
+
+0021315 
+
+0021316 
+
+0021317 
+
+0021318 
+
+0021319 
+
+0021382 
+
+0021383 
+
+0021384 
+
+0021385 
+
+0021452 
+
+0021453 
+
+0021454 
+
+0021455 
+
+0021456 
+
+0021560 
+
+0021561 
+
+0021640 
+
+0021641 
+
+0021642 
+
+0021690 
+
+0021691 
+
+00216A8 
+
+00216AA 
+
+0021696 
+
+00216F0 
+
+00216F1 
+
+00216B0 
+
+00216B1 
+
+0021760 
+
+0021761 
+
+00217C0 
+
+9 
+
+Timeout 2.2 sec  
+
+Timeout 2.2 sec 
+
+Timeout 2.2 sec 
+
+Timeout 2.2 sec 
+
+Timeout 2.2 sec 
+
+Timeout 2.2 sec 
+
+NTSC:60Hz,PAL50Hz AC power 
+
+Timeout 2.2 sec 
+
+Timeout 2.2 sec 
+
+Y 
+
+Y 
+
+Y 
+
+Y  ※Scene  Change  Detection   
+
+Y 
+
+Y 
+
+N 
+
+N 
+
+Y 
+
+ALWAYS SEND BACK 002D6B0 
+
+ALWAYS SEND BACK 002D6B1 
+
+No need to set the menu cursor. 
+
+Equivalent to power OFF-ON. 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+91 RESOLUTION  HIGH 
+
+92 SETUP  MENU  ON 
+
+93 SETUP  MENU  OFF 
+
+94 SETUP  MENU  [Cursor STOP] 
+
+95 SETUP  MENU  [Cursor UP] 
+
+96 SETUP  MENU  [Cursor Right] 
+
+97 SETUP  MENU  [Cursor Down] 
+
+98 SETUP  MENU  [Cursor Left] 
+
+99 SETUP  MENU  SET1 
+
+100 SETUP  MENU  SET2 
+
+00217C1 
+
+0021940 
+
+0021941 
+
+002194F 
+
+0021942 
+
+0021943 
+
+0021944 
+
+0021945 
+
+002194A 
+
+002194B 
+
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+Y 
+
+Equivalent to pressing set button for 
+
+2 seconds. 
+
+101 Left+Right button pressed (F2). 
+
+002194C 
+
+For Special menu, Gain reset etc. 
+
+Need to set the setup menu cursor. 
+
+102 Left+Centre+Right button pressed (F3).  002194D 
+
+For Camera reset. 
+
+Need to set the setup menu cursor 
+
+103 Digital Flip ON 
+
+104 Digital Flip OFF 
+
+105 Menu ON 
+
+106 Menu OFF 
+
+107 Area Title 1 SET 
+
+108 Area Title 2 SET 
+
+109 Area Title 3 SET 
+
+110 Area Title 4 SET 
+
+111 Area Title 5 SET 
+
+112 Area Title 6 SET 
+
+113 Area Title 7 SET 
+
+114 Area Title 8 SET 
+
+115 Area Title Default ON 
+
+116 Area Title OFF 
+
+117 Area Title 1 read start 
+
+118 Area Title 1 write start 
+
+119 Area Title 2 read start 
+
+120 Area Title 2 write start 
+
+121 Area Title 3 read start 
+
+122 Area Title 3 write start 
+
+123 Area Title 4 read start 
+
+124 Area Title 4 write start 
+
+125 Area Title 5 read start 
+
+126 Area Title 5 write start 
+
+127 Area Title 6 read start 
+
+128 Area Title 6 write start 
+
+129 Area Title 7 read start 
+
+130 Area Title 7 write start 
+
+131 Area Title 8 read start 
+
+132 Area Title 8 write start 
+
+00219A0 
+
+00219A1 
+
+00219C0 
+
+00219C1 
+
+00219C8 
+
+00219C9 
+
+00219CA 
+
+00219CB 
+
+00219CC 
+
+00219CD 
+
+00219CE 
+
+00219CF 
+
+00219D0 
+
+00219D1 
+
+00219E0 
+
+00219E1 
+
+00219E2 
+
+00219E3 
+
+00219E4 
+
+00219E5 
+
+00219E6 
+
+00219E7 
+
+00219E8 
+
+00219E9 
+
+00219EA 
+
+00219EB 
+
+00219EC 
+
+00219ED 
+
+00219EE 
+
+00219EF 
+
+10 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+133 Function Request 
+
+134 SETUP  SPECIAL  MENU 
+
+135 ONE SHOT AUTO  FOCUS  ON 
+
+136 AUTO  FOCUS  AREA  (SMALL) 
+
+137 AUTO  FOCUS  AREA  (MIDDLE) 
+
+00219F0 
+
+002194E 
+
+0021A06 
+
+0021A18 
+
+0021A19 
+
+138 AUTO  FOCUS  AREA  (LARGE) 
+
+0021A1A 
+
+2.4 Receiver Function Command  CS950:Y: New command for CS950 
+
+No. 
+
+Function 
+
+Command 
+
+CS950  Remark 
+
+Depends  on  MENU:CONT  1 
+
+Depends  on  MENU:CONT  1 
+
+Depends on MENU :CONT 1 AUX1 
+
+Depends on MENU :CONT 1 AUX1 
+
+Depends on MENU :CONT 2 AUX2 
+
+Depends on MENU :CONT 2 AUX2 
+
+Depends on MENU :CONT 1 AUX1 
+
+Depends on MENU :CONT 1 AUX1 
+
+Depends on MENU :CONT 2 AUX2 
+
+Depends on MENU :CONT 2 AUX2 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Y 
+
+Y 
+
+1 AUX ALL ON 
+
+2 AUX ALL OFF 
+
+3 AUX 1 ON 
+
+4 AUX 1 OFF 
+
+5 AUX 2 ON 
+
+6 AUX 2 OFF 
+
+7 AUX 1 MOMENTARY 
+
+8 AUX 1 LATCH 
+
+9 AUX 2 MOMENTARY 
+
+10 AUX 2 LATCH 
+
+2021130 
+
+2021131 
+
+2021160 
+
+2021161 
+
+2021162 
+
+2021163 
+
+2021180 
+
+2021181 
+
+2021182 
+
+2021183 
+
+11 ZOOM[STOP(F)] & FOCUS[STOP(F)] 
+
+2021224 
+
+12 ZOOM[TELE(F)] 
+
+2021228 
+
+13 ZOOM[TELE(F)] & FOCUS[FAR (F)] 
+
+2021229 
+
+14 FOCUS[FAR (F)] 
+
+202122A 
+
+15 ZOOM[WIDE(F)] & FOCUS[FAR (F)] 
+
+202122B 
+
+16 ZOOM[WIDE(F)] 
+
+202122C 
+
+17 ZOOM[WIDE(F)] & FOCUS[NEAR(F)] 
+
+202122D 
+
+18 FOCUS[NEAR(F)] 
+
+202122E 
+
+19 ZOOM[WIDE(F)] & FOCUS[NEAR(F)] 
+
+202122F 
+
+20 ZOOM[STOP(V)] & FOCUS[STOP(V)] 
+
+2021264 
+
+21 ZOOM[TELE(V)] 
+
+2021268 
+
+22 ZOOM[TELE(V)] & FOCUS[FAR (V)] 
+
+2021269 
+
+23 FOCUS[FAR (V)] 
+
+202126A 
+
+24 ZOOM[WIDE(V)] & FOCUS[FAR (V)] 
+
+202126B 
+
+25 ZOOM[WIDE(V)] 
+
+202126C 
+
+26 ZOOM[WIDE(V)] & FOCUS[NEAR(V)] 
+
+202126D 
+
+27 FOCUS[NEAR(V)] 
+
+202126E 
+
+28 ZOOM[WIDE(V)] & FOCUS[NEAR(V)] 
+
+202126F 
+
+29 ZOOM  LIMIT  INC 
+
+30 ZOOM  LIMIT  DEC 
+
+31 AUTO  PAN  ON 
+
+32 AUTO  PAN  OFF 
+
+33 AUTO PAN REVERSE 
+
+34 AUTO PAN LEFT END SET 
+
+35 AUTO PAN RIGHT END SET 
+
+2021272 
+
+2021273 
+
+2021300 
+
+2021301 
+
+2021305 
+
+2021306 
+
+2021307 
+
+11 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+36 AUTO PAN SPEED INC 
+
+37 AUTO PAN SPEED DEC 
+
+38 AUTO  PAN  ENDLESS  ON 
+
+39 AUTO  PAN  ENDLESS  OFF 
+
+40 PAN[STOP (F)] & TILT[STOP(F)] 
+
+41 PAN[LEFT (F)] 
+
+42 PAN[LEFT (F)] & TILT[ UP (F)] 
+
+43 TILT[ UP (F)] 
+
+44 PAN[RIGHT(F)] & TILT[ UP (F)] 
+
+45 PAN[RIGHT(F)] 
+
+2021308 
+
+2021309 
+
+202130E 
+
+202130F 
+
+2021324 
+
+2021328 
+
+2021329 
+
+202132A 
+
+202132B 
+
+202132C 
+
+46 PAN[RIGHT(F)] & TILT[DOWN(F)] 
+
+202132D 
+
+47 TILT[DOWN(F)] 
+
+48 PAN[LEFT (F)] & TILT[DOWN(F)] 
+
+49 PAN[STOP (F)] & TILT[STOP(S)] 
+
+50 PAN[LEFT (F)] 
+
+51 PAN[LEFT (F)] & TILT[ UP (S)] 
+
+52 TILT[ UP (S)] 
+
+53 PAN[RIGHT(F)] & TILT[ UP (S)] 
+
+54 PAN[RIGHT(F)] 
+
+202132E 
+
+202132F 
+
+2021334 
+
+2021338 
+
+2021339 
+
+202133A 
+
+202133B 
+
+202133C 
+
+55 PAN[RIGHT(F)] & TILT[DOWN(S)] 
+
+202133D 
+
+56 TILT[DOWN(S)] 
+
+57 PAN[LEFT (F)] & TILT[DOWN(S)] 
+
+58 PAN[STOP (S)] & TILT[STOP(F)] 
+
+59 PAN[LEFT (S)] 
+
+60 PAN[LEFT (S)] & TILT[ UP (F)] 
+
+61 TILT[ UP (F)] 
+
+62 PAN[RIGHT(S)] & TILT[ UP (F)] 
+
+63 PAN[RIGHT(S)] 
+
+202133E 
+
+202133F 
+
+2021344 
+
+2021348 
+
+2021349 
+
+202134A 
+
+202134B 
+
+202134C 
+
+64 PAN[RIGHT(S)] & TILT[DOWN(F)] 
+
+202134D 
+
+65 TILT[DOWN(F)] 
+
+66 PAN[LEFT (S)] & TILT[DOWN(F)] 
+
+67 PAN[STOP (S)] & TILT[STOP(S)] 
+
+68 PAN[LEFT (S)] 
+
+69 PAN[LEFT (S)] & TILT[ UP (S)] 
+
+70 TILT[ UP (S)] 
+
+71 PAN[RIGHT(S)] & TILT[ UP (S)] 
+
+72 PAN[RIGHT(S)] 
+
+202134E 
+
+202134F 
+
+2021354 
+
+2021358 
+
+2021359 
+
+202135A 
+
+202135B 
+
+202135C 
+
+73 PAN[RIGHT(S)] & TILT[DOWN(S)] 
+
+202135D 
+
+74 TILT[DOWN(S)] 
+
+75 PAN[LEFT (S)] & TILT[DOWN(S)] 
+
+202135E 
+
+202135F 
+
+76 PAN[STOP (V)] & TILT[STOP(V)] 
+
+2021364:2022xx0 
+
+77 PAN[LEFT (V)] 
+
+2021368:2022xx0 
+
+78 PAN[LEFT (V)] & TILT[ UP (V)] 
+
+2021369:2022xx0 
+
+79 TILT[ UP (V)] 
+
+202136A:2022xx0 
+
+80 PAN[RIGHT(V)] & TILT[ UP (V)] 
+
+202136B:2022xx0 
+
+81 PAN[RIGHT(V)] 
+
+202136C:2022xx0 
+
+12 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+82 PAN[RIGHT(V)] & TILT[DOWN(V)] 
+
+202136D:2022xx0 
+
+83 TILT[DOWN(V)] 
+
+202136E:2022xx0 
+
+84 PAN[LEFT (V)] & TILT[DOWN(V)] 
+
+202136F:2022xx0 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Timeout 2.2sec 
+
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+85 AUTO PAN KEY:AUTO PAN 
+
+86 AUTO PAN KEY:SEQ 
+
+87 AUTO PAN KEY:SORT 
+
+88 AUTO PAN KEY:PATROL1 
+
+89 AUTO PAN KEY:PATROL2 
+
+90 AUTO PAN KEY:PATROL3 
+
+91 AUTO PAN KEY:PATROL4 
+
+2021390 
+
+2021391 
+
+2021392 
+
+2021393 
+
+2021394 
+
+2021395 
+
+2021396 
+
+92 AUTO PAN KEY:AUTO TRACKING 
+
+2021397 
+
+93 PROPO PAN/TILT ON 
+
+94 PROPO PAN/TILT OFF 
+
+95 SELF RETURN:ON 
+
+96 SELF RETURN:OFF 
+
+97 SELF RETURN TIME:INC 
+
+98 SELF RETURN TIME:DEC 
+
+99 SELF RETURN MODE: 
+
+AUTO TRACKING 
+
+100 SELF RETURN MODE:PATROL2 
+
+101 SELF RETURN MODE:PATROL3 
+
+102 SELF RETURN MODE:PATROL4 
+
+103 SELF RETURN MODE:OFF 
+
+104 SELF RETURN MODE:AUTO 
+
+20213A0 
+
+20213A1 
+
+20213B0 
+
+20213B1 
+
+20213B2 
+
+20213B3 
+
+20213B4 
+
+20213B5 
+
+20213B6 
+
+20213B7 
+
+20213B8 
+
+20213B9 
+
+105 SELF RETURN MODE:HOME-POSI 
+
+20213BA 
+
+106 SELF RETURN MODE:AUTOPAN 
+
+20213BB 
+
+107 SELF RETURN MODE:SEQ 
+
+108 SELF RETURN MODE:SORT 
+
+109 SELF RETURN MODE:PATROL1 
+
+110 PAN LIMIT ON 
+
+111 PAN LIMIT OFF 
+
+112 180 DEG TURN 
+
+20213BC 
+
+20213BD 
+
+20213BE 
+
+20213C0 
+
+20213C1 
+
+20213D1 
+
+113 PRESET POSITION CALL 
+
+2021400:2022xx0 
+
+114 HOME POSITION CALL 
+
+115 PRESET SEQ [OFF] 
+
+116 PRESET MODE [SEQ ON] 
+
+117 PRESET MODE [SORT ON] 
+
+118 PATROL SETTING NUMBER:1 
+
+2021410 
+
+2021431 
+
+2021437 
+
+2021438 
+
+2021480 
+
+119 PATROL SETTING NUMBER:2 
+
+2021481 
+
+120 PATROL SETTING NUMBER:4 
+
+2021482 
+
+121 PATROL1(S)  PLAY 
+
+122 PATROL2(S)  PLAY 
+
+123 PATROL3(S)  PLAY 
+
+124 PATROL4(S)  PLAY 
+
+2021488 
+
+2021489 
+
+202148A 
+
+202148B 
+
+13 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+When changing a setting number, 
+
+implement  after  erasing  memory 
+
+contents 
+
+by  PATROL  DEL 
+
+202149B-E. 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+To stop PLAY LEARN of PATROL 
+
+2-4,  implement  PATROL  STOP 
+
+2021491. 
+
+Y  or  N  depends  on  the  setting 
+
+number. 
+
+Refer 2.7 
+
+Refer 2.7 
+
+Refer 2.7 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+Y 
+
+125 PATROL PLAY 
+
+126 PATROL STOP 
+
+127 PATROL LEARN 
+
+128 PATROL2  PLAY 
+
+129 PATROL3  PLAY 
+
+130 PATROL4  PLAY 
+
+131 PATROL2  LEARN 
+
+132 PATROL3  LEARN 
+
+133 PATROL4  LEARN 
+
+134 PATROL1  DEL 
+
+135 PATROL2  DEL 
+
+136 PATROL3  DEL 
+
+137 PATROL4  DEL 
+
+138 IMAGE HOLD ON 
+
+139 IMAGE HOLD OFF 
+
+2021490 
+
+2021491 
+
+2021494 
+
+2021495 
+
+2021496 
+
+2021497 
+
+2021498 
+
+2021499 
+
+202149A 
+
+202149B 
+
+202149C 
+
+202149D 
+
+202149E 
+
+20214E0 
+
+20214E1 
+
+99 DIRECT PREPOSITION SET START 
+
+2021540:2022**0 
+
+100 DIRECT PREPOSITION SET  
+
+2021542 
+
+101 DIRECT PREPOSITION SET END 
+
+2021543 
+
+140 PRESET POSITION ID ALL CLEAR 
+
+2021547 
+
+141 Alarm IN 1 OFF 
+
+142 Alarm IN 1 POSI 
+
+143 Alarm IN 1 AUTOPAN 
+
+144 Alarm IN 1 PATROL1 
+
+145 Alarm IN 1 AUTO TRACKING1 
+
+146 Alarm IN 2 OFF 
+
+147 Alarm IN 2 POSI 
+
+148 Alarm IN 2 SEQ 
+
+149 Alarm IN 2 PATROL2 
+
+150 Alarm IN 2 AUTO TRACKING2 
+
+151 Alarm IN 3 OFF 
+
+152 Alarm IN 3 POSI 
+
+153 Alarm IN 3 SORT 
+
+154 Alarm IN 3 PATROL3 
+
+155 Alarm IN 3 AUTO TRACKING3 
+
+156 Alarm IN 4 OFF 
+
+157 Alarm IN 4 POSI 
+
+158 Alarm IN 4 BW 
+
+159 Alarm IN 4 PATROL4 
+
+160 Alarm IN 4 AUTO TRACKING4 
+
+161 CONT 1 OFF 
+
+162 CONT 1 AUX1 
+
+163 CONT 1 VMD 
+
+164 CONT 2 OFF 
+
+165 CONT 2 AUX2 
+
+166 CONT 2 BW 
+
+2021600 
+
+2021601 
+
+2021602 
+
+2021603 
+
+2021604 
+
+2021610 
+
+2021611 
+
+2021612 
+
+2021613 
+
+2021614 
+
+2021620 
+
+2021621 
+
+2021622 
+
+2021623 
+
+2021624 
+
+2021630 
+
+2021631 
+
+2021632 
+
+2021633 
+
+2021634 
+
+2021700 
+
+2021701 
+
+2021702 
+
+2021710 
+
+2021711 
+
+2021713 
+
+14 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+These  commands  are  about  auto 
+
+tracking, only for CW970 model.  
+
+167 CAMERA HEIGHT  INC 
+
+168 CAMERA HEIGHT  DEC 
+
+169 OBJECT SIZE  SMALL 
+
+170 OBJECT SIZE  MEDIUM 
+
+171 OBJECT SIZE  LARGE 
+
+172 SENSITIVITY  LOW 
+
+173 SENSITIVITY  MID 
+
+174 SENSITIVITY  HIGH 
+
+175 TRACKING MODE  LOW 
+
+176 TRACKING MODE  MID 
+
+177 TRACKING MODE  HIGH 
+
+178 ZOOM CONTROL  OFF 
+
+179 ZOOM CONTROL  INTERMIT 
+
+2021800 
+
+2021801 
+
+2021810 
+
+2021811 
+
+2021812 
+
+2021820 
+
+2021821 
+
+2021822 
+
+2021830 
+
+2021831 
+
+2021832 
+
+2021840 
+
+2021841 
+
+180 ZOOM CONTROL  CONTINUOUS 
+
+2021842 
+
+181 AUTO RELEASE  INC 
+
+182 AUTO RELEASE  DEC 
+
+2021860 
+
+2021861 
+
+183 AUTO RELEASE  DEFAULT(OFF) 
+
+2021863 
+
+184 LOST MODE  STOP 
+
+185 LOST MODE  RESEACH 
+
+186 LOST MODE  ZOOM-OUT 
+
+187 ALARM  OFF 
+
+188 ALARM  ON 
+
+189 INDICATOR  OFF 
+
+190 INDICATOR  CANDIDATE 
+
+191 INDICATOR  TARGET 
+
+192 INDICATOR  ON 
+
+2021870 
+
+2021871 
+
+2021872 
+
+2021880 
+
+2021881 
+
+2021890 
+
+2021891 
+
+2021892 
+
+2021893 
+
+15 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2.5 PTZ Control (Conventional Protocol) 
+
+2.5.1 Variable Pan/Tilt speed command (Timeout 2.2 sec). 
+
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+STX G C F : 2 0 2 1 3 6 9 : 2 0 2 2 X Y 0 ETX 
+
+Note: Above commands can be sent sepalately. 
+
+G C  
+
+: Command header, GC:Camera Control Command 
+
+F 
+
+: Number of commands. Refer Fig – 1 
+
+2 0 2 
+
+: Command distination, 002:Camera functions,202:Receiver functions 
+
+1 
+
+: Command type, 1:Control command, 0:Status request command, 2:Text data 
+
+3 6 9 
+
+: Function(Pan left+tilt up), Refer table 2 Receiver function command. 
+
+2 0 2 
+
+: Command distination, 002:Camera functions,202:Receiver functions 
+
+2 
+
+X  
+
+Y 
+
+: Command type, 1:Control command, 0:Status request command, 2:Text data 
+
+: Pan Speed, 0: Min to 7: Max. 
+
+: Tilt Speed, 0: Min to 7: Max. 
+
+2.6 Preset Position Call command. 
+
+STX G C F : 2 0 2 1 4 0 0 : 2 0 2 2 X Y 0 ETX 
+
+Note: Above commands can be sent sepalately. 
+
+G C  
+
+: Command header, GC:Camera Control Command 
+
+F 
+
+: Number of commands. Refer Fig – 1 
+
+2 0 2 
+
+: Command distination, 002:Camera functions,202:Receiver functions 
+
+1 
+
+: Command type, 1:Control command, 0:Status request command, 2:Text data 
+
+4 0 0 
+
+: Function (Preset position call), Refer table 2 Receiver function command. 
+
+2 0 2 
+
+: Command distination, 002:Camera functions,202:Receiver functions 
+
+2 
+
+: Command type, 1:Control command, 0:Status request command, 2:Text data 
+
+X Y  
+
+: Preset Position, 0 0:Preset 1 to 3F: Preset 64 
+
+［Supplement］ 
+
+  Use the direct function command (chapter 4) for preset 65-256. 
+
+  It is desirable to use the direct function command for preset 1-64, too. 
+
+2.7 Direct Preset Position SET Command  
+
+Replaced by Direct Function Command GCF:00219F0:0022640  
+
+Refer 4 Direct Function Command 
+
+16 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2.8 Normal Preset Position SET Command 
+
+To set a preset position, send Pre Position SET command and set the PTZ to the desired position by 
+
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+using Pan/Tilt and Zoom / focus command. 
+
+Fig 2.8.1 Pre Position SET command 
+
+Function 
+
+Command 
+
+Answer 
+
+Memo 
+
+Setup Start 
+
+[G][C][7][:][2][0][2][1][5][4][0] 
+
+[G][C][7][:][2][0][2][E][5][4][0] 
+
+Pre Position Number  [G][C][7][:][2][0][2][2][X][Y][0]  [G][C][7][:][2][0][2][9][X][Y][0] 
+
+Positioning 
+
+Use Pan/tilt Zoom/Focus Command 
+
+Position set Done 
+
+[G][C][7][:] [2][0][2][1][5][4][2]  [G][C][7][:] [2][0][2][E][5][4][2] 
+
+ Setup END  
+
+[G][C][7][:] [2][0][2][1][5][4][3]  [G][C][7][:] [2][0][2][E][5][4][3] 
+
+               X Y : Preset Position,  
+
+0 0:Preset 1 to 3F: Preset 64 
+
+  ［Supplement］ 
+
+  Use the direct function command (chapter 4) for preset 65-256. 
+
+  It is desirable to use the direct function command for preset 1-64, too. 
+
+2.9 System command 
+
+2.9.1 Alarm 
+
+(1) Alarm mode set command 
+
+Command 
+
+Answer 
+
+STX R L M : Fig5.1 ETX 
+
+STX R L M  ETX 
+
+<Fig5.1> 
+
+Mode 
+
+0 
+
+1 
+
+2 
+
+Function 
+
+  Camera sends alarm log when requested 
+
+  Camera sends alarm log every time an alarm occurs.  
+
+  Camera sends alarm log every 5 seconds 
+
+(2) Alarm log mode request command 
+
+Command 
+
+STX Q L M ETX 
+
+Answer 
+
+STX Fig5.1 ETX 
+
+17 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+(3) Alarm log request command 
+
+This command is used to ask alarm log when the alarm mode is “0”. 
+
+Command 
+
+Answer 
+
+STX Q L D ETX 
+
+STX Fig5.2 ETX 
+
+<Fig5.2> 
+
+Answer 
+
+0 
+
+1 
+
+2 
+
+  No. 
+
+Alarm log 
+
+Yes. There was at least one alarm after previous request. 
+
+  Yes. NOW  there is alarm . 
+
+(4) Alarm inform command 
+
+This command is sent from a camera when the alarm mode is “1”. 
+
+Command 
+
+STX A D X X; A L M : X X ETX 
+
+X X: Camera unit address : 01-96 
+
+Answer 
+
+- 
+
+2.9.2 Device ID request 
+
+(1) Device ID request command for a RS-485 camera 
+
+Command 
+
+STX Q I D ETX 
+
+Answer 
+
+STX 0 1 0 ETX 
+
+Refer table 2.9.2.1 
+
+Table 2.9.2.1 
+
+Answer 
+
+Model 
+
+WV-CS850   WV-CS850 series NTSC, PAL 
+WV-CW860  WV-CW860 series NTSC PAL 
+
+WV-CS570  WV-CS570 
+
+WV-CS950  WV-CS950 
+
+WV-CW960  WV-CW960 
+
+WV-CW970  WV-CW970 
+
+010 
+
+011 
+
+00C 
+
+00D 
+
+00E 
+
+00F 
+
+WV-CSR600,CS600 series NTSC 
+
+ WV-CSR600,CS600 series PAL 
+
+ WV-CSR400,CS400 series NTSC 
+
+ WV-CSR400,CS400 series PAL 
+
+ WV-BSR300,BS300 series NTSC 
+
+ WV-BSR300,BS300 series PAL 
+
+WV-CLR920  WV-CLR920 series PAL   
+
+18 
+
+ 
+   
+ 
+ 
+ 
+       
+WV-CPR650  WV-CPR650 series NTSC   
+
+WV-CPR650   WV-CPR650 series PAL 
+
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+(2) Camera ID request command for a standard camera over the coax gateway equipment  
+
+Fig 2.9.3 CAMERA ID request command 
+
+Function 
+
+Command  
+
+Answer 
+
+Memo 
+
+CAMERA ID request   [STX] [G][C][f] 
+
+[:][0][0][2][1][9][0][0] 
+
+   [:][0][0][2][2][0][0][0] 
+
+   [:][0][0][2][1][9][3][0] 
+
+   [:][0][0][2][0][3][0][8] 
+
+   [:][0][0][2][0][3][0][1] 
+
+   [:][0][0][2][1][9][3][1] 
+
+[ETX] 
+
+read 
+
+id index 
+
+id read start 
+
+srq3 
+
+srq3 
+
+id read end 
+
+[STX] [G][C][7][:][0][0][2][E][9][0][0] [ETX] 
+
+read ack 
+
+[STX] [G][C][7][:][0][0][2][9][0][0][0] [ETX] 
+
+id index ack 
+
+[STX] [G][C][7][:][0][0][2][E][9][3][0] [ETX] 
+
+id read start ack 
+
+[STX] [G][C][7][:][0][0][2][3][1][x][8] [ETX] 
+
+[STX] [G][C][7][:][0][0][2][3][y][z][1] [ETX] 
+
+id 1x 
+
+id yz 
+
+[STX] [G][C][7][:][0][0][2][E][9][3][1] [ETX] 
+
+read end ack 
+
+xyz : refer table 2.9.2.2 
+
+19 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+Table 2.9.2.2 
+
+Answer 
+
+1 xyz 
+
+Model 
+
+07E 
+07F 
+
+08E 
+
+08F 
+
+03E 
+
+04E 
+
+04D 
+
+048 
+
+049 
+
+057 
+
+052 
+
+053 
+
+010 
+
+011 
+
+00C 
+
+00D 
+
+00E 
+
+00F 
+
+01A 
+
+01B 
+
+006 
+
+007 
+
+00A 
+
+00B 
+
+WV-CS950,CW960,CW970 series NTSC 
+WV-CS950,CW960,CW970 series PAL  
+
+ WV-CS570 series NTSC 
+
+ WV-CS570 series PAL 
+ WV-CS850 series NTSC/PAL  (DIPSW1  RS485  and  coax  setup) 
+WV-CS550 series NTSC   
+WV-CS320 series 
+
+WV-CW464P 
+
+WV-CW464E 
+
+WV-CP470CH 
+
+WV-CP470 NTSC 
+
+WV-CP470 PAL 
+
+WV- CS600series NTSC 
+
+ WV- CS600 series PAL 
+
+ WV- CS400 series NTSC 
+
+ WV- CS400 series PAL 
+
+ WV- BS300 series NTSC 
+
+ WV- BS300 series PAL 
+ WV-CPR650 series NTSC   
+ WV-CPR650 series PAL 
+
+ WV-CP610 series NTSC 
+
+ WV-CP610 series PAL 
+
+ WV-BP510 series NTSC 
+
+ WV-BP510 series PAL 
+
+2.9.3 Communication Configuration 
+
+Panasonic RS485 communication utilizes ACK and ANSWER codes. When PC sends a command, 
+
+the camera sends back an ACK and an ANSWER codes. This is our basic procedure to make sure 
+
+that the communication and the camera function are properly executed. But, if the ACK and 
+
+ANSWER codes are not preferable, these codes can be omitted.    
+
+RON:7 mode is recommended in 2 wire connection. 
+
+SRQ(request command) and Qxx(ex.QID) requires either RON:0, RON:1, RON:4, or RON:5 mode. 
+
+Communication Configuration Commands 
+
+Command 
+
+Answer 
+
+STX R O N : Y ETX 
+
+STX R O N : Y ETX 
+
+Y:Refer table 2.9.3 
+
+Y:Refer table 2.9.3 
+
+20 
+
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+Table 2.9.3 
+
+Code 
+
+ACK  *3 
+
+ANSWER 
+
+Error Code *2 
+
+0 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7   
+
+Yes 
+
+Yes 
+
+Yes 
+
+Yes 
+
+No 
+
+No 
+
+No 
+
+No 
+
+Yes *1 
+
+Yes *1 
+
+No 
+
+No 
+
+Yes *1 
+
+Yes *1 
+
+No 
+
+No 
+
+Yes 
+
+Yes 
+
+Yes 
+
+No 
+
+Yes 
+
+No 
+
+Yes 
+
+No 
+
+*1 Exception : GC7:9xxxxxx command is always no answer. 
+
+*2  Refer Table 2.9.4 
+
+ Table 2.9.4 
+
+Code 
+
+Error 
+
+Comments 
+
+ER001 
+
+Invalid command 
+
+ER002  Invalid parameters 
+
+ER301 
+
+Invalid command  Cannot execute depending on camera mode 
+
+ER305 
+
+Invalid command  Cannot answer for execution waiting 
+
+ER306 
+
+Invalid command  Cannot execute for execution waiting 
+
+ER601  Wrong command  Cannot execute depending on menu setting 
+
+*3  Refer Table 2.9.5 
+
+ Table 2.9.5 
+
+NAK 
+
++CODE 
+
+Error 
+
+comments 
+
+(15hex)1 
+
+parity error  Detected data  parity error (even, odd), 
+
+it cause camera to clear camera received data   
+
+(15hex)2  buffer overflow  Detected camera receive buffer full, cannot receive data 
+
+(15hex)3 
+
+framing error  Detected  data    framing  error  (bad  length  to  stop 
+
+bit) ,cause camera to clear camera received data   
+
+(15hex)4 
+
+overrun error  Detected 
+
+overwrote 
+
+data 
+
+buffer 
+
+in 
+
+camera 
+
+communication hardware, cause camera to clear camera 
+
+received data 
+
+(15hex)5 
+
+timeout error  No [etx] is received wihtin10 minutes after [stx] received, 
+
+camera goes to wait for [stx]. 
+
+21 
+
+ 
+ 
+ 
+ 
+ 
+Tips for Two wire Communication Configuration 
+
+(1) Do not send a command before receiving ACK and Answer of previous command. 
+
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+     If you do so, data may be broken. 
+
+  Bad example 
+
+CAM 
+
+PC 
+
+STX RON:0 ETX       
+
+STX QRS ETX    (send    start    within    20ms) 
+
+ACK (Maybe     Broken) 
+
+ACK (Maybe     No     response) 
+
+                          Answer 
+
+STX RON  ETX(Maybe     No     Answer) 
+
+STX 0  ETX(Maybe     No     Answer) 
+
+Good example 
+
+CAM 
+
+PC 
+
+STX RON:0 ETX       
+
+ACK 
+
+Answer STX RON ETX 
+
+STX QRS ETX       
+
+ACK 
+
+Answer STX 0 ETX 
+
+Good example 
+
+CAM 
+
+PC 
+
+STX RON:0;QRS ETX       
+
+ACK 
+
+Answer 
+
+STX RON ETX 
+
+STX 0 ETX 
+
+22 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                         
+                         
+                         
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+3. Panasonic New Camera Protocol 
+
+3.1 One Way Command  
+
+New protocol is one way and does not require answer. 
+
+3.1.1 Command structure. 
+
+STX G C 7 : 9 T T X X X X  ETX 
+
+9  
+
+T T 
+
+: ONE Way New Command 
+
+: Command type, 02:PTZ command, 03:Focus command, Preset command etc 
+
+X X X X   : Command body, Refer Fig 1.  
+
+3.1.2 Command Answer 
+
+This protocol does not use answer from camera 
+
+                  Camera                                                         PC   ex. preset position 1 call 
+
+STX G C 7 : 9030000 ETX  
+
+ACK  (Depends on RON mode)  
+
+3.2 Pan/tilt commands 
+
+No Answer 
+
+Fig3.2 PTZ Command body structure 
+
+X 
+
+X 
+
+X 
+
+X 
+
+PT Direction 
+
+Pan Speed 
+
+Tilt Speed 
+
+Zoom Speed 
+
+Zoom Direction 
+
+0: Tele, 1: Wide 
+
+Zoom Cont 
+
+0: Zoom control, 1: Zoom stop 
+
+EX1.  PAN Left Max speed: GC7:90288F0    (Zoom 1000=8hex) 
+EX2.  PAN / TILT Stop ：：：： GC7:902X1XX  
+
+23 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                              
+                                                                                                       
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+EX3.  Zoom Tele Max speed: GC7:9023000  (Zoom 0011=3hex) 
+
+EX4.  Zoom STOP: GC7:9028XXX 
+
+Table 3.1 PTZ Speed 
+Pan Speed 
+
+Tilt Speed 
+
+Zoom Speed 
+
+0 (MIN)1, 2S..E, F(MAX) 
+
+0 (MIN)1, 2S..E, F(MAX) 
+
+0 (MIN)1, 2, 3 (MAX) 
+
+Table 3.1.1 PT Speed 
+
+PAN deg/sec 
+
+TILT deg/sec 
+
+SPEED 0   
+
+SPEED 1 
+
+SPEED 2 
+
+SPEED 3 
+
+SPEED 4 
+
+SPEED 5 
+
+SPEED 6 
+
+SPEED 7 
+
+SPEED 8 
+
+SPEED 9 
+
+SPEED A 
+
+SPEED B 
+
+SPEED C 
+
+SPEED D 
+
+SPEED E 
+
+SPEED F 
+
+0.1
+
+0.21
+
+0.47
+
+1
+
+3.19
+
+7.06
+
+12.01
+
+18.27
+
+26.54
+
+35.55
+
+44.97
+
+57.52
+
+71.63
+
+86.02
+
+103.1
+
+0.1
+
+0.21
+
+0.47
+
+1
+
+3.19
+
+7.06
+
+12.01
+
+18.27
+
+26.54
+
+35.55
+
+44.97
+
+57.52
+
+71.63
+
+86.02
+
+103.1
+
+120.24
+
+120.24
+
+Table 3.2 PT directions 
+Command 
+
+Function 
+
+0 
+
+1 
+
+8 
+
+9 
+
+A 
+
+B 
+
+C 
+
+D 
+
+E 
+
+F 
+
+Null (when used only fo zoom) 
+
+STOP 
+
+Left 
+
+Left + UP 
+
+UP 
+
+Right + UP 
+
+Right 
+
+Right + Down 
+
+Down 
+
+Left + Down 
+
+24 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+         3.2 .1 Pan command  example 
+
+                  Camera                         PC   ex. PAN LEFT Max speed⇒⇒⇒⇒PAN RIGHT Max speed 
+
+    STX GC7:90288F0  ETX 
+
+ （（（（PAN LEFT Max speed）））） 
+
+ACK  (Depends on RON mode)  
+
+STX GC7:902X1XX ETX 
+
+（（（（PAN/TILT STOP）））） 
+
+ACK  (Depends on RON mode)  
+
+STX GC7:902C8F0  ETX 
+
+（（（（PAN RIGHT Max speed）））） 
+
+ACK  (Depends on RON mode) 
+
+STX GC7:902X1XX ETX 
+
+（（（（PAN/TILT STOP）））） 
+
+ACK  (Depends on RON mode)  
+
+※※※※Pan/Tilt  is Automatic Stop at 2 seconds. 
+
+25 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                              
+                                                                                                       
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+3.3 Focus Command 
+
+Fig3.3 Focus Command body structure 
+
+X 
+
+4 
+
+X 
+
+0 
+
+X 
+
+X 
+
+0 
+
+26 
+
+Focus Speed: 0(MIN) 1, 2, 3 (MAX) 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+0: Near, 1: Far 
+
+0: Zoom control, 1: Zoom stop 
+
+3.4 Preset position set/call Command 
+
+Refer Table 4 
+
+3.5 256 steps PTZ commands 
+
+This is only for CS850A. Prior to use this command, check the availability by SRQ1 command. 
+
+SRQ1 (256 Steps PT check): 2020150, Ans: Yes: 2021500, No: nop. 
+
+STX G C 7 : D X X X X X X ETX 
+
+D  
+
+: ONE Way 256 steps Command 
+
+X X X X X X 
+
+: Command body, Refer Fig 3.5.  
+
+Fig3.5 PTZ Command body structure 
+
+X 
+
+X 
+
+X 
+
+X   
+
+    X 
+
+   X 
+
+PT Direction 
+
+Pan Speed 256 steps 
+
+Tilt Speed 256 steps 
+
+Zoom Speed 
+
+Zoom Direction 
+
+0: Tele, 1: Wide 
+
+Zoom Cont 
+
+0: Zoom control, 1: Zoom stop 
+
+Table 3.5.1 PTZ Speed 
+
+Pan Speed 256steps 
+
+(min) 00, 01, 02S..FE, FF(max) 
+
+Tilt Speed 256 steps 
+
+(min) 00, 01, 02S..FE, FF(max) 
+
+Zoom Speed 4 steps 
+
+(min) 0, 1, 2, 3 (max) 
+
+27 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+Table 3.5.2 256 Steps PT speed (deg/sec). 
+
+STEP  SPEED  STEP  SPEED  STEP  SPEED  STEP  SPEED  STEP  SPEED  STEP  SPEED 
+
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+10 
+11 
+12 
+13 
+14 
+15 
+16 
+17 
+18 
+19 
+20 
+21 
+22 
+23 
+24 
+25 
+26 
+27 
+28 
+29 
+30 
+31 
+32 
+33 
+34 
+35 
+36 
+37 
+38 
+39 
+40 
+41 
+42 
+43 
+
+0.1 
+0.1 
+0.1 
+0.1 
+0.12 
+0.12 
+0.12 
+0.12 
+0.14 
+0.14 
+0.14 
+0.14 
+0.17 
+0.17 
+0.17 
+0.17 
+0.21 
+0.21 
+0.21 
+0.21 
+0.21 
+0.21 
+0.21 
+0.21 
+0.26 
+0.26 
+0.26 
+0.26 
+0.32 
+0.32 
+0.32 
+0.32 
+0.39 
+0.39 
+0.39 
+0.39 
+0.47 
+0.47 
+0.56 
+0.56 
+0.56 
+0.65 
+0.65 
+
+44 
+45 
+46 
+47 
+48 
+49 
+50 
+51 
+52 
+53 
+54 
+55 
+56 
+57 
+58 
+59 
+60 
+61 
+62 
+63 
+64 
+65 
+66 
+67 
+68 
+69 
+70 
+71 
+72 
+73 
+74 
+75 
+76 
+77 
+78 
+79 
+80 
+81 
+82 
+83 
+84 
+85 
+86 
+
+0.65 
+0.76 
+0.76 
+0.76 
+0.76 
+0.87 
+0.87 
+0.87 
+0.87 
+1 
+1 
+1 
+1 
+1.13 
+1.13 
+1.13 
+1.13 
+1.27 
+1.27 
+1.27 
+1.27 
+1.42 
+1.42 
+1.42 
+1.58 
+1.58 
+1.75 
+1.75 
+1.93 
+1.93 
+2.12 
+2.12 
+2.32 
+2.32 
+2.52 
+2.52 
+2.74 
+2.74 
+2.96 
+2.96 
+3.19 
+3.44 
+3.44 
+
+87 
+88 
+89 
+90 
+91 
+92 
+93 
+94 
+95 
+96 
+97 
+98 
+99 
+100 
+101 
+102 
+103 
+104 
+105 
+106 
+107 
+108 
+109 
+110 
+111 
+112 
+113 
+114 
+115 
+116 
+117 
+118 
+119 
+120 
+121 
+122 
+123 
+124 
+125 
+126 
+127 
+128 
+129 
+
+3.69 
+3.69 
+3.95 
+3.95 
+4.22 
+4.22 
+4.5 
+4.79 
+4.79 
+5.09 
+5.39 
+5.39 
+5.71 
+5.71 
+6.03 
+6.03 
+6.37 
+6.37 
+6.71 
+6.71 
+7.06 
+7.06 
+7.42 
+7.42 
+7.8 
+7.8 
+8.17 
+8.17 
+8.56 
+8.56 
+8.96 
+8.96 
+9.37 
+9.37 
+9.79 
+9.79 
+10.21 
+10.21 
+10.65 
+10.65 
+11.54 
+11.54 
+12.01 
+
+130 
+131 
+132 
+133 
+134 
+135 
+136 
+137 
+138 
+139 
+140 
+141 
+142 
+143 
+144 
+145 
+146 
+147 
+148 
+149 
+150 
+151 
+152 
+153 
+154 
+155 
+156 
+157 
+158 
+159 
+160 
+161 
+162 
+163 
+164 
+165 
+166 
+167 
+168 
+169 
+170 
+171 
+172 
+
+12.01 
+12.48 
+12.96 
+13.45 
+13.45 
+13.95 
+13.95 
+14.46 
+14.46 
+14.97 
+14.97 
+15.5 
+15.5 
+16.03 
+16.03 
+16.58 
+17.13 
+17.13 
+17.7 
+18.27 
+18.27 
+18.85 
+18.85 
+19.44 
+19.44 
+20.65 
+20.65 
+21.27 
+21.27 
+21.89 
+22.53 
+23.18 
+23.83 
+24.49 
+25.17 
+25.85 
+25.85 
+26.54 
+26.54 
+27.24 
+27.95 
+28.67 
+29.4 
+
+173 
+174 
+175 
+176 
+177 
+178 
+179 
+180 
+181 
+182 
+183 
+184 
+185 
+186 
+187 
+188 
+189 
+190 
+191 
+192 
+193 
+194 
+195 
+196 
+197 
+198 
+199 
+200 
+201 
+202 
+203 
+204 
+205 
+206 
+207 
+208 
+209 
+210 
+211 
+212 
+213 
+214 
+215 
+
+30.13 
+30.88 
+31.64 
+32.4 
+33.17 
+33.96 
+34.75 
+35.55 
+36.36 
+37.18 
+38.01 
+38.85 
+39.69 
+40.55 
+41.41 
+42.29 
+43.17 
+44.06 
+44.97 
+45.88 
+46.8 
+47.73 
+48.66 
+49.61 
+50.57 
+51.53 
+52.51 
+53.49 
+54.49 
+54.49 
+55.49 
+56.5 
+57.52 
+58.55 
+59.59 
+60.64 
+61.7 
+61.7 
+62.76 
+63.84 
+64.92 
+66.02 
+67.12 
+
+216 
+217 
+218 
+219 
+220 
+221 
+222 
+223 
+224 
+225 
+226 
+227 
+228 
+229 
+230 
+231 
+232 
+233 
+234 
+235 
+236 
+237 
+238 
+239 
+240 
+241 
+242 
+243 
+244 
+245 
+246 
+247 
+248 
+249 
+250 
+251 
+252 
+253 
+254 
+255 
+256 
+
+69.36 
+70.49 
+71.63 
+72.77 
+73.93 
+75.1 
+76.28 
+77.46 
+78.66 
+79.86 
+81.07 
+82.3 
+83.53 
+84.77 
+86.02 
+88.54 
+89.82 
+91.11 
+93.71 
+95.02 
+97.68 
+100.37 
+103.1 
+105.86 
+108.66 
+110.08 
+112.93 
+115.83 
+118.76 
+120.24 
+120.24 
+120.24 
+120.24 
+120.24 
+120.24 
+120.24 
+120.24 
+120.24 
+120.24 
+120.24 
+120.24 
+
+※Please transmit the PTZF command at first, and then transmit the STOP 
+command. Without transmitting the STOP command, PTZF operation may not work. 
+
+28 
+
+   
+   
+   
+   
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+4. Absolute Position Control 
+
+compatible in CS850A and later model 
+
+4.1 Get Positioning Data from Dome Camera (PTZ) 
+
+4.1.1 Pan Position 
+
+Example Pan Angle: 
+
+120.5(deg) = 1205 
+
+Camera 
+
+PC 
+
+Start Command to get Pan position data 
+
+[stx]GCF:20203A0:20203B0[etx] 
+
+[stx]GC7:2023A12[etx] 
+
+[stx]GC7:2023B05[etx]    120.5 deg 
+
+RS485 
+
+4.1.2 Tilt Position 
+
+Example Tilt Angle: 45.0(deg) = 0450 
+
+Camera 
+
+PC 
+
+Start Command to get Tilt position data 
+
+[stx]GCF:20203C0:20203D0[etx] 
+
+[stx]GC7:2023C04[etx] 
+
+[stx]GC7:2023D50[etx]    45.0 deg 
+
+RS485 
+
+29 
+
+ 
+ 
+       
+ 
+ 
+ 
+       
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+4.1.3 Zoom Ratio 
+
+Example Zoom Ratio: 
+
+10.0(times) = 0100 
+
+Camera 
+
+PC 
+
+Start Command to get Zoom ratio data 
+
+[stx]GCF:2020490:20204A0[etx] 
+
+[stx]GC7:2024901[etx] 
+
+[stx]GC7:2024900[etx]      10.0 times 
+
+RS485 
+
+30 
+
+ 
+ 
+       
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+4.2 Set Positioning Data to Dome Camera 
+
+4.2.1 Pan Position 
+
+Example Pan Position: 
+
+175.0(deg) = 1750 
+
+(MIN=000.0, MAX=360.0) 
+
+Camera 
+
+PC 
+
+Start Command to set Pan Position data 
+
+[stx]GCN:20214C0:2022178:2022501[etx] 
+
+[stx]GC7:202E4C0[etx] 
+
+[stx]GC7:2029178[etx] 
+
+[stx]GC7:2029501[etx] 
+
+RS485 
+
+4.2.2 Tilt Position 
+
+Example Tilt Position: 
+
+78.9(deg) = 0789 
+
+(MIN=002.0, MAX=090.0) 
+
+Camera 
+
+PC 
+
+Start Command to set Tilt Position data 
+
+[stx]GCN:20214C1:2022078:2022891[etx] 
+
+[stx]GC7:202E4C1[etx] 
+
+[stx]GC7:2029078[etx] 
+
+[stx]GC7:2029891[etx] 
+
+RS485 
+
+31 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+4.2.3 Pan/Tilt Position 
+
+Example Pan Position: 
+
+24.3(deg) = 0243 (MIN=000.0, MAX=360.0) 
+
+ Tilt Position: 
+
+31.6(deg) = 0316 (MIN=002.0, MAX=090.0) 
+
+Camera 
+
+PC 
+
+Start Command to set Tilt Position data 
+
+[stx]GC＾:20214C2:2022028:2022439:202203A:2022163[etx] 
+
+[stx]GC7:202E4C2[etx] 
+
+[stx]GC7:2029028[etx] 
+
+[stx]GC7:2029439[etx] 
+
+[stx]GC7:202903A[etx] 
+
+[stx]GC7:2029163[etx] 
+
+RS485 
+
+＾＾＾＾ = AsciiCode 5Ehex 
+
+32 
+
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+4.2.4 Zoom Ratio 
+
+Example Zoom Ratio: 
+
+010.0(times) 
+
+= 0100 
+
+(MIN=001.0 , MAX=022.0) 
+
+Camera 
+
+PC 
+
+Start Command to set Zoom ratio data 
+
+[stx]GCN:20214B0:2022018:2022001[etx] 
+
+[stx]GC7:202E4B0[etx] 
+
+[stx]GC7:2029018[etx] 
+
+[stx]GC7:2029001[etx] 
+
+RS485 
+
+4.2.5 Focus Distance 
+
+Example Focus Distance: 
+
+001.9(meter) = 0019 
+
+(MIN=001.0 , MAX=022.0) 
+
+Camera 
+
+PC 
+
+Start Command to set Focus distance data 
+
+[stx]GCN:20214B1:2022008:2022191[etx] 
+
+[stx]GC7:202E4B1[etx] 
+
+[stx]GC7:2029008[etx] 
+
+[stx]GC7:2029191[etx] 
+
+RS485 
+
+［Supplement］ 
+
+When using “Absolute Position Control” command, consider the lifetime of the lens part, the slip ring (P/T) 
+
+(lens part: 3,700,000 times of operation, slip ring: 2,400,000 times of operation) 
+
+As for the slip ring, in case of using 7 years, the operation limit is about 1000 times per day. 
+
+※Please transmit the PTZF command at first, and then transmit the STOP 
+command. Without transmitting the STOP command, PTZF operation may not work. 
+
+33 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+5. Direct Function Command (New and Conventional Protocol) 
+      Table 4 
+
+New Protocol 
+
+Conventional Protocol 
+[GCF: CMD : TXT] 
+
+Function 
+
+Comment 
+
+CMD 
+
+CMD 
+
+TXT 
+
+9030000  
+9030001  
+  ~  
+903003E  
+903003F  
+9030040  
+9030041  
+9030042  
+9030043  
+9030044  
+9030045  
+9030046  
+9030047  
+9030048  
+9030049  
+903004A  
+903004B  
+903004C  
+903004D  
+903004E  
+903004F  
+9030050  
+9030051  
+9030052  
+9030053  
+9030054  
+9030055  
+9030056  
+9030057  
+9030058  
+9030059  
+903005A  
+903005B  
+903005C  
+903005D  
+903005E  
+903005F  
+9030060  
+9030061  
+9030062  
+9030063  
+9030064 
+9030065 
+ ~ 
+90300A2 
+90300A3 
+90300A4 
+90300A5 
+90300A6 
+90300A8 
+90300A9 
+90300AA 
+90300AB 
+90300AC 
+
+00219F0 
+00219F0 
+
+ 0022000 
+ 0022010 
+
+PRESET CALL 
+
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+00219F0 
+ 00219F0 
+ 00219F0 
+
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+
+ENDLESS 
+
+PROPO. P/T 
+
+DIGITAL FLIP 
+
+AUTO  PAN 
+
+AUTO  MODE 
+
+ 00223E0 
+ 00223F0 
+ 0022400 
+ 0022410 
+ 0022420 
+ 0022430 
+ 0022440 
+ 0022450 
+ 0022460 
+ 0022470 
+ 0022480 
+ 0022490 
+ 00224A0 
+ 00224B0 
+ 00224C0 
+ 00224D0 
+ 00224E0 
+ 00224F0 
+ 0022500 
+ 0022510 
+ 0022520 
+ 0022530 
+ 0022540 
+ 0022550 
+ 0022560 
+ 0022570 
+ 0022580  HOME POSITION   
+ 0022590 
+ 00225A0 
+ 00225B0 
+ 00225C0 
+ 00225D0 
+ 00225E0 
+ 00225F0 
+ 0022600 
+ 0022610 
+ 0022620 
+ 0022630  REFRESH 
+ 0022640 
+ 0022650 
+
+PRESET STORE 
+
+AREA TITLE  
+
+SUPER DⅡ 
+
+CAMERA ID 
+
+EL-ZOOM 
+
+BW 
+
+AF 
+
+ 0022A20 
+ 0022A30 
+ 0022A40 
+ 0022A50 
+ 0022A60 
+ 0022A80 
+ 0022A90 
+ 0022AA0 
+ 0022AB0 
+ 0022AC0 
+
+PATROL 
+
+IRIS 
+
+SHUTTER 
+
+34 
+
+ PRESET 1  CALL 
+ PRESET 2  CALL 
+  ~ 
+ PRESET 63  CALL 
+ PRESET 64  CALL 
+ AUTO PAN  ON 
+ AUTO PAN  OFF 
+ AUTO PAN SPEED INC 
+ AUTO PAN SPEED DEC 
+ AUTO PAN START POINT SET 
+ AUTO PAN END POINT SET 
+ AUTO MODE  OFF 
+ AUTO SEQ  ON 
+ AUTO SORT  ON 
+ AUTO PAN SWEEP AREA INVERT 
+
+ ENDLESS  ON 
+ ENDLESS  OFF 
+ DIGITAL FLIP  ON 
+ DIGITAL FLIP  OFF 
+ PROPORTIONAL P/T  ON 
+ PROPORTIONAL P/T  OFF 
+
+ SUPER-DII   ON 
+ SUPER-DII   OFF 
+ STOP  AF  ON  (MENU ITEM) 
+ STOP  AF  OFF  (MENU ITEM) 
+ 1 SHOT AF  ON       (START) 
+ HOME POSITION  MOVE 
+ BW ON   (MENU ITEM) 
+ BW OFF  (MENU ITEM) 
+ BW AUTO  (MENU ITEM) 
+ CAMERA ID  ON 
+ CAMERA ID   OFF 
+ AREA TITLE  NESW   ON 
+ AREA TITLE  USER   ON 
+ AREA TITLE  OFF 
+ EL-ZOOM   ON 
+ EL-ZOOM   OFF 
+REFRESH 
+ PRESET1  SET 
+ PRESET2  SET 
+  ~ 
+ PRESET63  SET 
+ PRESET64  SET 
+ PATROL(1)   PLAY 
+ PATROL   STOP 
+ PATROL(1)   LEARN   
+ IRIS  OPEN 
+ IRIS  CLOSE 
+ SHUTTER  ON  
+ SHUTTER  OFF 
+ SHUTTER  INC 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+  
+ 
+ 
+ 
+ 
+ 
+   
+90300AD 
+90300AE 
+90300AF 
+90300B0 
+90300B1 
+90300B2 
+90300B3 
+90300B4 
+90300B5 
+90300B6 
+90300B7 
+90300B8 
+90300B9 
+90300BA 
+90300BB 
+90300BC 
+90300BD 
+90300BE 
+90300BF 
+90300C0 
+90300C1 
+
+90300C2 
+90300C3 
+90300C4 
+90300C5 
+90300C6 
+90300C7 
+
+90300C8 
+90300C9 
+90300CA 
+90300CB 
+ ~ 
+ ~ 
+9031000 
+9031001 
+ ~ 
+90310FE 
+90310FF 
+ ~ 
+ ~ 
+903112C 
+903112D 
+ ~ 
+903122A 
+903122B 
+
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+
+ 00219F0 
+ 00219F0 
+ 00219F0 
+ 00219F0 
+
+ --- 
+ --- 
+
+ --- 
+ --- 
+
+ --- 
+ --- 
+
+ --- 
+ --- 
+
+AGC 
+
+SENS UP FIX 
+
+SENS UP AUTO 
+
+ 0022AD0 
+ 0022AE0 
+ 0022AF0 
+ 0022B00 
+ 0022B10 
+ 0022B20 
+ 0022B30 
+ 0022B40 
+ 0022B50 
+ 0022B60 
+ 0022B70 
+ 0022B80 
+ 0022B90 
+ 0022BA0  180 deg pan turn 
+ 0022BB0 
+ 0022BC0 
+ 0022BD0 
+ 0022BE0 
+ 0022BF0 
+ 0022C00 
+ 0022C10 
+
+BW DURATION 
+
+                TIME 
+
+CLEANING 
+
+LL phase 
+
+PATROL 
+
+ 0022C20 
+ 0022C30 
+ 0022C40 
+ 0022C50 
+ 0022C60 
+ 0022C70 
+
+ 0022C80 
+ 0022C90 
+ 0022CA0 
+ 0022CB0 
+
+ --- 
+ --- 
+
+ --- 
+ --- 
+
+ --- 
+ --- 
+
+ --- 
+ --- 
+
+ AUTO TRACKING 
+
+ STABILIZER 
+
+ OSD 
+
+ PRESET CALL 
+
+ PRESET SET 
+
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+ SHUTTER  DEC 
+ AGC  ON 
+ AGC  OFF 
+ SENS  UP   FIX  ON 
+ SENS  UP   FIX  OFF 
+ SENS  UP   FIX  INC 
+ SENS  UP   FIX  DEC 
+ SENS UP AUTO ON  
+ SENS UP AUTO OFF 
+ SENS UP AUTO INC 
+ SENS UP AUTO DEC 
+ LL Phase  INC 
+ LL Phase  DEC 
+ 180 deg pan turn 
+CLEANING ON (MENU) 
+ CLEANING OFF (MENU) 
+ BW DURATION TIME 10S 
+ BW DURATION TIME 30S 
+ BW DURATION TIME 60S 
+ BW DURATION TIME 300S 
+ PATROL2 PLAY 
+(Implement PATROL STOP 90300A5 to stop) 
+ PATROL3 PLAY 
+ PATROL4 PLAY 
+ PATROL2 LEARN 
+ PATROL3 LEARN 
+ PATROL4 LEARN 
+ AUTO TRACKING 
+(Implement AUTO MODE OFF 9030046 to stop) 
+ STABILIZER ON 
+ STABILIZER OFF 
+P/T/Z Position Display ON 
+P/T/Z Position Display OFF 
+ N/A 
+ N/A 
+ PRESET 1 CALL 
+ PRESET 2 CALL 
+ ~ 
+ PRESET 255 CALL 
+ PRESET 256 CALL 
+ N/A 
+ N/A 
+ PRESET 1 SET 
+ PRESET 2 SET 
+  ~ 
+ PRESET 255 SET 
+ PRESET 256 SET 
+
+When camera received  preset store command：9030064-90300A3, ”MEMORY”is displayed for 3 seconds. 
+
+35 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+6. Auto Tracking Control  
+
+only for CW970 model 
+
+6.1   Control Auto-Tracking 
+
+6.1.1   Search in the whole area and start Auto-Tracking 
+
+Camera 
+
+PC 
+
+[stx]GC7:90300C7[etx] 
+
+Auto Tracking ON 
+
+RS485 
+
+6.1.2   Select the target and start Auto-Tracking 
+
+2 
+
+0   1   2   3   4   5   6  7   8   9   A  B  C   D  E       Horizontal Position(0-E) 
+
+3 
+
+0 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+A 
+    Vertical Position(0-A) 
+
+Camera 
+
+PC 
+
+Example: 
+
+Select this target and start auto-tracking. 
+
+*Search starts from neighbour area of the target 
+
+point and selected object is not always tracked. 
+
+[stx]GCV:20214D0:2022238:2022101:90300C7[etx] 
+
+Fix 
+
+[stx]GC7:202E4D0[etx] 
+
+[stx]GC7:2029238[etx] 
+
+[stx]GC7:2029191[etx] 
+
+Auto Tracking ON 
+
+Vertical Position 
+
+Horizontal Position 
+
+RS485 
+
+36 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+6.1.3   Stop Auto-Tracking 
+
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+Camera 
+
+PC 
+
+[stx]GC7:9030046[etx] 
+
+RS485 
+
+37 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+6.2   Get the information of Auto-Tracking 
+
+6.2.1   Get the status of Auto-Tracking 
+
+Camera 
+
+PC 
+
+[stx]GC7:2020180[etx] 
+
+[stx]GC7:202180X[etx] 
+
+X‥0:Not Active 
+
+      1:Search 
+
+      2:Tracking 
+
+      3:Lost 
+
+RS485 
+
+6.2.2   Get the information of PTZ movement during Auto-Tracking 
+
+Camera 
+
+PC 
+
+[stx]GCF:20200E0:20200F0[etx] 
+
+[stx]GC7:2020EXX[etx] 
+
+[stx]GC7:2020FXX[etx] 
+
+RS485 
+
+Don’t care 
+
+Pan LEFT (1:active) 
+
+Pan RIGHT(1:active) 
+
+Tilt DOWN(1:active) 
+
+Tilt UP(1:active) 
+
+ex)RIGHT&UP--> GC7:2020E0A 
+
+Don’t care 
+
+Zoom WIDE(1:active) 
+
+Zoom TELE(1:active) 
+
+ex)WIDE --> GC7:2020F01 
+
+38 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Panasonic CCVE Products Document  
+
+6/28/2013 
+
+7. Gateway Mode 
+
+The commands in this document can be sent over the coax via switcher equipment supporting gateway 
+
+command such as SX550A, FS616, MP204 etc. 
+
+New protocol (9xxxxxx code) can be gatewayed by MP204 only.  
+
+Refer switcher’s protocol document for detail. 
+
+8. Wiring 
+
+8.1   2Wire Internal Circuit  
+
+                              Tx(A) /Rx(A) 
+
+Half Duplex                                                                                                TX(Camera) 
+
+DATA                        Tx(B) /Rx(B) 
+
+TX Drive Control 
+
+RX(Camera) 
+
+ONLINE MONITOR       Carriar Detection 
+
+Fig. 8.1  
+
+8.2   4Wire Internal Circuit  
+
+                              Tx(A)  
+
+Full Duplex                                                                                                TX(Camera) 
+
+DATA                        Tx(B)  
+
+Note :In 2Wire Multidrop USE(PC HOST), Tx(A),Tx(B) Terminals should be OPEN  
+
+and 4WIRE DIPSW2 setting. 
+
+TX Drive allwaysON(L:ACTIVE) 
+
+(or 1WAY Control)  Rx(A)                               
+
+Rx(B) 
+
+ONLINE MONITOR        NO USE 
+
+RX(Camera) 
+
+Fig. 8.2  
+
+39 
+
+ 
+                               
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+

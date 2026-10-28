@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+# Start divinus (software field-weave NTSC->480 pipeline).
+# Config is read from /etc/divinus.yaml; sensor init from /etc/bt656_ntsc.ini.
+# The TP9950 NTSC registers are applied by divinus itself (v4_weave thread).
+#
+
+DAEMON=/usr/bin/divinus
+LOG=/tmp/divinus.log
+SUPPID=/tmp/divinus_sup.pid
+
+case "$1" in
+	start)
+		[ -x "$DAEMON" ] || { echo "divinus: $DAEMON missing"; exit 1; }
+		# Ensure the MPP (vendor) kernel modules are loaded. S70vendor loads
+		# them at boot but can lose a race occasionally; without them divinus
+		# fails with ERR_VB_NOTREADY. Re-run the loader and wait if needed.
+		if [ ! -e /proc/umap/venc ]; then
+			echo "MPP not loaded; running vendor module loader..."
+			/etc/init.d/S70vendor start
+			i=0
+			while [ ! -e /proc/umap/venc ] && [ $i -lt 10 ]; do
+				sleep 1
+				i=$((i + 1))
+			done
+		fi
+		cd /tmp
+		# Supervisor: respawn divinus whenever it exits. The web "restart"
+		# button exits the process on purpose (an in-process execvp() restart
+		# would hit ERR_VB_BUSY because exec keeps the /dev/mpp fds open); a
+		# crash is covered too. Each respawn is a fresh fork+exec, so MPP gets
+		# new fds and the VB pool initialises cleanly.
+		( while true; do
+			"$DAEMON" >"$LOG" 2>&1
+			sleep 2
+		done ) &
+		echo $! > "$SUPPID"
+		echo "divinus started (supervised)"
+		;;
+	stop)
+		# Kill the supervisor first so it does not respawn, then divinus.
+		[ -f "$SUPPID" ] && kill "$(cat "$SUPPID")" 2>/dev/null
+		rm -f "$SUPPID"
+		P=$(pidof divinus)
+		[ -n "$P" ] && kill $P
+		;;
+	restart)
+		"$0" stop; sleep 2; "$0" start
+		;;
+	*)
+		echo "usage: $0 {start|stop|restart}"
+		exit 1
+		;;
+esac

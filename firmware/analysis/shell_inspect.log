@@ -1,0 +1,120 @@
+
+>>> mount -t devtmpfs none /dev
+mount -t devtmpfs none /dev
+mount: mounting none on /dev failed: No such device
+/ # 
+>>> mount -t proc none /proc
+mount -t proc none /proc
+/ # 
+>>> mount -t sysfs none /sys
+mount -t sysfs none /sys
+/ # 
+>>> mount -t tmpfs none /tmp
+mount -t tmpfs none /tmp
+/ # 
+>>> mount -t debugfs none /sys/kernel/debug
+mount -t debugfs none /sys/kernel/debug
+mount: mounting none on /sys/kernel/debug failed: No such file or directory
+/ # 
+>>> sh /etc/init.d/rcS >/tmp/rcs.log 2>&1; echo RCS_DONE
+sh /etc/init.d/rcS >/tmp/rcs.log 2>&1; echo RCS_DONE
+RCS_DONE
+/ # 
+>>> sleep 15; echo SLEPT
+sleep 15; echo SLEPT
+SLEPT
+/ # 
+>>> pidof camapp
+pidof camapp
+82
+/ # 
+>>> P=$(pidof camapp); echo PID=$P
+P=$(pidof camapp); echo PID=$P
+PID=82
+/ # 
+>>> ls -l /proc/$(pidof camapp)/fd
+ls -l /proc/$(pidof camapp)/fd
+total 0
+lr-x------    1 root     root            64 Jan  1 00:02 [1;36m0[0m -> [1;35m/dev/null[0m
+l-wx------    1 root     root            64 Jan  1 00:02 [1;36m1[0m -> [0;0m/tmp/rcs.log[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m10[0m -> [1;35m/dev/ai[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m11[0m -> [1;35m/dev/mmz_userdev[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m12[0m -> [1;35m/dev/aio[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m13[0m -> [1;35m/dev/aenc[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m14[0m -> [1;35m/dev/mmz_userdev[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m15[0m -> [1;35m/dev/adec[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m16[0m -> [1;35m/dev/adec[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m17[0m -> [1;35m/dev/ao[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m18[0m -> [1;35m/dev/ao[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m19[0m -> [1;35m/dev/acodec[0m
+l-wx------    1 root     root            64 Jan  1 00:02 [1;36m2[0m -> [0;0m/tmp/rcs.log[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m20[0m -> [1;35m/dev/watchdog[0m
+lr-x------    1 root     root            64 Jan  1 00:02 [1;36m21[0m -> [0;35mpipe:[240][0m
+l-wx------    1 root     root            64 Jan  1 00:02 [1;36m22[0m -> [0;35mpipe:[240][0m
+lr-x------    1 root     root            64 Jan  1 00:02 [1;36m23[0m -> [1;35m/dev/rgn[0m
+lr-x------    1 root     root            64 Jan  1 00:02 [1;36m24[0m -> [1;35m/dev/ive[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m25[0m -> [1;35m/dev/venc[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m26[0m -> [1;35m/dev/venc[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m27[0m -> [1;35m/dev/venc[0m
+lr-x------    1 root     root            64 Jan  1 00:02 [1;36m28[0m -> [1;35m/dev/vpss[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m29[0m -> [1;35m/dev/ttyAMA1[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m3[0m -> [1;35m/dev/sys[0m
+lr-x------    1 root     root            64 Jan  1 00:02 [1;36m30[0m -> [1;35m/dev/isp_dev[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m31[0m -> [1;35m/dev/ttyAMA2[0m
+lr-x------    1 root     root            64 Jan  1 00:02 [1;36m32[0m -> [1;35m/dev/vi[0m
+lr-x------    1 root     root            64 Jan  1 00:02 [1;36m33[0m -> [1;35m/dev/isp_dev[0m
+lr-x------    1 root     root            64 Jan  1 00:02 [1;36m34[0m -> [1;35m/dev/vi[0m
+lr-x------    1 root     root            64 Jan  1 00:02 [1;36m35[0m -> [1;35m/dev/vi[0m
+lr-x------    1 root     root            64 Jan  1 00:02 [1;36m36[0m -> [1;35m/dev/vpss[0m
+lr-x------    1 root     root            64 Jan  1 00:02 [1;36m37[0m -> [1;35m/dev/vpss[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m38[0m -> [1;35m/dev/venc[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m39[0m -> [1;35msocket:[263][0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m4[0m -> [1;35m/dev/vb[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m40[0m -> [1;35msocket:[253][0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m41[0m -> [1;35msocket:[264][0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m42[0m -> [1;35msocket:[265][0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m43[0m -> [1;35msocket:[266][0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m44[0m -> [1;35msocket:[329][0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m45[0m -> [1;35msocket:[637][0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m46[0m -> [1;35msocket:[660][0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m5[0m -> [1;35m/dev/mem[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m6[0m -> [1;35m/dev/i2c-0[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m7[0m -> [1;35m/dev/i2c-1[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m8[0m -> [1;35m/dev/i2c-2[0m
+lrwx------    1 root     root            64 Jan  1 00:02 [1;36m9[0m -> [1;35m/dev/lsadc[0m
+/ # 
+>>> ls -l /proc/$(pidof camapp)/fd | grep -iE 'tty|mem|serial'
+ls -l /proc/$(pidof camapp)/fd | grep -iE 'tty|mem|serial'
+lrwx------    1 root     root            64 Jan  1 00:02 29 -> /dev/ttyAMA1
+lrwx------    1 root     root            64 Jan  1 00:02 31 -> /dev/ttyAMA2
+lrwx------    1 root     root            64 Jan  1 00:02 5 -> /dev/mem
+/ # 
+>>> cat /sys/kernel/debug/gpio
+cat /sys/kernel/debug/gpio
+cat: can't open '/sys/kernel/debug/gpio': No such file or directory
+/ # 
+>>> echo PINMUX:; devmem 0x112c0044; devmem 0x112c0030; devmem 0x112c0034; devmem 0x112c0038; devmem 0x112c003c; devmem 0x100c000c
+echo PINMUX:; devmem 0x112c0044; devmem 0x112c0030; devmem 0x112c0034; devme
+m 0x112c0038; devmem 0x112c003c; devmem 0x100c000c
+PINMUX:
+0x00000501
+0x00001C02
+0x00001C02
+0x00001C02
+0x00001C02
+0x00001000
+/ # 
+>>> cat /proc/tty/driver/ttyAMA 2>/dev/null; cat /proc/tty/drivers | head
+cat /proc/tty/driver/ttyAMA 2>/dev/null; cat /proc/tty/drivers | head
+serinfo:1.0 driver revision:
+0: uart:PL011 rev2 mmio:0x12040000 irq:21 tx:6026 rx:625 RTS|CTS|DTR|DSR|CD|RI
+1: uart:PL011 rev2 mmio:0x12041000 irq:22 tx:16 rx:16 RTS|DTR|DSR|CD|RI
+2: uart:PL011 rev2 mmio:0x12042000 irq:23 tx:16 rx:0 RTS|DTR|DSR|CD|RI
+/bin/sh: head: not found
+/ # 
+>>> grep -c . /tmp/rcs.log; grep -iE 'ptz_uart|UART' /tmp/rcs.log | tail -6
+grep -c . /tmp/rcs.log; grep -iE 'ptz_uart|UART' /tmp/rcs.log | tail -6
+grep: /tmp/rcs.log: No such file or directory
+/bin/sh: tail: not found
+grep: /tmp/rcs.log: No such file or directory
+/ # 

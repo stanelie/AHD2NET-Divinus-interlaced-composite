@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Image>
+	<ImagingOptions>
+		<BacklightCompensation>
+			<sizeMode>2</sizeMode>
+			<Mode0>0</Mode0> <!--0 OFF 1 ON --> 
+			<Mode1>1</Mode1> <!--0 OFF 1 ON -->
+			<Level Min="-100" Max="100"></Level>
+		</BacklightCompensation>
+		<Brightness Min="-255" Max="255"></Brightness>
+		<ColorSaturation Min="0" Max="255"></ColorSaturation>
+		<Contrast Min="0" Max="128"></Contrast>							  					  
+		<Exposure>
+			<sizeMode>2</sizeMode>
+			<Mode0>0</Mode0> <!--0 AUTO 1 MANUAL -->
+			<Mode1>1</Mode1> <!--0 AUTO 1 MANUAL -->
+			<MinExposureTime Min="120" Max="8000"></MinExposureTime>
+			<MaxExposureTime Min="120" Max="8000"></MaxExposureTime>	
+			<MinGain Min="0" Max="60"></MinGain>			  		
+			<MaxGain Min="0" Max="60"></MaxGain>						  		
+			<ExposureTime Min="1" Max="8000"></ExposureTime>
+			<Gain Min="0" Max="60"></Gain>
+		</Exposure>
+		<Focus>
+			<sizeAutoFocusModes>2</sizeAutoFocusModes>
+			<AutoFocusModes0>0</AutoFocusModes0> <!--0 AUTO 1 MANUAL -->
+			<AutoFocusModes1>1</AutoFocusModes1> <!--0 AUTO 1 MANUAL -->
+			<DefaultSpeed Min="0" Max="100"></DefaultSpeed>
+			<NearLimit Min="0" Max="100"></NearLimit>
+			<FarLimit Min="0" Max="100"></FarLimit>
+		</Focus>
+		<sizeIrCutFilterModes>3</sizeIrCutFilterModes>
+		<IrCutFilterModes0>0</IrCutFilterModes0>	<!--0 ON 1 OFF 2 AUTO -->
+		<IrCutFilterModes1>1</IrCutFilterModes1>	<!--0 ON 1 OFF 2 AUTO -->
+		<IrCutFilterModes2>2</IrCutFilterModes2> <!--0 ON 1 OFF 2 AUTO -->
+		<Sharpness Min="0" Max="255"></Sharpness>
+		<WideDynamicRange>
+			<sizeMode>2</sizeMode>
+			<Mode0>0</Mode0> <!--0 OFF 1 ON -->
+			<Mode1>1</Mode1> <!--0 OFF 1 ON -->
+			<Level Min="0" Max="100"></Level>
+		</WideDynamicRange>
+		<WhiteBalance>
+			<sizeMode>2</sizeMode>
+			<Mode0>0</Mode0> <!--0 AUTO 1 MANUAL -->
+			<Mode1>1</Mode1> <!--0 AUTO 1 MANUAL -->
+			<YrGain Min="1" Max="16384"></YrGain>
+			<YbGain Min="1" Max="16384"></YbGain>				  	   			
+		</WhiteBalance>
+	</ImagingOptions>
+	
+	<ImagingMoveOptions>
+		<Absolute>
+			<Position Min="0" Max="100"></Position>
+			<Speed Min="0" Max="100"></Speed>
+		</Absolute>
+		<Relative>
+			<Distance Min="0" Max="100"></Distance>
+			<Speed Min="0" Max="100"></Speed>
+		</Relative>						
+		<Continuous>
+			<Speed Min="0" Max="100"></Speed>
+		</Continuous>
+	</ImagingMoveOptions>
+</Image>

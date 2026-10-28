@@ -1,0 +1,101 @@
+system:
+  sensor_config: /etc/bt656_ntsc.ini
+  web_port: 80
+  web_enable_auth: false
+  web_auth_user: admin
+  web_auth_pass: 12345
+  web_auth_skiplocal: true
+  web_enable_static: false
+  isp_thread_stack_size: 16384
+  venc_stream_thread_stack_size: 16384
+  web_server_thread_stack_size: 65536
+  time_format: %Y-%m-%d %H:%M:%S
+  watchdog: 0
+night_mode:
+  enable: false
+  ir_sensor_pin: 999
+  check_interval_s: 10
+  ir_cut_pin1: 999
+  ir_cut_pin2: 999
+  ir_led_pin: 999
+  pin_switch_delay_us: 250
+  adc_device: 
+  lamp: ir
+  adc_threshold: 128
+isp:
+  mirror: false
+  flip: false
+  antiflicker: 60
+mdns:
+  enable: false
+onvif:
+  enable: false
+  enable_auth: false
+  auth_user: 
+  auth_pass: 
+rtsp:
+  enable: true
+  port: 554
+  audio_codec: mp3
+  enable_auth: false
+  auth_user: admin
+  auth_pass: 12345
+record:
+  enable: false
+  continuous: false
+  path: /mnt/sdcard/recordings
+  filename: 
+  segment_duration: 0
+  segment_size: 0
+stream:
+  enable: false
+  udp_srcport: 0
+audio:
+  enable: false
+  bitrate: 128
+  gain: 0
+  srate: 0
+mp4:
+  enable: true
+  codec: H.264
+  mode: 0
+  width: 640
+  height: 480
+  fps: 30
+  gop: 40
+  profile: 1
+  bitrate: 1024
+osd:
+  enable: true
+    reg0_text: Test
+    reg0_font: UbuntuMono-Regular
+    reg0_opal: 255
+    reg0_posx: 16
+    reg0_posy: 16
+    reg0_size: 32.0
+    reg0_color: 0x83e0
+    reg0_outl: 0xc400
+    reg0_thick: 0.0
+jpeg:
+  enable: false
+  width: 0
+  height: 0
+  qfactor: 0
+mjpeg:
+  enable: true
+  mode: 0
+  width: 640
+  height: 480
+  fps: 30
+  bitrate: 8000
+  qfactor: 50
+http_post:
+  enable: false
+  host: 
+  url: 
+  login: 
+  password: 
+  width: 0
+  height: 0
+  interval: 0
+  qfactor: 0

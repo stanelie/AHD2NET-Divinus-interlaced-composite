@@ -1,0 +1,13 @@
+
+>>> ls /sys/kernel/debug/pinctrl/ 2>/dev/null
+ls /sys/kernel/debug/pinctrl/ 2>/dev/null
+/ # 
+>>> cat /sys/kernel/debug/pinctrl/*/pinmux-pins 2>/dev/null | grep -iE 'uart|UART' | head -20
+cat /sys/kernel/debug/pinctrl/*/pinmux-pins 2>/dev/null | grep -iE 'uart|UAR
+T' | head -20
+/bin/sh: head: not found
+/ # 
+>>> for o in 00 04 08 0c 10 14 18 1c 20 24 28 2c 30 34 38 3c 40 44 48 4c 50 54 58 5c 60 64 68 6c 70 74; do printf '112c00%s = ' \; devmem 0x112c00\; done
+for o in 00 04 08 0c 10 14 18 1c 20 24 28 2c 30 34 38 3c 40 44 48 4c 50 54 5
+8 5c 60 64 68 6c 70 74; do printf '112c00%s = ' \; devmem 0x112c00\; done
+> 

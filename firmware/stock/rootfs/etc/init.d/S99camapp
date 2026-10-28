@@ -1,0 +1,51 @@
+#!/bin/sh
+
+APP="/usr/sbin/camapp"
+MMC_MNT="/mnt"
+PRE_RUN="${MMC_MNT}/preinit.sh"
+USR_RUN="/usr/etc/usrinit.sh"
+
+ulimit -s unlimited
+ulimit -p unlimited
+ulimit -l unlimited
+
+echo "mount tmp folder"
+mount -t tmpfs tmpfs /tmp
+mount -t jffs2 -o noatime,nodiratime,sync /dev/mtdblock4 /usr
+
+sleep 1
+
+echo "mount mmc device"
+for mmc in `ls /dev/mmcblk*`
+do
+	echo "mount ${mmc} to ${MMC_MNT}"
+	mount ${mmc} ${MMC_MNT}
+	if [ $? -ne 0 ]; then
+		echo "mount mmc failed..."
+	else
+		echo "mount mmc successfull..."
+		break
+	fi
+done
+
+echo "check usrinit script..."
+if [ -f ${USR_RUN} ]; then
+	echo "execute preinit script: ${PRE_RUN}"
+	sh ${USR_RUN}
+fi
+
+echo "check preinit script..."
+if [ -f ${PRE_RUN} ]; then
+	echo "execute preinit script: ${PRE_RUN}"
+	sh ${PRE_RUN}
+	exit 0
+fi
+
+echo "check application..."
+if [ -f ${APP} ]; then
+	echo "execute application: ${APP}"
+	${APP} &
+else
+	echo "application: ${APP} not found"
+	exit 0
+fi

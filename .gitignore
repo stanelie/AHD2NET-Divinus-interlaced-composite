@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+
+# Large raw serial capture (the reassembled flash.bin is the canonical copy)
+*.hex
+firmware/stock/flash.hex
+
+# OS cruft
+Thumbs.db
+.DS_Store

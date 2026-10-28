@@ -1,0 +1,808 @@
+OpenIPC Firmware Install
+  Profile: gk7205v200
+  Port:    COM6
+  Flash:   NOR 8MB (override)
+  Image:  firmware.bin.gk7205v200 (7208960 bytes; split NOR layout, uImage + 
+squashfs at 0x50000)
+  U-Boot: u-boot-gk7205v200-nor.bin (212965 bytes → padded to 262144)
+
+Phase 1: Burning U-Boot to RAM
+  Power-cycle the camera now!
+INFO:defib.transport.serial_platform:Using standard SerialTransport for win32
+  Loaded profile: gk7205v200
+  Starting HiSilicon Standard handshake for gk7205v200
+  Waiting for bootrom... power-cycle the device now!
+DEBUG:defib.protocol.hisilicon_standard:handshake: 5 consecutive markers, entering boot mode (flooding=False)
+  Boot mode entered
+  Sending 212965 bytes of firmware...
+DEBUG:defib.protocol.hisilicon_standard:send_firmware: profile=gk7205v200 firmware=212965 bytes spl_override=False
+  Sending DDR step
+DEBUG:defib.protocol.hisilicon_standard:=== DDR STEP === address=0x04013000 data=64 bytes
+DEBUG:defib.protocol.hisilicon_standard:HEAD: length=64 address=0x04013000
+DEBUG:defib.protocol.hisilicon_standard:TX HEAD (14 bytes): fe 00 ff 01 00 00 00 40 04 01 30 00 51 9c
+DEBUG:defib.protocol.hisilicon_standard:TX HEAD ACKed (attempt 1/16)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=1 payload=64 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (69 bytes): da 01 fe 04 e0 2d e5 24 00 9f e5 24 10 9f e5 00 10 80 e5 20 00 9f e5 20 10 9f e5 04 10 80...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:TAIL: seq=2
+DEBUG:defib.protocol.hisilicon_standard:TX TAIL (5 bytes): ed 02 fd ba b0
+DEBUG:defib.protocol.hisilicon_standard:TX TAIL ACKed (attempt 1/16)
+  DDR step complete
+DEBUG:defib.protocol.hisilicon_standard:send_firmware: rehandshake before SPL
+DEBUG:defib.protocol.hisilicon_standard:rehandshake: waiting up to 5s for bootmode markers
+INFO:defib.protocol.hisilicon_standard:SPL boundary detected (gzip) at 0x4800 (18432 bytes); profile default was 0x6000 (24576 bytes)
+DEBUG:defib.protocol.hisilicon_standard:=== SPL === address=0x04010500 size=18432 chunks=18
+  Sending SPL
+DEBUG:defib.protocol.hisilicon_standard:HEAD: length=18432 address=0x04010500
+DEBUG:defib.protocol.hisilicon_standard:TX HEAD (14 bytes): fe 00 ff 01 00 00 48 00 04 01 05 00 dd c6
+DEBUG:defib.protocol.hisilicon_standard:TX HEAD ACKed (attempt 1/16)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=1 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 01 fe 15 05 00 ea fe ff ff ea fe ff ff ea fe ff ff ea fe ff ff ea fe ff ff ea fe ff ff...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=2 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 02 fd 14 c0 0d 12 00 64 00 f0 00 00 00 00 fd 00 00 00 30 c0 0d 12 21 22 88 28 00 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=3 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 03 fc ec c0 0d 12 09 00 00 00 00 00 00 00 fd 00 00 00 6c c0 0d 12 ff 00 ff 00 00 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=4 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 04 fb 60 02 0d 12 00 00 11 00 00 00 00 00 fd 00 00 00 70 02 0d 12 00 00 11 00 00 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=5 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 05 fa 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=6 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 06 f9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=7 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 07 f8 0c 30 95 e5 00 00 52 e3 06 00 00 1a 04 10 95 e5 03 20 84 e1 01 20 92 e1 02 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=8 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 08 f7 03 30 c3 e3 02 30 83 e3 d3 ff ff ea 00 f0 20 e3 08 30 9d e5 01 30 83 e2 08 30 8d...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=9 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 09 f6 02 c1 cc e3 c4 c0 80 e5 10 80 bd e8 01 00 04 00 70 40 2d e9 00 40 a0 e1 01 50 a0...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=10 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 0a f5 18 30 84 e5 07 34 c3 e3 84 30 85 e5 50 30 9f e5 04 21 93 e5 2c 20 84 e5 14 31 93...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=11 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 0b f4 60 70 90 e5 01 00 57 e3 00 70 a0 13 0b 00 00 1a 44 30 90 e5 50 10 93 e5 60 20 93...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=12 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 0c f3 14 30 9d e5 01 00 73 e3 2b 00 00 1a 07 31 85 e0 00 20 a0 e3 0a 10 a0 e1 07 21 85...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=13 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 0d f2 04 00 55 e3 01 b0 8b 00 01 b0 4b 10 02 0c 5b e3 0f 00 00 3a 10 d0 8d e2 f0 8d bd...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=14 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 0e f1 00 00 53 e3 04 00 00 0a 5c 80 94 e5 00 00 58 e3 0d 00 00 0a 00 50 e0 e3 62 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=15 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 0f f0 80 e0 90 e4 04 e0 ac e5 f4 ff ff ea 04 c0 90 e4 80 c0 83 e4 01 00 53 e1 fb ff ff...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=16 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 10 ef 08 30 91 e5 20 00 13 e3 03 00 00 0a 00 30 e0 e3 02 00 a0 e3 03 20 a0 e1 c6 f8 ff...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=17 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 11 ee 01 60 86 12 7d 1e a0 e3 20 00 a0 e3 ce ff ff eb 00 00 50 e3 f0 81 bd 18 20 30 a0...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=18 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 12 ed 05 30 a0 e1 01 c0 a0 e3 df ff ff ea 00 00 e0 e3 f3 ff ff ea f4 3f 73 40 f0 3f 73...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:TAIL: seq=19
+DEBUG:defib.protocol.hisilicon_standard:TX TAIL (5 bytes): ed 13 ec 88 e2
+DEBUG:defib.protocol.hisilicon_standard:TX TAIL ACKed (attempt 1/16)
+DEBUG:defib.protocol.hisilicon_standard:DDR training delay: 300ms (spl_size=18432)
+  SPL complete
+DEBUG:defib.protocol.hisilicon_standard:=== U-Boot === address=0x41000000 total=212965 chunks=208
+  Sending U-Boot
+DEBUG:defib.protocol.hisilicon_standard:rehandshake: waiting up to 5s for bootmode markers
+DEBUG:defib.protocol.hisilicon_standard:TX HEAD (14 bytes): fe 00 ff 01 00 03 3f e5 41 00 00 00 8a de
+DEBUG:defib.protocol.hisilicon_standard:TX HEAD ACKed (attempt 1/64)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=1 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 01 fe 15 05 00 ea fe ff ff ea fe ff ff ea fe ff ff ea fe ff ff ea fe ff ff ea fe ff ff...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=2 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 02 fd 14 c0 0d 12 00 64 00 f0 00 00 00 00 fd 00 00 00 30 c0 0d 12 21 22 88 28 00 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=3 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 03 fc ec c0 0d 12 09 00 00 00 00 00 00 00 fd 00 00 00 6c c0 0d 12 ff 00 ff 00 00 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=4 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 04 fb 60 02 0d 12 00 00 11 00 00 00 00 00 fd 00 00 00 70 02 0d 12 00 00 11 00 00 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=5 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 05 fa 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=6 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 06 f9 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=7 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 07 f8 0c 30 95 e5 00 00 52 e3 06 00 00 1a 04 10 95 e5 03 20 84 e1 01 20 92 e1 02 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=8 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 08 f7 03 30 c3 e3 02 30 83 e3 d3 ff ff ea 00 f0 20 e3 08 30 9d e5 01 30 83 e2 08 30 8d...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=9 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 09 f6 02 c1 cc e3 c4 c0 80 e5 10 80 bd e8 01 00 04 00 70 40 2d e9 00 40 a0 e1 01 50 a0...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=10 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 0a f5 18 30 84 e5 07 34 c3 e3 84 30 85 e5 50 30 9f e5 04 21 93 e5 2c 20 84 e5 14 31 93...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=11 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 0b f4 60 70 90 e5 01 00 57 e3 00 70 a0 13 0b 00 00 1a 44 30 90 e5 50 10 93 e5 60 20 93...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=12 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 0c f3 14 30 9d e5 01 00 73 e3 2b 00 00 1a 07 31 85 e0 00 20 a0 e3 0a 10 a0 e1 07 21 85...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=13 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 0d f2 04 00 55 e3 01 b0 8b 00 01 b0 4b 10 02 0c 5b e3 0f 00 00 3a 10 d0 8d e2 f0 8d bd...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=14 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 0e f1 00 00 53 e3 04 00 00 0a 5c 80 94 e5 00 00 58 e3 0d 00 00 0a 00 50 e0 e3 62 00 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=15 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 0f f0 80 e0 90 e4 04 e0 ac e5 f4 ff ff ea 04 c0 90 e4 80 c0 83 e4 01 00 53 e1 fb ff ff...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=16 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 10 ef 08 30 91 e5 20 00 13 e3 03 00 00 0a 00 30 e0 e3 02 00 a0 e3 03 20 a0 e1 c6 f8 ff...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=17 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 11 ee 01 60 86 12 7d 1e a0 e3 20 00 a0 e3 ce ff ff eb 00 00 50 e3 f0 81 bd 18 20 30 a0...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=18 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 12 ed 05 30 a0 e1 01 c0 a0 e3 df ff ff ea 00 00 e0 e3 f3 ff ff ea f4 3f 73 40 f0 3f 73...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=19 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 13 ec 00 30 81 e5 00 00 a0 e1 fe ff ff ea 04 00 02 12 1f 8b 08 08 33 43 db 6a 00 03 75...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=20 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 14 eb cd 13 fd c8 6b 9b 67 b8 35 1c 61 2e 0f 1d 6b 79 58 20 ea f7 7f 6a bd 98 ed 09 79...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=21 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 15 ea b5 4e f7 7b 61 0f f2 ef 33 fa 6b c8 e9 6e 8c 8d 9a a3 fc 07 20 17 ff 8f cf 32 ac...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=22 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 16 e9 f1 b8 bd 02 b2 34 91 18 f6 f5 98 fd 70 78 2a 6d 31 f4 9a 78 95 73 1e c3 93 fb 2c...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=23 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 17 e8 80 8e 82 59 53 32 e1 8f 4f 56 f6 95 6b de 07 ff 38 3d 0f f6 06 f7 fd 84 a8 0b 8b...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=24 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 18 e7 87 f5 38 86 18 3c 21 fd 10 6c 86 5b 1f e2 6e 3b e8 d3 73 7a 70 25 e8 8a 42 87 9f...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=25 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 19 e6 78 5c e7 59 ec c7 3d 73 f9 dc 1f eb 79 f2 ae 40 df 3f 68 3f f4 5c ea 1a 69 7c 11...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=26 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 1a e5 e5 94 43 0a 77 25 0e b1 7e 47 9e 4c 0a 7a 80 ee d7 68 23 ad 06 9c b1 21 1c e1 2e...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=27 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 1b e4 cb 84 45 98 d7 ab 75 9c 07 ba b3 16 78 32 ee 19 97 79 e4 ec b2 22 c3 23 ce 3b 06...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=28 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 1c e3 42 32 30 41 97 a9 ea 18 c6 30 dc 01 e3 82 43 d8 fb 81 bf a7 9d c8 89 aa 66 96 a3...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=29 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 1d e2 4b 8c c0 7a 0b b0 1e eb de 95 bf 64 fe 56 e5 27 68 c7 07 e2 db df 46 8a 8e 1d f8...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=30 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 1e e1 c5 b8 63 6a f0 e1 dd 99 38 6b da b4 91 e0 45 94 f2 09 5b 5c 56 a0 ed fd 77 9e 50...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=31 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 1f e0 58 87 d6 17 fd 4f a1 ef 6f 68 3e da 7e b4 f7 d0 de 41 fb 04 2d 56 95 76 16 1e 83...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=32 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 20 df bb 5d c0 9a f4 bc e1 ac 11 a8 5a 1d eb 34 a3 de ba d0 4f 98 f5 32 b6 ef 29 e5 b2...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=33 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 21 de ca 8d ca fd d0 7e 7c 4e 7d c1 7e 27 18 a2 7d 0f be 79 c2 94 f9 09 d6 24 5e d5 ff...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=34 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 22 dd 8d 6d c5 4b e6 c2 62 3a 66 ff fd 93 2a 16 bc 25 96 e7 31 ae cb 43 7c 22 92 37 81...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=35 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 23 dc 5f 93 b9 94 66 9d 07 da 0c bf b3 f3 b0 ac 19 82 79 2f d2 59 1f be f8 9c c2 e3 90...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=36 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 24 db 68 05 76 cd 02 e3 54 30 0f 59 c4 bc 5a 72 45 d8 30 f5 38 ef 21 b1 1b fe 66 77 36...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=37 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 25 da 02 26 bb 3d 39 a8 ad cd c3 98 23 39 06 fb 92 2f c4 26 db d1 57 8a be 6d 78 f6 c1...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=38 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 26 d9 d7 68 3f f8 6c d7 d9 98 13 fa f4 d9 ae fa 05 e5 f9 b4 ff 70 96 14 e8 b9 c3 c6 59...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=39 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 27 d8 27 39 5c 33 91 32 a7 7d 12 31 70 ae ff c2 67 ba 7c 15 31 c1 77 9f 91 f1 b1 f4 6d...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=40 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 28 d7 fa d7 7e ad 7f 35 fa df 46 ff ca 6f 58 73 8e 5e 33 85 31 1e c6 cc fd 86 31 57 e9...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=41 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 29 d6 97 2a 1f 63 9d d3 27 6e cd 37 85 7d 45 9f 68 32 62 0e 93 f7 bc 34 1c 41 8c d3 da...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=42 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 2a d5 cb 0b 31 27 8a 7b 4f 13 e3 88 4b 40 c3 a4 92 dc dd df 40 1d 75 65 1e a6 7d ed bf...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=43 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 2b d4 63 7b f8 22 e2 8e c8 33 82 b6 3d fb 84 dd 98 2d 12 bb da 06 54 31 6f 86 78 b4 26...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=44 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 2c d3 ad f4 eb 27 6a 9c 31 06 fd fb 99 33 b0 57 84 33 cd 15 32 cf 12 2d 9d 97 9d 41 bc...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=45 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 2d d2 76 94 d4 77 e9 fb 82 7f 3e a2 6a 7f bc d7 f1 b4 cf 36 f5 77 6a 60 58 03 98 e7 de...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=46 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 2e d1 9b 39 19 a7 9e ba ee d7 dc cd bb 49 fa b6 10 eb aa e1 6b aa b5 af b9 ed 21 25 d7...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=47 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 2f d0 5c b5 c5 3e 87 b9 f4 2c e4 74 f0 71 d8 27 6a 8d f6 b8 87 b0 40 a3 a5 ea b3 f4 a1...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=48 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 30 cf 36 a1 43 d6 52 f0 62 3c 73 52 c3 8b f0 4e 7d 1b 8a fe 61 b8 a3 7b 20 d3 f7 40 f6...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=49 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 31 ce 8a eb 9c 28 73 2c a4 ef 7b f5 4a 3e 49 1f f3 4f 77 63 9d 3b ea 55 3e c0 c5 93 f5...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=50 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 32 cd d9 91 72 2a c7 cc 73 3e 1d 37 cf 79 e7 dc 79 4e 0b de 1d b4 81 37 d5 3a 0e be ad...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=51 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 33 cc 24 4d ad d0 7b cf cd f6 16 4f 21 d6 bd 67 7f be f8 23 da 92 fd 89 24 ce 8f f6 07...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=52 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 34 cb 9f 48 a5 bc 5c 1e 60 c2 5d 4a 66 f2 dd 4d 6d 77 90 5e 77 4b 5b 54 da a6 e6 10 7a...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=53 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 35 ca 55 06 74 9d f6 2b 4e 1f 96 40 1f f9 13 b5 d0 67 d1 2e 4e 0d 88 c7 a0 87 d0 e9 89...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=54 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 36 c9 f3 45 bc e7 f6 de fa d9 57 f9 f1 2d e6 a9 f5 b7 8d fa 8c 8a 2f 5d e7 cc 8d ed 3e...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=55 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 37 c8 25 ed a4 9b 18 6e 96 75 ab aa e5 d2 6e 63 cd 59 98 33 13 fb ce 24 3f 41 f7 29 27...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=56 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 38 c7 95 31 91 5f 59 83 27 e4 a4 6e 99 aa 2b 5b d8 83 39 9e 98 de 67 29 f6 71 b0 4f 3e...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=57 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 39 c6 1d b2 3c a2 3a 53 26 9c 15 65 cc 75 55 61 8d c5 b7 2b fd 20 dd 9c 1b 97 75 e7 b4...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=58 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 3a c5 77 98 04 9b ee 1a f4 4f a5 67 36 85 ba 4e bb 8e ba f7 f8 6d c4 7c 93 7c 62 ed dc...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=59 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 3b c4 77 44 9c f4 1d cc f1 f4 78 53 e1 5b ea 69 84 f9 06 ac 37 12 76 36 62 4f 8a 1b f6...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=60 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 3c c3 b9 8f f7 50 e4 d4 2b 9f c2 27 5a 5c f3 44 d4 28 4c 72 ef c1 ce 5c dd 51 e2 02 c6...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=61 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 3d c2 88 e5 f2 15 96 eb e1 ee 08 a3 2d 8d 6d 8b 81 99 ad 33 6f 83 dc 4e cb 5e c0 98 1d...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=62 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 3e c1 69 f9 6e ad 8c c3 6c 9d a3 22 5d bb 81 ad 72 74 bf 42 bf 0c 7c 63 d8 df f3 5f c6...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=63 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 3f c0 46 32 a6 d3 33 09 dc 79 79 a0 1b 59 2f 07 5f ab 19 d7 c1 47 2f 0f da c7 33 fe a0...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=64 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 40 bf 8e 65 1f d6 a5 ef 26 bf e8 b7 e9 b3 b9 0e cf c0 fd 39 de 32 d7 1d f4 d7 49 fa 6a...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=65 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 41 be c4 9b de 67 45 5c d7 e6 52 7e de 01 5d 7f 07 de 3e 80 bb e3 1e f9 32 e3 af ee 63...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=66 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 42 bd ee ce 16 75 a0 81 4f c6 6b 3e f1 2c f3 25 63 70 e6 21 b8 4b 8d a8 5d 49 7e f1 bc...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=67 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 43 bc 7f e0 cb 6d de 70 e6 78 ec e9 ee 31 f6 9f fa f5 2f 01 5b 27 e7 b2 7e f5 00 e9 f3...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=68 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 44 bb 15 b0 e9 15 86 9d 8b c0 a6 8f a4 2f 59 70 40 da 6b e6 91 47 aa 9a 56 5c bb 80 b1...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=69 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 45 ba 89 be 14 de 6b 34 dc 13 ef 86 a5 ee 69 e1 9e 78 37 35 dc d3 52 f7 c4 38 a9 3b dd...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=70 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 46 b9 ed 1a f5 f5 9c ed 5c d8 62 6f 40 eb 46 eb 44 8b 01 ef 94 41 ce 80 c7 a2 a7 e5 19...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=71 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 47 b8 2c e9 58 86 33 54 b5 09 7b e8 b3 be 69 60 6c 19 b1 9b 75 5d 5f 33 e2 75 bd 79 ce...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=72 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 48 b7 fc b0 de ec fa a5 0a 9b 5b d6 39 5e b3 bd 77 77 d4 b9 ce 1b 82 75 a2 6f f6 ac 67...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=73 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 49 b6 6b 68 13 a4 7c 6a da f9 b7 7c 57 e0 a4 39 cc 5f d5 56 81 97 bb 0e 48 9a ce a2 8e...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=74 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 4a b5 dc 7f 0b fc e7 c0 0c ac f5 d2 5c 69 03 de 01 0d a7 5e cb b1 9b 82 2a 91 37 ec 10...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=75 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 4b b4 36 d8 7c 82 b4 5f 75 ea f7 ad ea 37 e2 df da 14 7e 53 2f 6d d8 fb c2 a4 76 af 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=76 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 4c b3 ef 4f 3f 45 7a cc f5 73 d3 42 39 dc 11 2c 1d af e4 d0 76 74 ca 0e 65 69 15 e6 52...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=77 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 4d b2 96 ac 37 e8 aa 06 9c 46 5f ca d8 11 1c 63 e8 88 5f e4 59 fe 03 67 e9 e6 7e ab 5a...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=78 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 4e b1 17 73 16 62 ce 26 cc a9 c2 ba 7b 1a 99 9f aa c8 ef c2 53 47 7c 03 fa 45 f9 3b cc...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=79 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 4f b0 b1 f5 df 23 8e 81 5f 85 6f dd 0b ac 5c a9 ea af 59 f0 32 83 bb 60 ad e8 4c cc e3...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=80 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 50 af 18 96 fc 1e 29 fa 7e 26 be ff 55 7d a7 ff 60 df d3 f8 fd 17 fa 3f d0 c8 54 77 7c...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=81 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 51 ae 61 13 46 c3 77 9c a5 fc 9d 66 b5 08 5f c9 7b e5 0b b2 de a1 59 2b aa 3f af 6a c5...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=82 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 52 ad d7 2a 72 83 e9 8e 3d 8c c5 89 3f df bc 46 1b 4c 20 5e 7e 4d e5 04 93 da 02 ff ef...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=83 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 53 ac 22 fc 1d f4 23 39 54 c9 d6 ed 45 39 47 0d 38 2a 03 9f 4a 8c 75 cc a4 a8 37 24 35...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=84 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 54 ab 18 1b 34 af 0e ae 68 62 fc 33 df d7 61 6b 26 37 3d ee 9f 84 f3 97 0a ff e0 e4 e7...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=85 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 55 aa 21 7c e5 c7 1f 17 0e c6 d9 4b 30 6e 36 6b b2 18 47 99 5e 84 71 bc 53 35 ec c0 83...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=86 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 56 a9 36 af 77 11 5f 57 72 0f d6 7e fe 38 99 38 b1 15 b8 78 67 d0 75 fa 1f dd 58 73 6b...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=87 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 57 a8 ac c7 f7 3d 55 d2 7f ef 8a f5 04 cf 96 f3 0e db fb 5f c2 7b 29 b0 68 b4 b1 b3 9f...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=88 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 58 a7 58 f3 3c 91 be 33 de 74 8e cb 18 e4 18 dc 73 95 b2 63 75 58 33 aa 9d 9f 8f 36 39...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=89 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 59 a6 e3 57 df 93 d8 63 89 de 53 0d 1b 5e fb 73 6b 47 d0 07 3c 16 05 26 66 7d 18 76 a0...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=90 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 5a a5 42 3e 1c e5 23 86 d4 fa 93 c9 ef cf 5f e7 b3 8e 5c 06 5d d6 9a dc ca 79 c2 5e ad...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=91 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 5b a4 6c 14 98 a8 f2 25 11 33 38 02 23 13 eb 99 66 67 f0 f0 f8 43 b2 91 1b b5 26 28 c5...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=92 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 5c a3 ce a2 73 ea 6a 2c cf 79 22 c7 e2 ac 11 b5 3e cf c9 6f 3c cf 18 75 ce ad 97 f4 88...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=93 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 5d a2 94 7f 3a cb ac f0 2c 6d 87 ed 15 99 b3 cd ff e8 62 6d 30 32 bb ed d0 3e b3 72 c1...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=94 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 5e a1 27 8d e6 37 99 37 a2 7f d4 9a d2 a2 1e c1 bc e3 74 e0 95 0b 20 93 9a ed fa a1 dd...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=95 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 5f a0 b2 7f f2 0f dd c1 95 a0 3d 7f 4f 00 3d 13 06 e8 0c 9c 3d 59 db e2 13 67 bf f6 e3...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=96 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 60 9f 62 b4 7c 43 d3 b3 22 9f be 10 fa 32 01 fa 41 59 2f 96 81 98 b2 a9 2f 44 28 2f e7...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=97 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 61 9e 9b c7 9c 6b e2 ab 2b 6c 63 fe 0a 21 fb 2e d6 25 96 d3 b4 75 22 d6 05 1d 6b ee c7...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=98 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 62 9d 17 e8 5e 5a d0 3c bc 4b ec 60 de 7e 9e ff 2a b0 ef ef 81 81 8b 6b b4 ff ac 2b eb...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=99 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 63 9c ad b0 8a b0 9f e8 9b 04 79 0c e3 cb 48 99 8c 2f 23 67 86 f1 e5 06 11 5f 4e 86 9d...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=100 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 64 9b 2a ea 45 db 82 e7 cd ad f9 0f cc 6d e0 61 37 78 db 06 99 43 9c 8b 27 e3 77 13 cf...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=101 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 65 9a f4 6c 8e 48 5d 61 ec 86 7b fa 73 a1 93 e7 a2 8f 63 67 5e d9 13 88 58 61 84 53 09...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=102 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 66 99 77 3c 87 a2 95 68 09 6d 0d 9e ff c0 d8 bf a3 0d a2 f9 68 bb d1 de 25 3e 40 fb 08...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=103 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 67 98 2a 5d ab b9 34 e2 87 3e 8a eb d3 57 72 2e c6 97 2f c7 59 77 1e 90 32 42 9f 24 fa...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=104 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 68 97 c7 89 b0 d5 bb 10 93 51 ee 53 4a e7 99 7f 1f 6b 66 84 2e ec b9 48 d6 28 96 e1 db...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=105 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 69 96 69 e2 4e 23 b1 0f eb 65 09 d8 9f 18 ee f3 1a ee 83 3b 0d ac 79 44 d6 29 99 2b e8...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=106 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 6a 95 e1 f2 6b 80 0d ed fb e5 d4 d4 45 ca af a5 b4 ce dc 8d 31 46 6e 0d 68 5c 16 d2 7f...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=107 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 6b 94 e8 9c 8c 98 6f ef a7 a3 1e 71 39 bf c9 1c 44 0e 63 d1 bf 0c cb 46 fc 3f f4 0f a5...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=108 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 6c 93 c8 86 7d ba 94 07 9c c1 67 71 69 38 29 70 6b 52 66 bf 4c 7b b9 86 34 f2 35 d3 19...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=109 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 6d 92 9f d5 76 05 cc d9 dc 95 0b 58 53 39 3d 5b 64 0d 4a c9 54 bd 67 b6 c9 57 f0 de 91...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=110 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 6e 91 f4 5a 2f ea 7b 6b fd b0 94 78 a6 4e 91 86 0f ea 98 87 f3 b0 af 55 c5 73 23 b7 49...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=111 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 6f 90 8c f9 ed ec 47 78 03 d0 ef 63 29 97 a6 8f 38 3b a0 0f ec 07 2d 09 45 11 f9 00 72...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=112 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 70 8f 6e 40 ee dc f4 00 e6 b0 9f fd 31 cc 51 7a ac eb 8f b7 e2 fb 00 e4 c5 3c 8f fb 7c...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=113 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 71 8e f0 7e 27 f8 3b 07 77 97 78 09 ba fe c0 f4 c7 0d d6 8c fe 80 7d 66 99 7d 01 70 d5...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=114 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 72 8d 61 6b c4 20 b3 6b 9c 57 f7 f8 9a 26 f8 da aa 38 7b 0c ac d7 83 36 d3 80 2d 1d 8c...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=115 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 73 8c a0 13 ba 97 84 b5 1f fc c0 da e5 5e 47 9a 75 90 ac eb 3f 39 6e 8f 7f c4 1e 5d ac...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=116 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 74 8b 82 b3 b5 fa 03 31 06 fa 19 8b 72 bd aa 2d a7 45 31 a6 11 b4 36 82 d6 46 d0 78 13...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=117 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 75 8a dd 93 ee 04 dd 9d 88 e7 26 e3 0f ec 22 8d 3d 8f fb 80 6d f0 9d 98 cc 3e cc bb f5...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=118 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 76 89 a6 c8 cf 61 4e ad aa 83 0d 28 9b 49 98 88 eb 88 65 07 de 65 6c 84 1d 28 fa a3 78...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=119 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 77 88 a1 9b 40 3f e9 a2 be 0c 7e 65 b5 73 cd 15 11 8d 8a 8e 93 7b 88 15 c3 b4 19 e5 8c...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=120 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 78 87 c7 a8 58 f5 30 ce cd 6f fb f1 ed 1a c8 fa 1b bf d3 7d 67 c8 14 58 22 ae fa 8f 5d...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=121 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 79 86 f8 86 fc 4b 61 e9 73 0e 44 eb 39 8e d2 ef 9a ea 28 97 f3 e7 33 2f ee 10 aa 56 c0...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=122 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 7a 85 bf 8a 47 d6 80 54 f5 37 c8 b0 11 ef 09 f6 28 6c 7e cb 49 f8 ef 7d dc 9b 35 4b ca...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=123 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 7b 84 0b d8 f3 3e 31 a0 30 46 69 9a 17 b2 7e b8 a7 54 3a a9 02 b6 74 5f cd 53 6a ad 01...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=124 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 7c 83 9e 2d c6 cc bc 17 b7 e7 7a 71 e8 0e 30 78 4b f2 2b 85 a0 42 fb 8b 13 a2 38 1f ee...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=125 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 7d 82 7b 19 93 88 e7 41 fb 9d 07 8f f4 06 94 2f d0 bd ab 4e 55 fb a2 4e 0f 49 6f 4b 54...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=126 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 7e 81 de 05 af e7 33 3f b3 e7 06 35 93 54 7d b3 9b 7d 40 ca 31 6e ce f1 ec 6c 3f fc c7...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=127 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 7f 80 d2 7c 25 6d 94 13 d7 3a 9e b5 5a c7 08 26 e2 fd 76 c8 3e e6 14 42 00 f6 b5 df bf...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=128 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 80 7f dc 6f fc 56 3c d7 77 e1 1d b9 5e 9b b8 2d d9 d8 0b 1d 10 4e 20 70 86 94 f8 42 b0...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=129 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 81 7e 88 6f 71 a3 5b d5 e2 9e 55 7d 4e d8 62 ce 8d 1b b9 14 d2 80 65 6a ef a4 15 ad 4d...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=130 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 82 7d f8 4e ab 5b cd 9b 89 39 29 fa 4b f2 13 32 e4 b7 d2 d9 f9 60 32 62 cf d4 33 10 bb...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=131 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 83 7c 59 eb c5 f3 c6 98 b5 40 d5 7a 91 cf 20 91 bd 7c 43 c2 5a 2b d3 16 6b f9 51 7e 69...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=132 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 84 7b 46 3a 83 6b 9c 92 c2 42 23 9d e7 b0 be d8 54 0d df 03 1f d1 e4 b0 1e df e5 86 df...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=133 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 85 7a df 8d 0c fe 91 1f fc c6 0b 3c 30 99 1b e3 79 c9 07 74 6c 69 49 e7 d2 b9 4c 60 c3...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=134 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 86 79 19 57 3e b8 a7 11 3a 36 23 0b ff 89 3c b2 8a 7d d0 4c e4 23 d2 da 8e d2 d0 bb bf...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=135 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 87 78 32 9f 04 99 e7 22 99 17 c7 cb 7c fb e8 51 9a c6 7f 3d f8 e1 32 e7 bf 35 07 ff 32...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=136 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 88 77 fa c7 9f 2a c6 2a 10 87 84 58 38 60 89 3e 49 bb 44 ee e7 53 6e 9d 75 c3 b2 33 3e...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=137 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 89 76 40 92 ff 71 6b 83 07 f9 4d c7 39 a6 aa 31 78 36 ec f8 14 ea 09 f8 09 71 b8 75 8c...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=138 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 8a 75 c4 9d 8c 4d f7 1d 8c 70 25 fc cc 9d 15 8e 7b 3b 70 d5 77 11 20 ef 2e fb 31 15 53...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=139 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 8b 74 15 d7 34 c5 c6 d1 46 df 41 fc 14 9b 82 fb b4 c8 46 77 94 0e f3 a2 31 85 3c a5 c2...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=140 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 8c 73 58 ec 5d 2e 56 b5 28 c6 65 c9 de aa ad 63 46 d9 e6 20 83 aa 71 b5 b3 73 21 bb 36...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=141 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 8d 72 4c 27 06 65 07 eb 0e 99 a8 67 51 a3 6c 2c 87 fc 14 7a 06 fd 5c a0 ea 22 b9 e0 74...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=142 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 8e 71 7f f7 a9 1c 1e 7c fc ce 29 11 2e 8a 8b 65 7e c2 45 2e 6d 3f 32 5a ae 99 98 e6 2d...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=143 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 8f 70 7b 85 95 23 c4 53 ab bc 5e d5 af ba d8 7f 13 bc 3f 8a f5 1b f0 a9 12 3e 6e 43 67...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=144 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 90 6f b5 6b ae cd dc 7b c0 98 0a fb e8 8f 72 3c 9c dd 60 1f d0 ca 49 ee 5f 5f 1c 50 39...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=145 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 91 6e c2 dc ac 3b eb 9e f7 60 2a d2 79 f6 36 ad 17 22 5b db af e7 0a 9d 93 1f cb b9 88...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=146 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 92 6d 31 21 66 9d 13 90 87 8c 0d 69 c4 06 fa 12 c6 84 a4 5d 7c 86 3e f3 ee 17 a2 ba 3f...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=147 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 93 6c d0 c7 b0 a6 ab 6a a9 c0 39 ea 1c d8 83 fd 94 98 60 1e 1c 8d 8d 2b dd 78 52 d5 7d...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=148 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 94 6b 6b f9 15 f2 27 d3 08 fa eb 5a bc c7 31 a6 ca 83 0f 32 e2 de 9d a7 bb fe 6d 75 97...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=149 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 95 6a 6e b4 f1 a8 97 d4 61 7d 96 7c ab 5e d6 c2 fd 1f 29 40 8d 7b 3f 01 b9 73 44 b9 9a...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=150 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 96 69 7d f2 e5 99 68 0f a0 3e 0f 35 65 80 c4 dd 5c b3 c6 49 3f 8c c5 cd 66 5e 74 c7 da...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=151 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 97 68 c9 4f dd 07 7a 9b 59 a4 8e 4b de c4 7d d3 a8 b2 fe fb 18 e3 2c 05 3b 0c 0d 30 a7...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=152 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 98 67 4f bc f0 de fd ee e5 28 b7 dc b3 df dd 84 fa bb 1f 4c 17 f6 b1 64 f6 e5 8e 77 63...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=153 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 99 66 d7 54 a4 57 c3 37 cc 99 30 8f a9 4a f7 27 37 fd 83 f1 ab 0f 27 f9 e6 a4 5b e2 67...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=154 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 9a 65 5b d0 f7 87 f1 1e 05 1d 9a f7 79 ef d7 ad 43 76 5c 47 e6 ff f2 5f 7a fe 4b ea d0...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=155 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 9b 64 70 4c ba e7 9d 45 c6 c1 36 29 32 fc 91 c5 13 e6 8e ec 2b 48 64 fb 13 2a a1 e9 82...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=156 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 9c 63 e0 4b bc a9 43 cd c4 d9 c1 c7 f0 b9 0b 5c 7b 4b e7 5a 4f cc 9a 86 35 f1 c6 42 83...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=157 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 9d 62 58 f1 6d af 31 56 2c 39 11 27 fb 03 cf e9 f8 63 a1 e1 77 a5 6e 9a c5 98 4c a1 89...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=158 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 9e 61 7e e9 be d1 1f 4d 87 cc 5d 3d 02 ba df c4 9c c9 11 e8 d9 27 78 8e a3 86 3e be c3...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=159 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da 9f 60 fa 1e 72 66 8c e5 8b cf 7d 45 3e 7c 82 69 12 fb c1 9a 8c ff 14 99 3d 8b b0 e7 4a...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=160 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da a0 5f c9 4a f4 7f 1c fd 5c 9f f6 23 e6 7e 38 7f f4 fd a3 6c ff 11 f7 e2 dc 12 cc a9 00...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=161 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da a1 5e de a9 13 75 27 ea b5 a8 03 a8 9b 50 0f a2 6e 44 fd 59 b1 73 34 cd 5c 9f a7 ce 5e...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=162 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da a2 5d e2 37 8d 42 fe 5e 31 e6 74 1d 19 5d 8d 7b 6f 53 aa 96 32 02 b6 c1 d9 ae 91 fb 25...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=163 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da a3 5c db 81 f6 be 02 d3 5f 80 7e d3 76 a0 bd 2f df f4 e7 a3 df b4 1d 68 ef cb 33 fd 79...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=164 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da a4 5b ff d6 f0 0d cf ff ec ec e3 47 7f 31 78 c5 97 9f 7f e3 3b 07 8e ec df 74 6f 70 c6...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=165 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da a5 5a a8 eb 8b 8f fe c7 53 1f fd c6 2f ff ed 47 0f ae fb f5 89 2f bb e6 fe e1 9b df bc...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=166 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da a6 59 fd d2 ff ef f8 e6 83 3d 8c 6f d6 1f c3 37 49 e4 45 7c d3 86 7f 08 df 7c ac 81 bf...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=167 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da a7 58 4d 84 43 7b 04 f5 e7 50 ca 48 1b a8 bf 7f 56 1a 3f a3 67 69 dc fe 0e f5 1b 67 69...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=168 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da a8 57 7d f7 29 b8 7d 11 ee ef 84 15 70 3a 2c 96 69 b8 c5 bb 70 d2 f3 d5 02 75 a1 5a a6...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=169 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da a9 56 95 ee 92 cf 3e 5f bc a7 2f 30 94 88 f4 0c fa 07 c3 d1 3d 3d bd 9e d0 ce 98 f2 85...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=170 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da aa 55 ec 90 af f5 4d ba 13 9b ea 7a 99 a9 65 a1 ae 2b bb 58 45 53 a4 27 64 d7 58 df d8...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=171 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da ab 54 4a c3 ac df d2 21 a3 ab 72 87 07 73 c6 db 33 01 5a b5 a2 33 5f 3a be d0 ce df 4a...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=172 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da ac 53 ae cb d8 49 9d 89 d6 93 b1 96 ee cb b0 17 4d a7 c4 9f 72 71 9c e9 21 9d fa dc bd...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=173 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da ad 52 32 c0 4b ac ca 90 44 8b c5 ac 8b 31 d8 2d 2a c2 3f 04 c7 8c 3f 86 37 94 c9 ed f6...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=174 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da ae 51 a1 cc d7 03 81 a6 49 c5 06 4d f7 c3 37 e1 2d bd 83 be 9e fe 48 20 cc 04 6e b8 56...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=175 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da af 50 90 93 0c 38 c6 3d 69 bc 9f 7a 29 35 78 d2 64 4f 22 1e ae 0c 84 bc 51 49 fd 09 59...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=176 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da b0 4f 5b 83 83 de 14 64 dc 8a 05 e1 1b 4a 90 1b 0a d8 17 8b 8a f1 75 25 70 b4 3e ac ac...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=177 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da b1 4e e8 d3 da 10 e6 72 7f c8 0f 8e ca 3e 91 07 36 79 ee a9 78 99 81 dd 69 82 5a bd b1...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=178 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da b2 4d 4d f3 b5 66 39 9b bb 41 06 a7 1a 4a 84 68 00 a9 58 5f c6 7d e1 65 54 1a 2f 23 1e...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=179 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da b3 4c 8a 94 48 d3 8c b2 8d 60 7e d7 d2 b7 10 82 ca 30 32 b4 d6 ab 34 da af 9c 31 c6 c5...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=180 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da b4 4b e6 74 8e 52 7b 50 30 ac 43 20 39 98 d7 91 00 64 e5 e0 a0 d7 a9 12 7d 10 b1 1b 2b...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=181 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da b5 4a ac 30 86 c6 f4 e4 72 ff 12 7b 89 ec 47 92 b5 f4 7b db f3 04 a0 52 c4 40 25 47 4e...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=182 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da b6 49 ae d5 d3 d0 de d5 79 0a d8 50 98 8c b3 13 8c 92 8a a7 88 e8 62 4c ce 1b 0e c5 a3...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=183 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da b7 48 32 60 99 94 46 31 5f e0 d3 5e 7f 4a fe 9f 12 2c c3 52 cc 82 1a 1c f4 e2 4c 21 1f...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=184 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da b8 47 40 4d c1 4a d3 fb ab 6e 4f c4 af 16 68 1f 6f 41 d6 5a 8d 1e b8 25 81 38 55 2c 2c...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=185 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da b9 46 a4 16 33 3d 2b 5c 56 79 b5 2b dd d5 a4 bb b2 81 aa 5d cb b1 92 6b 95 f4 b5 74 c1...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=186 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da ba 45 5a f7 2d 5f 5b 58 fb 2d 69 db 13 f5 64 13 f5 da 54 be 33 9b c9 aa 84 ae 2d a1 49...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=187 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da bb 44 0d 3d d2 22 8d 95 cb bb 5a 54 4b cd 8a 2e c2 b6 62 c7 cd 1d 20 c8 76 75 55 03 48...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=188 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da bc 43 b5 bd c3 4b 3f 26 7b 2b 3d 58 e3 da de b2 d9 9a 64 51 3d 5a bd bd bd a3 f3 a4 e3...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=189 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da bd 42 71 7b 1b 5a 02 06 7e bd 4f 84 bc 90 a2 31 79 34 88 33 c0 74 77 36 54 58 b1 9d 81...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=190 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da be 41 f7 27 42 e8 b6 63 9c b2 5e c0 46 35 b9 3b b1 14 e5 74 e5 2c 2e b3 f9 bc 42 b0 68...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=191 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da bf 40 1b cc 5b 6f 0e 2c f1 ed 0d ed c4 59 ca 91 8a b4 67 8d 67 fa f6 04 93 f1 ac 8d ca...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=192 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da c0 3f 99 a3 83 83 de 9c d1 3e 4f 5c 74 17 46 2c 17 41 12 b1 de 3a 14 2d 1f 2f b1 26 87...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=193 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da c1 3e 11 82 5b 1a 41 f0 4b bb 3d 8c 8f c2 b4 cb 61 bc 14 26 30 64 85 f1 c9 61 7c f6 30...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=194 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da c2 3d 93 3d 82 d7 ab 87 a4 57 f1 40 88 21 6b 1c a6 26 e7 8a 2b ae b8 e2 8a 2b ae b8 e2...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=195 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da c3 3c 82 9d 8f e7 e3 86 05 b4 3b 91 8c aa 66 a5 c3 40 18 11 79 76 38 8d ab 19 51 ec 4d...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=196 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da c4 3b 84 46 42 13 81 11 5a 08 1e 42 0f c1 4f 18 20 04 09 7b 09 e3 84 18 21 45 98 25 cc...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=197 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da c5 3a c2 82 7f dd 59 e0 3f 5b bc ff e6 fb 8f 2c cd bf 8d 3f 05 df fd c7 9c f7 c1 73 2f...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=198 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da c6 39 9e e0 93 ca 65 1d f3 4d 96 cb cf 1c f3 db 8a 30 2d cd ba 6a a5 50 52 9a c7 3b 3b...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=199 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da c7 38 d2 2f c8 3f 98 84 69 fb b0 3c d3 0d 9c 7a f2 d1 21 b3 e9 2d 93 e9 14 8f b6 68 7b...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=200 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da c8 37 c6 dc bd ce e8 cf d2 fd 72 ee ca f2 2d d7 b1 17 5c 60 b4 3d 28 df 39 7f 26 cb 95...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=201 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da c9 36 33 7a d1 87 09 ac 62 0d eb 7a f9 20 65 6c e0 24 36 51 b9 95 75 89 59 cc 61 1e 0b...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=202 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da ca 35 d8 c1 15 cc fc 80 79 85 2a 7a 7f 48 bb ff 96 76 a3 1d 5b ff 48 ff e3 02 2e e2 12...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=203 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da cb 34 72 c5 35 63 6f d5 37 c6 99 60 92 29 a6 99 61 96 39 e6 59 e0 39 8b 7c e0 6d e6 92...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=204 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da cc 33 32 eb d9 e7 80 43 de 71 c4 31 27 9c 72 c6 39 17 5c 72 c5 35 37 dc 72 af a0 8e dc...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=205 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da cd 32 64 8b 6d 76 d8 65 8f 7d 0e 38 e4 1d 47 1c 33 f7 66 e7 85 b5 b7 98 eb 92 7b 83 23...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=206 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da ce 31 33 61 ca 09 8f 78 cc 8c 39 4f 38 e5 29 cf 78 ce 0b 16 bc e4 8c 57 bc e6 0d 6f 59...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=207 payload=1024 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1029 bytes): da cf 30 8c 99 30 e5 84 47 3c 66 c6 9c 27 9c f2 94 67 3c e7 05 0b 5e 72 c6 2b 5e f3 86 b7...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:DATA: seq=208 payload=997 bytes
+DEBUG:defib.protocol.hisilicon_standard:TX DATA (1002 bytes): da d0 2f 07 8e fe 50 3f 03 86 8c 18 33 61 ca 09 33 e6 2c 58 b2 62 cd 86 2d 3b ce b9 60 cf...
+DEBUG:defib.protocol.hisilicon_standard:TX DATA ACKed (attempt 1/32)
+DEBUG:defib.protocol.hisilicon_standard:TAIL: seq=209
+DEBUG:defib.protocol.hisilicon_standard:TX TAIL (5 bytes): ed d1 2e 01 da
+DEBUG:defib.protocol.hisilicon_standard:TX TAIL ACKed (attempt 1/16)
+  U-Boot complete
+  Recovery complete
+  U-Boot loaded in 41765ms
+  Autoboot detected, sending Ctrl-C...
+  U-Boot shell mode
+
+Phase 2: Flash via TFTP
+DEBUG:defib.flashdump:UART CMD: 'sf probe 0'
+DEBUG:defib.flashdump:UART CMD: 'sf read 0x42000000 0x1fffff0 0x10'
+DEBUG:defib.flashdump:UART CMD: 'sf read 0x42000000 0xfffff0 0x10'
+DEBUG:defib.flashdump:UART CMD: 'sf read 0x42000000 0x7ffff0 0x10'
+DEBUG:defib.flashdump:UART CMD: 'sf lock 0'
+U-Boot does not expose a usable `sf lock` command; continuing and relying on 
+erase/write result checks.
+  SPI flash detected: 8 MiB (override), erase block 0x10000
+  NIC: Wi-Fi, Host IP: 10.8.0.240
+INFO:defib.network.ip_manager:10.8.0.240 is already usable; leaving it as it is
+  IP assigned
+INFO:defib.network.tftp_server:TFTP server listening on 10.8.0.240:69 (serving 2 files, 7471104 bytes total)
+  TFTP server started on 10.8.0.240:69
+DEBUG:defib.flashdump:UART CMD: 'setenv ipaddr 10.8.0.236'
+DEBUG:defib.flashdump:UART CMD: 'setenv serverip 10.8.0.240'
+  Device IP: 10.8.0.236, server: 10.8.0.240
+
+  Flashing U-Boot → 0x0 (262144 bytes)
+DEBUG:defib.flashdump:UART CMD: 'tftpboot 0x42000000 u'
+INFO:defib.network.tftp_server:TFTP RRQ from 10.8.0.236:2155 for 'u' (mode=octet)
+DEBUG:defib.network.tftp_server:TFTP blksize requested=1468 negotiated=1468
+DEBUG:defib.network.tftp_server:Sent OACK with blksize=1468
+INFO:defib.network.tftp_server:Transfer complete to 10.8.0.236:2155 (262144 bytes)
+DEBUG:defib.flashdump:UART CMD: 'crc32 0x42000000 0x40000'
+    TFTP CRC verified: 14C46F83
+    Erase: 0x0+0x40000 (payload 0x40000)
+DEBUG:defib.flashdump:UART CMD: 'sf erase 0x0 0x40000'
+DEBUG:defib.flashdump:UART CMD: 'sf write 0x42000000 0x0 0x40000'
+DEBUG:defib.flashdump:UART CMD: 'sf read 0x42000000 0x0 0x40000'
+DEBUG:defib.flashdump:UART CMD: 'crc32 0x42000000 0x40000'
+    Flash verified: 14C46F83
+  U-Boot OK
+
+  kernel: the uImage at the start of firmware.bin (written by the rootfs 
+stage). Nothing to do.
+
+  Flashing firmware.bin → 0x50000 (7208960 bytes)
+DEBUG:defib.flashdump:UART CMD: 'tftpboot 0x42000000 r'
+INFO:defib.network.tftp_server:TFTP RRQ from 10.8.0.236:4081 for 'r' (mode=octet)
+DEBUG:defib.network.tftp_server:TFTP blksize requested=1468 negotiated=1468
+DEBUG:defib.network.tftp_server:Sent OACK with blksize=1468
+INFO:defib.network.tftp_server:Transfer complete to 10.8.0.236:4081 (7208960 bytes)
+DEBUG:defib.flashdump:UART CMD: 'crc32 0x42000000 0x6e0000'
+    TFTP CRC verified: E3A0A946
+    Erase: 0x50000+0x7B0000 (payload 0x6E0000)
+DEBUG:defib.flashdump:UART CMD: 'sf erase 0x50000 0x7b0000'
+DEBUG:defib.flashdump:UART CMD: 'sf write 0x42000000 0x50000 0x6e0000'
+DEBUG:defib.flashdump:UART CMD: 'sf read 0x42000000 0x50000 0x6e0000'
+DEBUG:defib.flashdump:UART CMD: 'crc32 0x42000000 0x6e0000'
+    Flash verified: E3A0A946
+  firmware.bin OK
+
+  rootfs-data: the rootfs stage erased everything after firmware.bin; the first
+boot makes an empty overlay there. Nothing to do.
+
+  Setting boot environment (U-Boot scans the NOR layout)
+DEBUG:defib.flashdump:UART CMD: 'printenv ethaddr'
+DEBUG:defib.flashdump:UART CMD: 'printenv totalmem'
+DEBUG:defib.flashdump:UART CMD: 'env default -a'
+DEBUG:defib.flashdump:UART CMD: 'setenv totalmem 64M'
+  U-Boot default environment loaded, totalmem 64M
+DEBUG:defib.flashdump:UART CMD: 'printenv ethaddr'
+  Restoring factory ethaddr: 5a:d3:7a:2a:47:69
+DEBUG:defib.flashdump:UART CMD: 'setenv ethaddr 5a:d3:7a:2a:47:69'
+DEBUG:defib.flashdump:UART CMD: 'saveenv'
+  Environment saved
+
+  Resetting device...
+DEBUG:defib.flashdump:UART CMD: 'reset'
+INFO:defib.network.ip_manager:Leaving 10.8.0.240 on Wi-Fi: this run did not add it
+
+Install complete! Device is rebooting into OpenIPC.

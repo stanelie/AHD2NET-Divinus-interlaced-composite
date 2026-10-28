@@ -1,0 +1,27 @@
+setenv bootargs mem=36M console=ttyAMA0,115200 loglevel=0 root=/dev/mtdblock3 rootfstype=squashfs rw mtdparts=sfc:128K(boot),64K(env),1792K(kernel),3M(rootfs),-(usr) mmz_allocator=xmedia mmz=anonymous,0,0x42400000,28M chip=gk7205ev200 sensors=sc200ai g_cmos_yuv_flag=1 board=demo init=/bin/sh
+# sf probe 0
+# xmediaapp
+# sf read 0x41000000 0x30000 0x200000
+device 0 offset 0x30000, size 0x200000
+
+SF: 2097152 bytes @ 0x30000 Read: OK
+# bootm 0x41000000
+## Booting kernel from Legacy Image at 41000000 ...
+   Image Name:   Linux-4.9.37
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    1828779 Bytes = 1.7 MiB
+   Load Address: 40008000
+   Entry Point:  40008000
+   Loading Kernel Image
+
+Starting kernel ...
+
+/bin/sh: can't access tty; job control turned off
+/ # 
+/ # echo __SHELL_OK__ $(id -u 2>/dev/null)
+/bin/sh: can't create /dev/null: Read-only file system
+/bin/sh: id: not found
+__SHELL_OK__
+/ # uname -a
+Linux (none) 4.9.37 #2 Tue Apr 14 15:01:57 CST 2026 armv7l GNU/Linux
+/ # 
