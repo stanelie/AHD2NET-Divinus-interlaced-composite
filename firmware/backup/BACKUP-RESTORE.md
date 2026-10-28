@@ -1,7 +1,10 @@
 # Flash backup — AHD2NET (GK7205V200 + TP9950), OpenIPC + weave pipeline
 
-Full backup of 10.8.1.31 taken after the software-weave pipeline was installed and
-made persistent. 8 MB NOR flash. All files are raw partition dumps.
+Full backup of 10.8.1.31. 8 MB NOR flash. All files are raw partition dumps.
+Refreshed 2026-10-28 to the current build — includes the clean-restart weave
+shutdown + S96 respawn supervisor and the ExMachino SPS/PPS config fix.
+(`uboot.bin`/`env.bin` are unchanged from the first backup; `firmware.bin`,
+`overlay_rootfs_data.bin` and `full_flash_8MB.bin` carry the fixed binary.)
 
 ## Files
 | file | size | partition | contents |
