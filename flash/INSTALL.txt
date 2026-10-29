@@ -1,0 +1,108 @@
+Flash a stock AHD2NET converter (Goke GK7205V200 + TP9950) into a working
+divinus device: 640x480 colour from NTSC composite over RTSP, web/MJPEG and
+ExMachino.
+
+This folder:
+  full_flash_8MB.bin     complete 8 MB flash image: OpenIPC + divinus + overlay
+  agent-gk7205v200.bin   prebuilt defib RAM agent (nothing to compile)
+  flash_ahd2net.py       flashing helper that KEEPS the unit's own MAC address
+  flash.cmd              Windows wrapper for the helper
+  INSTALL.txt            this file
+
+You need: a USB-UART adapter wired to the board (TX, RX, GND only -- do NOT
+connect its power pin; the board has its own supply), 115200 baud, 3.3 V logic.
+
+--- One-time: install defib (Windows) -------------------------------------
+
+defib is not on PyPI; install it from git with uv:
+
+    winget install --id=astral-sh.uv -e
+    uv tool install git+https://github.com/OpenIPC/defib
+
+(pipx also works:  pipx install git+https://github.com/OpenIPC/defib)
+Open a NEW terminal afterwards so defib is on PATH.
+
+This step needs an internet connection (it downloads uv, defib and its Python
+dependencies; git must be installed). If you have no suitable Python, uv
+fetches one itself, so there is nothing else to install by hand. The first
+"defib agent upload" also downloads a small U-Boot helper, so stay online for
+that run.
+
+--- Flash (recommended: keeps the unit's MAC address) ----------------------
+
+Why a helper: the image carries the MAC of the unit it was copied from. Flashing
+it as-is gives EVERY unit that same MAC, and two units with one MAC on a network
+fight over the address. The stock firmware stores the real MAC in a file; the
+helper reads it from a backup of your unit, writes it into the image's U-Boot
+environment (CRC fixed up), and flashes that. Nothing else in the image changes.
+
+1. Open Command Prompt in THIS folder.
+2. Close anything that has the serial port open (PuTTY, Tera Term, Arduino
+   serial monitor, ...). If one is open, defib fails with "Access is denied".
+   Find your port in Device Manager (examples use COM6).
+3. Run:
+
+       flash.cmd --port COM6
+
+   (or, if you have Python:  python flash_ahd2net.py --port COM6)
+
+   It will:
+     a. ask you to cut the converter's power, then catch the BootROM (plug the
+        power back in when defib says "Power-cycle the camera now!"),
+     b. back up the unit's current flash (stock_backup_<mac>.bin, ~3 minutes),
+     c. read the unit's original MAC out of that backup and show it to you,
+     d. ask you to cut power again, then flash the patched image.
+   The chip only opens its serial download window at a true cold power-on -- a
+   software reboot will not work. Keep the backup: it is the way back.
+
+   If the backup read fails (a UART error is the usual cause) it retries up to
+   3 times. Still failing? Add  --read-baud 230400  or check wiring/ground.
+   Not stock firmware, or the MAC was not found? Give it yourself:
+       flash.cmd --port COM6 --mac 02:AB:CD:12:34:56
+   Add --skip-backup to skip the backup (needs --mac; not recommended).
+
+4. Wait about a minute. Find the unit in your router's DHCP list.
+
+--- Flash (manual, no MAC handling) ----------------------------------------
+
+Use this only for a single unit where you do not care about the MAC. Every unit
+flashed this way gets the image's MAC (5a:d3:7a:2a:47:69).
+
+    set DEFIB_AGENT_DIR=%CD%
+    defib agent upload -c gk7205v200 -p COM6          (test; power-cycle when asked)
+    defib agent read -p COM6 -o stock_unit_backup.bin (optional backup; see note)
+    defib agent flash -c gk7205v200 -i full_flash_8MB.bin -p COM6
+
+Note: plain "defib agent read" runs at 921600 baud and aborts on a single
+dropped packet on some adapters; the helper above avoids that.
+
+--- After flashing ----------------------------------------------------------
+
+  Login:      ssh root@<ip>      password: patatepatate
+              (change it with  passwd  on any unit not on a trusted network)
+  Hostname:   gk7205v200-bt656-<last 3 MAC octets>, e.g. gk7205v200-bt656-123456.
+              Each unit gets its own, so several can share a network. It follows
+              the MAC: after  fw_setenv ethaddr <mac>  and a reboot it is renamed.
+  RTSP:       rtsp://<ip>:554/        (use TCP transport in VLC)
+  Web/MJPEG:  http://<ip>/
+  ExMachino:  <ip>:5054               (also advertised via mDNS)
+
+To change a unit's MAC later:   ssh root@<ip> "fw_setenv ethaddr 02:ab:cd:12:34:56"
+then reboot (lower-case, and unique on your LAN).
+
+To restore the stock unit you backed up, flash the backup:
+    defib agent flash -c gk7205v200 -i stock_backup_<mac>.bin -p COM6
+
+--- Notes -------------------------------------------------------------------
+
+* Smaller alternative if the device already runs OpenIPC: install only the
+  divinus binary and overlay with ahd2net-divinus-<version>.tar.gz (separate
+  release asset; run install.sh on the device).
+
+* The image is OpenIPC with its boot-health script replaced. Do not restore the
+  stock S99bootok: it waits for majestic, which is disabled here, so the boot
+  counter is never cleared and the third consecutive reboot boots FAILSAFE
+  (network + SSH only, no video).
+
+Source and build instructions:
+https://github.com/stanelie/AHD2NET-Divinus-interlaced-composite

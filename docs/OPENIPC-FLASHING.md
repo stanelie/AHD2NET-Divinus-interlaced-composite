@@ -1,5 +1,14 @@
 # Flashing OpenIPC on the converter (GK7205V200, 8 MB NOR)
 
+> **To get a working divinus unit, use the release bundle instead.** Download
+> `install_openipc_ahd2net.zip` from the latest release and follow its
+> `INSTALL.txt` (also in [`flash/`](../flash/)): `defib` is installed with `uv`
+> (it is not on PyPI), the RAM agent is prebuilt, and `flash.cmd --port COMx`
+> backs up the unit, preserves its MAC and flashes. This page is the original
+> exploratory runbook from before that was verified on hardware; some commands
+> below (`defib install` with `--host-ip`/`--device-ip`, `pip install`) were never
+> run and should not be relied on.
+
 Runbook for replacing the stock "CAMAPP" firmware with OpenIPC, tailored to
 what we found on this board. Read `FIRMWARE-RE.md` and `PTZ-PROTOCOL-stock.md`
 first.

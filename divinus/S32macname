@@ -1,0 +1,64 @@
+#!/bin/sh
+#
+# Give every unit a hostname of its own.
+#
+# OpenIPC's S31hostname names each unit "<soc>-<sensor>" (here gk7205v200-bt656),
+# which is identical on every unit built from the same image, so two units
+# collide in DHCP and in mDNS (<hostname>.local). This appends the last three
+# MAC octets:   gk7205v200-bt656  ->  gk7205v200-bt656-123456
+#
+# It runs after S31hostname and before S40network because udhcpc announces the
+# hostname when it asks for a lease. The suffix follows the MAC: change ethaddr
+# and reboot and the unit is renamed. A hostname set by hand is left alone.
+#
+
+OWN=/etc/hostname.mac      # the name this script set last time
+
+sync_hosts() {
+	sed -i '/^127\.0\.1\.1/d' /etc/hosts 2>/dev/null
+	printf '127.0.1.1\t%s\n' "$1" >> /etc/hosts
+}
+
+start() {
+	mac=$(fw_printenv -n ethaddr 2>/dev/null)
+	[ -n "$mac" ] || mac=$(cat /sys/class/net/eth0/address 2>/dev/null)
+	hex=$(echo "$mac" | tr -d ':' | tr 'A-F' 'a-f')
+	[ ${#hex} -eq 12 ] || return 0
+	suffix=${hex#??????}
+
+	cur=$(cat /etc/hostname 2>/dev/null)
+	last=$(cat "$OWN" 2>/dev/null)
+
+	if [ -n "$last" ] && [ "$cur" = "$last" ]; then
+		base=${last%-??????}       # we named it before: just swap the suffix
+	else
+		soc=$(fw_printenv -n soc 2>/dev/null | tr 'A-Z' 'a-z' | sed 's/[^a-z0-9]//g')
+		sensor=$(fw_printenv -n sensor 2>/dev/null | tr 'A-Z' 'a-z' | sed -e 's/_.*$//' -e 's/[^a-z0-9]//g')
+		case "$cur" in
+			"$soc-$sensor"|"$soc"|openipc-*) base=$cur ;;
+			*) return 0 ;;         # set by hand: not ours to touch
+		esac
+	fi
+
+	new="$base-$suffix"
+	[ "$cur" = "$new" ] && [ "$last" = "$new" ] && return 0
+
+	echo "$new" > /etc/hostname
+	echo "$new" > "$OWN"
+	hostname -F /etc/hostname
+	sync_hosts "$new"
+}
+
+case "$1" in
+	start)
+		start
+		;;
+
+	stop)
+		;;
+
+	*)
+		echo "Usage: $0 {start}"
+		exit 1
+		;;
+esac

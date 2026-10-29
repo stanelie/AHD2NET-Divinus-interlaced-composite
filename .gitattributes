@@ -1,0 +1,7 @@
+# Device-side shell scripts must stay LF even in a Windows checkout, or they
+# break on the converter ("/bin/sh^M: bad interpreter").
+divinus/S[0-9][0-9]* text eol=lf
+divinus/install.sh   text eol=lf
+*.sh                 text eol=lf
+# Windows-side helper
+flash/*.cmd          text eol=crlf

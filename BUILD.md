@@ -58,10 +58,24 @@ pieces — see `divinus/RUN.md` for the full list and why each matters):
 | `/etc/divinus.yaml` | `divinus/divinus_live.yaml` |
 | `/etc/bt656_ntsc.ini` | `divinus/bt656_prog.ini` |
 | `/etc/init.d/S96divinus` | `divinus/S96divinus` (boot start + respawn supervisor) |
+| `/etc/init.d/S32macname` | `divinus/S32macname` (unique hostname per unit, from its MAC) |
+| `/etc/init.d/S99bootok` | `divinus/S99bootok` (boot-health check — **required**, see below) |
 
-Also whiteout `S95majestic` in the overlay so majestic does not autostart and
-hold ports 80/554. The stock `/rom` `gk7205v200_vi.ko` is used as-is (no kernel
-patch — progressive capture + software weave needs none).
+`divinus/install.sh` does all of this (and the majestic step below) on the
+device. Also whiteout `S95majestic` in the overlay so majestic does not autostart
+and hold ports 80/554. The stock `/rom` `gk7205v200_vi.ko` is used as-is (no
+kernel patch — progressive capture + software weave needs none).
+
+**Do not skip `S99bootok`.** OpenIPC's stock version only clears U-Boot's boot
+counter once *majestic* has stayed up. With majestic disabled the counter is
+never cleared, U-Boot (`bootlimit=2`) counts every warm reboot, and the **third
+consecutive reboot boots FAILSAFE** — network and SSH only, no MPP, no video.
+The replacement treats a running divinus as healthy. (A power-cycle also resets
+the counter, which is why this goes unnoticed until the unit is rebooted a few
+times.)
+
+Default login on this build: **root / patatepatate** (SSH). Change it with
+`passwd` on anything that is not on a trusted network.
 
 ## 4. Deploy / update an already-running device
 
@@ -84,6 +98,13 @@ the process has fully exited, so always `stop` before overwriting.
 - ExMachino viewer: it discovers the device over mDNS (`_epoccam._tcp`, port
   5054), or connect to `<device-ip>:5054` directly.
 
-A clean boot: stock kernel loads VI → `S96divinus` starts divinus (under the
-supervisor) → the weave thread applies the TP9950 NTSC registers and begins
-weaving → 640×480 colour on all three services.
+A clean boot: stock kernel loads VI → `S32macname` sets the hostname →
+`S96divinus` starts divinus (under the supervisor) → the weave thread applies the
+TP9950 NTSC registers and begins weaving → 640×480 colour on all three services →
+about 16 s later `S99bootok` clears the boot counter.
+
+The hostname is `gk7205v200-bt656-<last 3 MAC octets>` (for example
+`gk7205v200-bt656-123456`), so several units on one network no longer share a
+name in DHCP or mDNS (`<hostname>.local`). It follows the MAC: change `ethaddr`
+with `fw_setenv` and reboot and the unit is renamed. A hostname you set by hand
+is left alone.

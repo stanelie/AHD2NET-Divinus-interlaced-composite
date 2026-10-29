@@ -1,10 +1,16 @@
 # Flash backup — AHD2NET (GK7205V200 + TP9950), OpenIPC + weave pipeline
 
-Full backup of 10.8.1.31. 8 MB NOR flash. All files are raw partition dumps.
-Refreshed 2026-10-28 to the current build — includes the clean-restart weave
-shutdown + S96 respawn supervisor and the ExMachino SPS/PPS config fix.
-(`uboot.bin`/`env.bin` are unchanged from the first backup; `firmware.bin`,
-`overlay_rootfs_data.bin` and `full_flash_8MB.bin` carry the fixed binary.)
+The release image: 8 MB NOR flash, raw partition dumps. Refreshed 2026-10-29
+(v1.1.0) from a working unit. It adds, over the first backup:
+- `S99bootok` replacement — without it the 3rd consecutive reboot boots FAILSAFE
+  (see `divinus/RUN.md`, "Boot counter and FAILSAFE"),
+- `S32macname` — unique hostname per unit from its MAC,
+- the clean-restart weave shutdown + S96 respawn supervisor, and the ExMachino
+  SPS/PPS config fix.
+`uboot.bin`/`env.bin` are unchanged from the first backup, so the image's MAC is
+still the default `5a:d3:7a:2a:47:69`; `flash/flash_ahd2net.py` patches it per
+unit. The overlay was cleaned of shell history and crash logs before the dump.
+`firmware.bin` and `overlay_rootfs_data.bin` are the matching partitions.
 
 ## Files
 | file | size | partition | contents |

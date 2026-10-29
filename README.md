@@ -47,6 +47,8 @@ kernel, starting at boot. The GK7205V200 can't hardware-weave an interlaced
 BT.656 source, so the two 240-line NTSC fields are interleaved and downscaled in
 software (low latency) inside a modified OpenIPC/divinus.
 
+- **Default login:** SSH as `root`, password `patatepatate` — change it with
+  `passwd` on anything not on a trusted network.
 - **Build it from scratch:** [`BUILD.md`](BUILD.md)
 - **How it works / gotchas:** [`divinus/RUN.md`](divinus/RUN.md)
 - **Full buildable source:** [`divinus-src/`](divinus-src/)

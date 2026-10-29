@@ -87,6 +87,10 @@ these — must point at the mapped VB block), **phys addr @120 (Y) / @128 (UV)**
 - `/etc/bt656_ntsc.ini`         — sensor config, progressive 240 (= bt656_prog.ini here)
 - `/etc/init.d/S96divinus`      — starts divinus at boot, **under a respawn
                                   supervisor** (see "Restart / shutdown" below)
+- `/etc/init.d/S99bootok`       — boot-health check; **required**, see "Boot
+                                  counter and FAILSAFE" below
+- `/etc/init.d/S32macname`      — unique hostname from the MAC, see "Hostname"
+- Login: `root` / `patatepatate` (SSH). Change with `passwd`.
 - `S95majestic` is **whiteouted** in the overlay so majestic no longer autostarts
   (frees ports 80/554). Restore it by removing the overlay whiteout.
 - The kernel module is the **stock /rom** `gk7205v200_vi.ko` (the earlier binary
@@ -125,6 +129,43 @@ image finds the VB pool still initialised and dies with `ERR_VB_BUSY`
 
 Bonus: the supervisor also auto-recovers crashes, covering the gap where the
 hardware watchdog did not actually reset the wedged process.
+
+## Boot counter and FAILSAFE (why S99bootok is replaced)
+
+OpenIPC guards against bad firmware with a boot counter in reserved RAM
+(`/sys/firmware/devicetree/base/reserved-memory/bootcount@…`, cleared by
+`bootcount-clear`, i.e. `devmem <addr> 32 0`). U-Boot has `bootlimit=2`: past
+that, `altbootcmd` boots the kernel with `failsafe` on the command line and
+`/etc/init.d/rcS` runs `failsafe-rescue` only — **network and SSH, nothing
+else** (no MPP, no divinus, no video). The failsafe path clears the counter on
+its way out, so one more reboot returns to normal.
+
+The stock `S99bootok` clears the counter only when `/usr/bin/majestic` is
+running (or absent). This image ships majestic but disables it, so the counter
+was never cleared: boot 1 after flashing, boot 2 after a reboot, **boot 3 =
+failsafe**. It looks like a mysteriously dead unit with SSH still working;
+`cat /proc/cmdline` shows `failsafe`, and `logread` shows `bootok: majestic did
+not stay up`. A power-cycle clears it too (RAM), which hides the problem.
+
+`divinus/S99bootok` is a drop-in replacement (overlay file shadows the
+squashfs one): healthy = divinus running **and** `/proc/umap/venc` present for 8
+checks in a row (~16 s). A crash-looping divinus never gets 8 in a row, so a
+genuinely broken image still escalates to failsafe. Verified by rebooting a
+unit four times in a row (past the limit of 2): every boot normal, divinus up,
+counter back to 0.
+
+Recovery from a unit stuck in failsafe: `ssh` in, install `S99bootok`
+(`install.sh` does), `reboot`.
+
+## Hostname
+
+OpenIPC's `S31hostname` names every unit `<soc>-<sensor>` (`gk7205v200-bt656`),
+identical on all units built from one image — a clash in DHCP and in mDNS.
+`divinus/S32macname` runs after it and **before `S40network`** (udhcpc announces
+the hostname when it asks for a lease) and appends the last three MAC octets:
+`gk7205v200-bt656-123456`. The name follows `ethaddr`; it records what it set in
+`/etc/hostname.mac` and leaves a hostname you set by hand alone. It writes flash
+only when the name actually changes.
 
 ## Device-handling gotchas
 - **Stop/restart via the init script**, not `kill`: `/etc/init.d/S96divinus stop`

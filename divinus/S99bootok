@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# Boot-health check for the divinus image.
+#
+# OpenIPC's stock S99bootok only clears U-Boot's boot counter once majestic has
+# stayed up. This image runs divinus instead and has majestic disabled, so with
+# the stock script the counter is never cleared: U-Boot (bootlimit=2) counts
+# every warm reboot and the THIRD one in a row boots FAILSAFE -- network and SSH
+# only, no MPP, no video. Here divinus is the health signal instead.
+#
+# "Healthy" = divinus running with the MPP modules loaded, for 8 checks in a
+# row (~16 s). A crash-looping divinus never gets 8 in a row, so a genuinely
+# broken image still escalates to failsafe, as intended.
+#
+
+case "$1" in
+	start|"") ;;
+	*) exit 0 ;;
+esac
+
+command -v bootcount-clear >/dev/null 2>&1 || exit 0
+
+{
+	need=8       # consecutive good checks (~16s) before trusting the image
+	ok=0
+	tries=0
+	while [ "$tries" -lt 90 ]; do
+		if pidof divinus >/dev/null 2>&1 && [ -e /proc/umap/venc ]; then
+			ok=$((ok + 1))
+			if [ "$ok" -ge "$need" ]; then
+				bootcount-clear || logger -s -t bootok "healthy but could not clear the boot counter (devmem write failed) -- U-Boot will keep counting toward failsafe" 2>/dev/null
+				exit 0
+			fi
+		else
+			ok=0
+		fi
+		sleep 2
+		tries=$((tries + 1))
+	done
+	logger -s -t bootok "divinus did not stay up; leaving the boot counter for U-Boot to escalate to failsafe" 2>/dev/null
+} &
